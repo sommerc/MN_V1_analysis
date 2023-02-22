@@ -1,6 +1,6 @@
 EPS: 0.000000000001
 FPS: 60
-MOVING_PLOT_TIME_SPAN_MIN: 15
+
 
 STAGES:
   - 37-38
@@ -11,20 +11,21 @@ STAGES:
   - 63-64
   - Juv
 
-frequency:
-  FREQ_MOVING_NODE: "Tail_1"
-  FREQ_MOVING_NODE_THRESH: 0.01
-  FREQ_OUTDIR: "frequency"
-  TEMP_ANGLE_SMOOTH: 0.1
-
-  FREQ_AT_TAIL_STEM:
-    - Tail_1
-    - Tail_2 # <- Angle here
-    - Tail_3
-
 LOCOMOTION_OUTDIR: "locomotion"
+
 AREA_EXPLORED_OUTDIR: "area_explored"
-  
+
+FREQUENCY_OUTDIR: "frequency"
+FREQUENCY_N: 24
+FREQUENCY_WAVELET: cmorl1.5-1.0
+
+PCA_FIT_ON_N: 8000
+PCA_PLOT_N: 256
+PCA_OUTDIR: pca_plots
+
+MOVING_OUTDIR: moving_plots
+MOVING_PLOT_TIME_SPAN_MIN: 15
+
 
 37-38:
   ROOT_DIR: "B:/BIF_StaffSci/Christoph/sweengrp/paper_videos/37-38"
@@ -50,11 +51,27 @@ AREA_EXPLORED_OUTDIR: "area_explored"
   AREA_EXPLORED_OUTDIR: "area_explored"
   
   LOCOMOTION_NODE: "Tail_1"
-  
   LOCOMOTION_MOVING_THRESH: 0.0002
   LOCOMOTION_TEMPORAL_SIGMA: 30
   LOCOMOTION_SPATIAL_SIGMA: 60
   LOCOMOTION_DC_SUBSAMPLE: 8
+
+  ALIGN_CENTRAL: "Tail_1"
+  ALIGN_TOP: "Heart_Center"
+
+  FREQ_MOVING_NODE: "Tail_1"
+  FREQ_MOVING_NODE_THRESH: 0.01
+  FREQ_TEMP_ANGLE_SMOOTH: 0.1
+  FREQ_FOR:
+    tail_stem:
+      - Tail_1
+      - Tail_2 # <- Angle here
+      - Tail_3
+    tail_tip:
+      - Tail_4
+      - Tail_5 # <- Angle here
+      - Tail_6
+
 
 52-54:
   ROOT_DIR: "B:/BIF_StaffSci/Christoph/sweengrp/paper_videos/52-54"
@@ -71,6 +88,27 @@ AREA_EXPLORED_OUTDIR: "area_explored"
   LOCOMOTION_SPATIAL_SIGMA: 60
   LOCOMOTION_DC_SUBSAMPLE: 8
 
+  ALIGN_CENTRAL: "Tail_1"
+  ALIGN_TOP: "Heart_Center"
+
+  FREQ_MOVING_NODE: "Tail_1"
+  FREQ_MOVING_NODE_THRESH: 0.01
+  FREQ_TEMP_ANGLE_SMOOTH: 0.1
+  FREQ_FOR:
+    tail_stem:
+      - Tail_1
+      - Tail_2 # <- Angle here
+      - Tail_3
+    tail_mid:
+      - Tail_3
+      - Tail_4 # <- Angle here
+      - Tail_5
+    tail_tip:
+      - Tail_8
+      - Tail_9 # <- Angle here
+      - Tail_10
+
+
 57-58:
   ROOT_DIR: "B:/BIF_StaffSci/Christoph/sweengrp/paper_videos/57-58"
                
@@ -86,6 +124,26 @@ AREA_EXPLORED_OUTDIR: "area_explored"
   LOCOMOTION_SPATIAL_SIGMA: 60
   LOCOMOTION_DC_SUBSAMPLE: 8
 
+  ALIGN_CENTRAL: "Tail_1"
+  ALIGN_TOP: "Heart_Center"
+
+  FREQ_MOVING_NODE: "Tail_1"
+  FREQ_MOVING_NODE_THRESH: 0.01
+  FREQ_TEMP_ANGLE_SMOOTH: 0.1
+  FREQ_FOR:
+    tail_stem:
+      - Tail_1
+      - Tail_2 # <- Angle here
+      - Tail_3
+    tail_mid:
+      - Tail_3
+      - Tail_4 # <- Angle here
+      - Tail_5
+    tail_tip:
+      - Tail_8
+      - Tail_9 # <- Angle here
+      - Tail_10
+
 59-62:
   ROOT_DIR: "B:/BIF_StaffSci/Christoph/sweengrp/paper_videos/59-62"
                
@@ -94,6 +152,9 @@ AREA_EXPLORED_OUTDIR: "area_explored"
   AREA_EXPLORED_NODE: "Tail_1"
   AREA_EXPLORED_BINS: 128
   AREA_EXPLORED_OUTDIR: "area_explored"
+
+  ALIGN_CENTRAL: "Tail_1"
+  ALIGN_TOP: "Heart_Center"
   
   LOCOMOTION_NODE: "Tail_1"
   LOCOMOTION_OUTDIR: "locomotion"
@@ -101,6 +162,46 @@ AREA_EXPLORED_OUTDIR: "area_explored"
   LOCOMOTION_TEMPORAL_SIGMA: 30
   LOCOMOTION_SPATIAL_SIGMA: 60
   LOCOMOTION_DC_SUBSAMPLE: 8
+
+  FREQ_MOVING_NODE: "Tail_1"
+  FREQ_MOVING_NODE_THRESH: 0.01
+  FREQ_TEMP_ANGLE_SMOOTH: 0.1
+  FREQ_FOR:
+    tail_stem:
+      - Tail_1
+      - Tail_2 # <- Angle here
+      - Tail_3
+    tail_mid:
+      - Tail_3
+      - Tail_4 # <- Angle here
+      - Tail_5
+    tail_tip:
+      - Tail_8
+      - Tail_9 # <- Angle here
+      - Tail_10
+
+  PCA_PARTS:
+    Tail:
+      - Heart_Center
+      - Tail_Stem
+      - Tail_1
+      - Tail_2
+      - Tail_3
+      - Tail_4
+      - Tail_5
+      - Tail_6
+      - Tail_7
+      - Tail_8
+      - Tail_9
+      - Tail_10
+      - Tail_Tip
+    Leg: 
+      - Tail_1
+      - Left_Hip
+      - Left_Knee
+      - Left_Ankle
+      - Left_Foot
+      - Left_toe
 
 63-64:
   ROOT_DIR: "B:/BIF_StaffSci/Christoph/sweengrp/paper_videos/63-64"
@@ -117,6 +218,26 @@ AREA_EXPLORED_OUTDIR: "area_explored"
   LOCOMOTION_SPATIAL_SIGMA: 60
   LOCOMOTION_DC_SUBSAMPLE: 8
 
+  ALIGN_CENTRAL: "Tail_1"
+  ALIGN_TOP: "Heart_Center"
+
+  FREQ_MOVING_NODE: "Tail_1"
+  FREQ_MOVING_NODE_THRESH: 0.01
+  FREQ_TEMP_ANGLE_SMOOTH: 0.1
+  FREQ_FOR:
+    tail_stem:
+      - Tail_1
+      - Tail_2 # <- Angle here
+      - Tail_3
+    tail_mid:
+      - Tail_3
+      - Tail_4 # <- Angle here
+      - Tail_5
+    tail_tip:
+      - Tail_8
+      - Tail_9 # <- Angle here
+      - Tail_10
+
 Juv:
   ROOT_DIR: "B:/BIF_StaffSci/Christoph/sweengrp/paper_videos/Juv"
                
@@ -125,6 +246,9 @@ Juv:
   AREA_EXPLORED_NODE: "Tail_Stem"
   AREA_EXPLORED_BINS: 128
   AREA_EXPLORED_OUTDIR: "area_explored"
+
+  ALIGN_CENTRAL: "Tail_1"
+  ALIGN_TOP: "Heart_Center"
   
   LOCOMOTION_NODE: "Tail_Stem"
   LOCOMOTION_MOVING_THRESH: 0.0002
