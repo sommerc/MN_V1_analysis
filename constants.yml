@@ -41,6 +41,14 @@ MOVING_PLOT_TIME_SPAN_MIN: 15
   LOCOMOTION_SPATIAL_SIGMA: 60
   LOCOMOTION_DC_SUBSAMPLE: 8
 
+  PCA_PARTS:
+    Tail:
+      - Heart_Center
+      - Tail_Stem
+      - Tail_1
+      - Tail_2
+      - Tail_Tip
+
 44-48:
   ROOT_DIR: "B:/BIF_StaffSci/Christoph/sweengrp/paper_videos/44-48"
                
@@ -71,6 +79,18 @@ MOVING_PLOT_TIME_SPAN_MIN: 15
       - Tail_4
       - Tail_5 # <- Angle here
       - Tail_6
+
+  PCA_PARTS:
+    Tail:
+      - Heart_Center
+      - Tail_Stem
+      - Tail_1
+      - Tail_2
+      - Tail_3
+      - Tail_4
+      - Tail_5
+      - Tail_6
+      - Tail_Tip
 
 
 52-54:
@@ -108,6 +128,18 @@ MOVING_PLOT_TIME_SPAN_MIN: 15
       - Tail_9 # <- Angle here
       - Tail_10
 
+  PCA_PARTS:
+    Tail:
+      - Heart_Center
+      - Tail_Stem
+      - Tail_1
+      - Tail_2
+      - Tail_3
+      - Tail_4
+      - Tail_5
+      - Tail_6
+      - Tail_Tip
+
 
 57-58:
   ROOT_DIR: "B:/BIF_StaffSci/Christoph/sweengrp/paper_videos/57-58"
@@ -143,6 +175,29 @@ MOVING_PLOT_TIME_SPAN_MIN: 15
       - Tail_8
       - Tail_9 # <- Angle here
       - Tail_10
+
+  PCA_PARTS:
+    Tail:
+      - Heart_Center
+      - Tail_Stem
+      - Tail_1
+      - Tail_2
+      - Tail_3
+      - Tail_4
+      - Tail_5
+      - Tail_6
+      - Tail_7
+      - Tail_8
+      - Tail_9
+      - Tail_10
+      - Tail_Tip
+    Leg: 
+      - Tail_1
+      - Left_Hip
+      - Left_Knee
+      - Left_Ankle
+      - Left_Foot
+      - Left_toe
 
 59-62:
   ROOT_DIR: "B:/BIF_StaffSci/Christoph/sweengrp/paper_videos/59-62"
@@ -238,6 +293,29 @@ MOVING_PLOT_TIME_SPAN_MIN: 15
       - Tail_9 # <- Angle here
       - Tail_10
 
+  PCA_PARTS:
+    Tail:
+      - Heart_Center
+      - Tail_Stem
+      - Tail_1
+      - Tail_2
+      - Tail_3
+      - Tail_4
+      - Tail_5
+      - Tail_6
+      - Tail_7
+      - Tail_8
+      - Tail_9
+      - Tail_10
+      - Tail_Tip
+    Leg: 
+      - Tail_1
+      - Left_Hip
+      - Left_Knee
+      - Left_Ankle
+      - Left_Foot
+      - Left_toe
+
 Juv:
   ROOT_DIR: "B:/BIF_StaffSci/Christoph/sweengrp/paper_videos/Juv"
                
@@ -255,5 +333,14 @@ Juv:
   LOCOMOTION_TEMPORAL_SIGMA: 30
   LOCOMOTION_SPATIAL_SIGMA: 60
   LOCOMOTION_DC_SUBSAMPLE: 8
+
+  PCA_PARTS:
+    Leg: 
+      - Tail_Stem
+      - Left_Hip
+      - Left_Knee
+      - Left_Ankle
+      - Left_Foot
+      - Left_toe
 
 
