@@ -87,7 +87,7 @@ def area_explored(tad, tids, cfg, stg, gen, write_img=False):
             ax.set_title(f"{os.path.basename(file_path)}, Tid: {tid}")
 
             plt.savefig(
-                f"{cfg['AREA_EXPLORED_OUTDIR']}/{stg}_{gen}_{base_file}_{tid}.png"
+                f"{cfg['AREA_EXPLORED_OUTDIR']}/imgs/{stg}_{gen}_{base_file}_{tid}.png"
             )
             plt.close(f)
 
@@ -100,7 +100,9 @@ def area_explored(tad, tids, cfg, stg, gen, write_img=False):
         ax.set_axis_off()
         ax.set_title(f"{os.path.basename(file_path)}")
         plt.colorbar(im, extend="max")
-        plt.savefig(f"{cfg['AREA_EXPLORED_OUTDIR']}/{stg}_{gen}_{base_file}_all.png")
+        plt.savefig(
+            f"{cfg['AREA_EXPLORED_OUTDIR']}/imgs/{stg}_{gen}_{base_file}_all.png"
+        )
         plt.close(f)
 
     return pd.DataFrame(
@@ -156,6 +158,7 @@ def run(STAGES, cfg):
 def main():
     cfg = settings()
     os.makedirs(cfg["AREA_EXPLORED_OUTDIR"], exist_ok=True)
+    os.makedirs(f'{cfg["AREA_EXPLORED_OUTDIR"]}/imgs', exist_ok=True)
 
     STAGES = [
         "37-38",
