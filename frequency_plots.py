@@ -32,8 +32,6 @@ if __name__ == "__main__":
                     index_col=0,
                 )
 
-                print(tab_stg_freq)
-
                 _, tail_ptn, _ = nodes
 
                 f, ax = plt.subplots(
