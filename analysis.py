@@ -6,6 +6,12 @@ from frequency_analysis import main as frequency_analysis
 from angle_range_analysis import main as angle_range_analysis
 from pca_moving_plots import main as pca_moving_plots
 
+from area_explored_plots import plot as aep
+from angle_range_plots import plot as arp
+from frequency_plots import plot as fp
+from locomotion_plots import plot as lp
+
+from shared import settings
 
 if __name__ == "__main__":
     analysis_run = {
@@ -25,3 +31,9 @@ if __name__ == "__main__":
 
     for r in res:
         r.join()
+
+    cfg = settings()
+    lp(cfg)
+    arp(cfg)
+    aep(cfg)
+    fp(cfg)

@@ -79,7 +79,7 @@ def plot_by_geno(cfg):
             tab_sub = TAB[(TAB.Genotype == gen) & (TAB.angle_at == angle_at)]
             if len(tab_sub) > 0:
                 for feature in [
-                    "angle_p95-5_dist",
+                    "angle_moving_std",
                     "angle_std",
                 ]:
                     f, ax = plt.subplots(figsize=(14, 4))

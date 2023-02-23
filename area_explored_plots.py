@@ -97,9 +97,14 @@ def plot_by_geno(cfg):
                 plt.savefig(f"{OUT_DIR}/{gen}_{feature}.pdf", bbox_inches="tight")
                 plt.close(f)
 
-if __name__ == "__main__":
-    cfg = settings()
+def plot(cfg):
     plot_by_geno(cfg)
     plot_by_stage(cfg)
+
+
+if __name__ == "__main__":
+    cfg = settings()
+
+    plot(cfg)
     
     

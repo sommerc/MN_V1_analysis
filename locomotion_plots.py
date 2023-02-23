@@ -10,7 +10,7 @@ from tqdm.auto import tqdm, trange
 from shared import settings
 
 
-def plot_by_stage():
+def plot_by_stage(cfg):
     STAGES = [
         "37-38",
         "44-48",
@@ -104,7 +104,7 @@ def plot_by_stage():
         plt.close(f)
 
 
-def plot_by_geno():
+def plot_by_geno(cfg):
     TAB = pd.read_csv("locomotion/locomotion_res.tab", sep="\t", index_col=0)
 
     GENO = TAB.Genotype.unique()
@@ -188,7 +188,12 @@ def plot_by_geno():
         plt.close(f)
 
 
+def plot(cfg):
+    plot_by_geno(cfg)
+    plot_by_stage(cfg)
+
+
 if __name__ == "__main__":
     cfg = settings()
-    # plot_by_stage()
-    plot_by_geno()
+
+    plot(cfg)

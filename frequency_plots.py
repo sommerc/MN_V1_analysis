@@ -133,8 +133,12 @@ def plot_by_geno(cfg):
                 plt.close(f)
 
 
+def plot(cfg):
+    plot_by_geno(cfg)
+    plot_by_stage(cfg)
+
+
 if __name__ == "__main__":
     cfg = settings()
 
-    plot_by_geno(cfg)
-    plot_by_stage(cfg)
+    plot(cfg)

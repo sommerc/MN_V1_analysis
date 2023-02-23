@@ -55,6 +55,10 @@ ANGLE_LR_CORR_OUTDIR: angle_lr_corr
       - Tail_2
       - Tail_Tip
 
+  FREQ_MOVING_NODE: "Tail_1"
+  FREQ_MOVING_NODE_THRESH: 0.02
+  FREQ_TEMP_ANGLE_SMOOTH: 0.1
+
 44-48:
   ROOT_DIR: "B:/BIF_StaffSci/Christoph/sweengrp/paper_videos/44-48"
                
@@ -74,7 +78,7 @@ ANGLE_LR_CORR_OUTDIR: angle_lr_corr
   ALIGN_TOP: "Heart_Center"
 
   FREQ_MOVING_NODE: "Tail_1"
-  FREQ_MOVING_NODE_THRESH: 0.01
+  FREQ_MOVING_NODE_THRESH: 0.02
   FREQ_TEMP_ANGLE_SMOOTH: 0.1
   FREQ_FOR:
     tail_stem:
@@ -99,7 +103,7 @@ ANGLE_LR_CORR_OUTDIR: angle_lr_corr
       - Tail_Tip
 
   ANGLE_RANGE_MOVING_NODE: "Tail_1"
-  ANGLE_RANGE_MOVING_NODE_THRESH: 0.01
+  ANGLE_RANGE_MOVING_NODE_THRESH: 0.02
   ANGLE_RANGE_FOR:
     tail_stem:
       - Tail_1
@@ -132,7 +136,7 @@ ANGLE_LR_CORR_OUTDIR: angle_lr_corr
   ALIGN_TOP: "Heart_Center"
 
   FREQ_MOVING_NODE: "Tail_1"
-  FREQ_MOVING_NODE_THRESH: 0.01
+  FREQ_MOVING_NODE_THRESH: 0.02
   FREQ_TEMP_ANGLE_SMOOTH: 0.1
   FREQ_FOR:
     tail_stem:
@@ -161,7 +165,7 @@ ANGLE_LR_CORR_OUTDIR: angle_lr_corr
       - Tail_Tip
 
   ANGLE_RANGE_MOVING_NODE: "Tail_1"
-  ANGLE_RANGE_MOVING_NODE_THRESH: 0.01
+  ANGLE_RANGE_MOVING_NODE_THRESH: 0.02
   ANGLE_RANGE_FOR:
     tail_stem:
       - Tail_1
@@ -187,7 +191,7 @@ ANGLE_LR_CORR_OUTDIR: angle_lr_corr
   ALIGN_TOP: "Heart_Center"
 
   FREQ_MOVING_NODE: "Tail_1"
-  FREQ_MOVING_NODE_THRESH: 0.01
+  FREQ_MOVING_NODE_THRESH: 0.02
   FREQ_TEMP_ANGLE_SMOOTH: 0.1
   FREQ_FOR:
     tail_stem:
@@ -227,7 +231,7 @@ ANGLE_LR_CORR_OUTDIR: angle_lr_corr
       - Left_toe
 
   ANGLE_RANGE_MOVING_NODE: "Tail_1"
-  ANGLE_RANGE_MOVING_NODE_THRESH: 0.01
+  ANGLE_RANGE_MOVING_NODE_THRESH: 0.02
   ANGLE_RANGE_FOR:
     tail_stem:
       - Tail_1
@@ -298,7 +302,7 @@ ANGLE_LR_CORR_OUTDIR: angle_lr_corr
       - Left_toe
 
   ANGLE_RANGE_MOVING_NODE: "Tail_1"
-  ANGLE_RANGE_MOVING_NODE_THRESH: 0.01
+  ANGLE_RANGE_MOVING_NODE_THRESH: 0.02
   ANGLE_RANGE_FOR:
     tail_stem:
       - Tail_1
@@ -328,7 +332,7 @@ ANGLE_LR_CORR_OUTDIR: angle_lr_corr
   ALIGN_TOP: "Heart_Center"
 
   FREQ_MOVING_NODE: "Tail_1"
-  FREQ_MOVING_NODE_THRESH: 0.01
+  FREQ_MOVING_NODE_THRESH: 0.02
   FREQ_TEMP_ANGLE_SMOOTH: 0.1
   FREQ_FOR:
     tail_stem:
@@ -368,7 +372,7 @@ ANGLE_LR_CORR_OUTDIR: angle_lr_corr
       - Left_toe
 
   ANGLE_RANGE_MOVING_NODE: "Tail_1"
-  ANGLE_RANGE_MOVING_NODE_THRESH: 0.01
+  ANGLE_RANGE_MOVING_NODE_THRESH: 0.02
   ANGLE_RANGE_FOR:
     tail_stem:
       - Tail_1
@@ -409,7 +413,7 @@ Juv:
       - Left_toe
 
   ANGLE_RANGE_MOVING_NODE: "Tail_Stem"
-  ANGLE_RANGE_MOVING_NODE_THRESH: 0.01
+  ANGLE_RANGE_MOVING_NODE_THRESH: 0.02
   ANGLE_RANGE_FOR:
     leg_ankle:
       - Left_Knee
