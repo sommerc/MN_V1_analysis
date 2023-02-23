@@ -10,8 +10,7 @@ from tqdm.auto import tqdm, trange
 from shared import settings
 
 
-if __name__ == "__main__":
-    cfg = settings()
+def plot_by_stage():
     STAGES = [
         "37-38",
         "44-48",
@@ -63,6 +62,7 @@ if __name__ == "__main__":
             sns.despine(ax=ax)
             ax.set_title(f"{STAGE} {feature}")
             plt.savefig(f"{OUT_DIR}/{STAGE}_{feature}.pdf", bbox_inches="tight")
+            plt.close(f)
 
         count_tab = tab_stg.groupby("Genotype")[["track_idx"]].count().reset_index()
 
@@ -79,6 +79,7 @@ if __name__ == "__main__":
 
         ax.set_title(f"{STAGE} Animal Counts")
         plt.savefig(f"{OUT_DIR}/{STAGE}_animal_counts.pdf", bbox_inches="tight")
+        plt.close(f)
 
         time_tab = (
             tab_stg.groupby("Genotype")[["track_idx", "Frames"]]
@@ -100,3 +101,94 @@ if __name__ == "__main__":
 
         ax.set_title(f"{STAGE} Animal hours")
         plt.savefig(f"{OUT_DIR}/{STAGE}_animal_hours.pdf", bbox_inches="tight")
+        plt.close(f)
+
+
+def plot_by_geno():
+    TAB = pd.read_csv("locomotion/locomotion_res.tab", sep="\t", index_col=0)
+
+    GENO = TAB.Genotype.unique()
+
+    OUT_DIR = cfg["LOCOMOTION_OUTDIR"]
+
+    for gen in GENO:
+        tab_sub = TAB[(TAB.Genotype == gen)]
+        for feature in [
+            "speed_mean",
+            "speed_std",
+            "speed_moving_mean",
+            "time_spend_moving",
+            "directional_change_mean",
+            "directional_change_std",
+            # "directional_change_95"
+        ]:
+            f, ax = plt.subplots(figsize=(14, 4))
+            a = sns.boxenplot(
+                y=feature,
+                x="Stage",
+                data=tab_sub,
+                ax=ax,
+                hue="Stage",
+                box_kws={"alpha": 0.4},
+                dodge=False,
+            )
+            a.legend_.remove()
+            b = sns.stripplot(
+                y=feature,
+                x="Stage",
+                data=tab_sub,
+                ax=ax,
+                hue="Stage",
+                dodge=False,
+                zorder=1,
+                legend=False,
+            )
+            sns.despine(ax=ax)
+            ax.set_title(f"{gen} {feature}")
+            plt.savefig(f"{OUT_DIR}/{gen}_{feature}.pdf", bbox_inches="tight")
+            plt.close(f)
+
+        count_tab = tab_sub.groupby("Stage")[["track_idx"]].count().reset_index()
+
+        f, ax = plt.subplots(figsize=(14, 4))
+        sns.barplot(
+            y="track_idx",
+            x="Stage",
+            data=count_tab,
+            dodge=False,
+            hue="Stage",
+            ax=ax,
+        )
+        sns.despine(ax=ax)
+
+        ax.set_title(f"{gen} Animal Counts")
+        plt.savefig(f"{OUT_DIR}/{gen}_animal_counts.pdf", bbox_inches="tight")
+        plt.close(f)
+
+        time_tab = (
+            tab_sub.groupby("Stage")[["track_idx", "Frames"]]
+            .sum("Frames")
+            .reset_index()
+        )
+        time_tab["Hours"] = time_tab["Frames"] / (60 * 60 * 60)
+
+        f, ax = plt.subplots(figsize=(14, 4))
+        sns.barplot(
+            y="Hours",
+            x="Stage",
+            data=time_tab,
+            dodge=False,
+            hue="Stage",
+            ax=ax,
+        )
+        sns.despine(ax=ax)
+
+        ax.set_title(f"{gen} Animal hours")
+        plt.savefig(f"{OUT_DIR}/{gen}_animal_hours.pdf", bbox_inches="tight")
+        plt.close(f)
+
+
+if __name__ == "__main__":
+    cfg = settings()
+    # plot_by_stage()
+    plot_by_geno()

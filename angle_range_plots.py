@@ -7,7 +7,11 @@ from matplotlib import pyplot as plt
 from shared import settings
 
 
-def plot_by_stage(TAB, cfg):
+def plot_by_stage(cfg):
+    TAB = pd.read_csv("angle_range/angle_range_res.tab", sep="\t", index_col=0)
+
+    TAB["angle_std"] = np.rad2deg(TAB["angle_std"])
+    TAB["angle_p95-5_dist"] = np.rad2deg(TAB["angle_p95-5_dist"])
     STAGES = [
         "37-38",
         "44-48",
@@ -54,13 +58,17 @@ def plot_by_stage(TAB, cfg):
                     sns.despine(ax=ax)
                     ax.set_title(f"{stg} {angle_at}")
                     plt.savefig(
-                        f"{OUT_DIR}/{stg}_{angle_at}_{feature}.png",
+                        f"{OUT_DIR}/{stg}_{angle_at}_{feature}.pdf",
                         bbox_inches="tight",
                     )
-                    print(f"{OUT_DIR}/{stg}_{angle_at}_{feature}.png")
+                    plt.close(f)
 
 
-def plot_by_geno(TAB, cfg):
+def plot_by_geno(cfg):
+    TAB = pd.read_csv("angle_range/angle_range_res.tab", sep="\t", index_col=0)
+
+    TAB["angle_std"] = np.rad2deg(TAB["angle_std"])
+    TAB["angle_p95-5_dist"] = np.rad2deg(TAB["angle_p95-5_dist"])
     GENO = TAB.Genotype.unique()
     AR_AT = TAB.angle_at.unique()
 
@@ -80,7 +88,7 @@ def plot_by_geno(TAB, cfg):
                         x="Stage",
                         data=tab_sub,
                         ax=ax,
-                        hue="Genotype",
+                        hue="Stage",
                         box_kws={"alpha": 0.4},
                         dodge=False,
                     )
@@ -90,7 +98,7 @@ def plot_by_geno(TAB, cfg):
                         x="Stage",
                         data=tab_sub,
                         ax=ax,
-                        hue="Genotype",
+                        hue="Stage",
                         dodge=False,
                         zorder=1,
                         legend=False,
@@ -98,19 +106,15 @@ def plot_by_geno(TAB, cfg):
                     sns.despine(ax=ax)
                     ax.set_title(f"{gen} {angle_at}")
                     plt.savefig(
-                        f"{OUT_DIR}/{gen}_{angle_at}_{feature}.png",
+                        f"{OUT_DIR}/{gen}_{angle_at}_{feature}.pdf",
                         bbox_inches="tight",
                     )
-                    print(f"{OUT_DIR}/{gen}_{angle_at}_{feature}.png")
+                    plt.close(f)
 
 
 if __name__ == "__main__":
-    TAB = pd.read_csv("angle_range/angle_range_res.tab", sep="\t", index_col=0)
-
-    TAB["angle_std"] = np.rad2deg(TAB["angle_std"])
-    TAB["angle_p95-5_dist"] = np.rad2deg(TAB["angle_p95-5_dist"])
 
     cfg = settings()
 
-    plot_by_geno(TAB, cfg)
-    plot_by_stage(TAB, cfg)
+    plot_by_geno(cfg)
+    plot_by_stage(cfg)

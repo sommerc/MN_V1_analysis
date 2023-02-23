@@ -9,8 +9,7 @@ from tqdm.auto import tqdm, trange
 from shared import settings
 
 
-if __name__ == "__main__":
-    cfg = settings()
+def plot_by_stage(cfg):
     STAGES = [
         "37-38",
         "44-48",
@@ -52,7 +51,8 @@ if __name__ == "__main__":
                     ax[i].set_ylabel("Mean CWT power spectrum")
                 plt.tight_layout()
 
-                plt.savefig(f"{OUT_DIR}/cwt_mean_ps_{STAGE}_{name}_{tail_ptn}.pdf")
+                plt.savefig(f"{OUT_DIR}/{STAGE}_{name}_{tail_ptn}_cwt_mean_ps_.pdf")
+                plt.close(f)
 
                 feature = "dominant_freq"
                 f, ax = plt.subplots(figsize=(14, 4))
@@ -70,5 +70,71 @@ if __name__ == "__main__":
                 sns.despine(ax=ax)
                 ax.set_title(f"{STAGE}_{name}_{tail_ptn}")
                 plt.savefig(
-                    f"{OUT_DIR}/dominant_cwt_freq_{STAGE}_{name}_{tail_ptn}.pdf"
+                    f"{OUT_DIR}/{STAGE}_{name}_{tail_ptn}_dominant_cwt_freq_.pdf"
                 )
+                plt.close(f)
+
+
+def plot_by_geno(cfg):
+    TAB = pd.read_csv("frequency/frequency_res.tab", sep="\t", index_col=0)
+    GENO = TAB.Genotype.unique()
+    FREQ_FOR = TAB.frequency_for.unique()
+
+    OUT_DIR = cfg["FREQUENCY_OUTDIR"]
+
+    for gen in GENO:
+        for freq_for in FREQ_FOR:
+            tab_sub = TAB[(TAB.Genotype == gen) & (TAB.frequency_for == freq_for)]
+            if len(tab_sub) > 0:
+
+                f, ax = plt.subplots(
+                    1, tab_sub.Stage.nunique(), sharey=True, figsize=(20, 4)
+                )
+                try:
+                    ax[0]
+                except:
+                    ax = [ax]
+
+                cc = ax[0]._get_lines.prop_cycler
+
+                for i, (stg, tab) in enumerate(tab_sub.groupby("Stage")):
+                    a = tab.T.iloc[6:-1].mean(1)
+                    b = tab.T.iloc[6:-1].std(1)
+                    x_vals = a.index.astype("float")
+                    color = next(cc)["color"]
+                    ax[i].plot(x_vals, a, color=color)
+                    ax[i].fill_between(x_vals, (a - b), (a + b), alpha=0.3, color=color)
+                    ax[i].set_title(stg)
+                    ax[i].set_ylim(0, 10)
+                    sns.despine(ax=ax[i])
+                    ax[i].set_xlabel(f"Frequency of angle change at {freq_for}")
+                    ax[i].set_ylabel("Mean CWT power spectrum")
+                plt.tight_layout()
+
+                plt.savefig(f"{OUT_DIR}/{gen}_{freq_for}_cwt_mean_ps.pdf")
+                plt.close(f)
+
+                feature = "dominant_freq"
+                f, ax = plt.subplots(figsize=(14, 4))
+
+                b = sns.stripplot(
+                    y=feature,
+                    x="Stage",
+                    data=tab_sub,
+                    ax=ax,
+                    hue="Stage",
+                    dodge=False,
+                    zorder=1,
+                    legend=False,
+                )
+                sns.despine(ax=ax)
+                ax.set_title(f"{gen}_{freq_for}")
+                plt.savefig(f"{OUT_DIR}/{gen}_{freq_for}_dominant_cwt_freq.pdf")
+                plt.close(f)
+
+
+if __name__ == "__main__":
+    cfg = settings()
+
+    plot_by_geno(cfg)
+    plot_by_stage(cfg)

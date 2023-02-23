@@ -8,9 +8,8 @@ from tqdm.auto import tqdm, trange
 
 from shared import settings
 
-
-if __name__ == "__main__":
-    cfg = settings()
+def plot_by_stage(cfg):
+    
     STAGES = [
         "37-38",
         "44-48",
@@ -55,5 +54,52 @@ if __name__ == "__main__":
             sns.despine(ax=ax)
             ax.set_title(f"{STAGE} {feature}")
             plt.savefig(f"{OUT_DIR}/{STAGE}_{feature}.pdf", bbox_inches="tight")
+            plt.close(f)
 
         
+def plot_by_geno(cfg):
+    TAB = pd.read_csv("area_explored/area_explored_res.tab", sep="\t", index_col=0)
+
+    GENO = TAB.Genotype.unique()
+
+    OUT_DIR = cfg["AREA_EXPLORED_OUTDIR"]
+
+    for gen in GENO:
+        tab_sub = TAB[(TAB.Genotype == gen)]
+        if len(tab_sub) > 0:
+            for feature in [
+                "area_explored_per_h"
+                
+            ]:
+                f, ax = plt.subplots(figsize=(14,4))
+                a = sns.boxenplot(
+                    y=feature,
+                    x="Stage",
+                    data=tab_sub,
+                    ax=ax,
+                    hue="Stage",
+                    box_kws={"alpha":0.4},
+                    dodge=False
+
+                )
+                a.legend_.remove()
+                b = sns.stripplot(
+                    y=feature,
+                    x="Stage",
+                    data=tab_sub,
+                    ax=ax,
+                    hue="Stage",
+                    dodge=False,
+                    zorder=1, legend=False
+                )
+                sns.despine(ax=ax)
+                ax.set_title(f"{gen} {feature}")
+                plt.savefig(f"{OUT_DIR}/{gen}_{feature}.pdf", bbox_inches="tight")
+                plt.close(f)
+
+if __name__ == "__main__":
+    cfg = settings()
+    plot_by_geno(cfg)
+    plot_by_stage(cfg)
+    
+    
