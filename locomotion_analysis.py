@@ -43,11 +43,17 @@ def locomotion(tad, tids, cfgs):
             subsample=cfgs["LOCOMOTION_DC_SUBSAMPLE"],
         )
 
-        directional_change_mean = dc_angles.mean()
-        directional_change_std = dc_angles.std()
-        directional_change_95 = np.percentile(dc_angles, 95)
+        moving_sub = moving_bin[:: cfgs["LOCOMOTION_DC_SUBSAMPLE"]][1:-1]
 
-        # acc_mean = acceleration.mean()
+        if np.any(moving_sub):
+
+            directional_change_mean = dc_angles[moving_sub].mean()
+            directional_change_std = dc_angles[moving_sub].std()
+            directional_change_95 = np.percentile(dc_angles[moving_sub], 95)
+        else:
+            directional_change_mean = np.nan
+            directional_change_std = np.nan
+            directional_change_95 = np.nan
 
         speed_moving_mean = 0
         if time_spent_moving > 0:
@@ -126,8 +132,7 @@ def run(STAGES, cfg):
     return tab_all
 
 
-if __name__ == "__main__":
-
+def main():
     cfg = settings()
 
     STAGES = [
@@ -140,3 +145,8 @@ if __name__ == "__main__":
         "Juv",
     ]
     run(STAGES, cfg)
+
+
+if __name__ == "__main__":
+
+    main()
