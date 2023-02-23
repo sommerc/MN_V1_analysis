@@ -163,9 +163,15 @@ def run(STAGES, cfg):
         tab_dict_stg = run_stage(STAGE, cfg)
         tab_dict_all.append(tab_dict_stg)
 
-    # tab_all = pd.concat(tab_all, axis=0, ignore_index=True)
-    # tab_all.to_csv(f"{cfg['FREQUENCY_OUTDIR']}/frequency_res.tab", sep="\t")
-    # return tab_stg
+    tab_collect = []
+    for tab_dict in tab_dict_all:
+        for name, tab in tab_dict.items():
+            tab["frequency_for"] = name
+            tab_collect.append(tab)
+
+    tab_collect = pd.concat(tab_collect, axis=0, ignore_index=True)
+    tab_collect.to_csv(f"{cfg['FREQUENCY_OUTDIR']}/frequency_res.tab", sep="\t")
+    return tab_collect
 
 
 def main():
