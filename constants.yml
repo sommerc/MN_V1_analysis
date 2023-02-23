@@ -26,6 +26,9 @@ PCA_OUTDIR: pca_plots
 MOVING_OUTDIR: moving_plots
 MOVING_PLOT_TIME_SPAN_MIN: 15
 
+ANGLE_RANGE_OUTDIR: angle_range
+ANGLE_LR_CORR_OUTDIR: angle_lr_corr
+
 
 37-38:
   ROOT_DIR: "B:/BIF_StaffSci/Christoph/sweengrp/paper_videos/37-38"
@@ -38,8 +41,11 @@ MOVING_PLOT_TIME_SPAN_MIN: 15
   LOCOMOTION_NODE: "Tail_1"
   LOCOMOTION_MOVING_THRESH: 0.0002
   LOCOMOTION_TEMPORAL_SIGMA: 30
-  LOCOMOTION_SPATIAL_SIGMA: 60
+  LOCOMOTION_SPATIAL_SIGMA: 10
   LOCOMOTION_DC_SUBSAMPLE: 8
+
+  ALIGN_CENTRAL: "Tail_1"
+  ALIGN_TOP: "Heart_Center"
 
   PCA_PARTS:
     Tail:
@@ -59,9 +65,9 @@ MOVING_PLOT_TIME_SPAN_MIN: 15
   AREA_EXPLORED_OUTDIR: "area_explored"
   
   LOCOMOTION_NODE: "Tail_1"
-  LOCOMOTION_MOVING_THRESH: 0.0002
+  LOCOMOTION_MOVING_THRESH: 0.02
   LOCOMOTION_TEMPORAL_SIGMA: 30
-  LOCOMOTION_SPATIAL_SIGMA: 60
+  LOCOMOTION_SPATIAL_SIGMA: 1
   LOCOMOTION_DC_SUBSAMPLE: 8
 
   ALIGN_CENTRAL: "Tail_1"
@@ -92,6 +98,20 @@ MOVING_PLOT_TIME_SPAN_MIN: 15
       - Tail_6
       - Tail_Tip
 
+  ANGLE_RANGE_MOVING_NODE: "Tail_1"
+  ANGLE_RANGE_MOVING_NODE_THRESH: 0.01
+  ANGLE_RANGE_FOR:
+    tail_stem:
+      - Tail_1
+      - Tail_2 # <- Angle here
+      - Tail_3
+
+  ANGLE_LR_CORRELATION_FOR:
+    ankle:
+      - Knee
+      - Ankle # <- Angle here
+      - Foot
+    
 
 52-54:
   ROOT_DIR: "B:/BIF_StaffSci/Christoph/sweengrp/paper_videos/52-54"
@@ -103,9 +123,9 @@ MOVING_PLOT_TIME_SPAN_MIN: 15
   AREA_EXPLORED_OUTDIR: "area_explored"
   
   LOCOMOTION_NODE: "Tail_1"
-  LOCOMOTION_MOVING_THRESH: 0.0002
+  LOCOMOTION_MOVING_THRESH: 0.02
   LOCOMOTION_TEMPORAL_SIGMA: 30
-  LOCOMOTION_SPATIAL_SIGMA: 60
+  LOCOMOTION_SPATIAL_SIGMA: 1
   LOCOMOTION_DC_SUBSAMPLE: 8
 
   ALIGN_CENTRAL: "Tail_1"
@@ -140,6 +160,13 @@ MOVING_PLOT_TIME_SPAN_MIN: 15
       - Tail_6
       - Tail_Tip
 
+  ANGLE_RANGE_MOVING_NODE: "Tail_1"
+  ANGLE_RANGE_MOVING_NODE_THRESH: 0.01
+  ANGLE_RANGE_FOR:
+    tail_stem:
+      - Tail_1
+      - Tail_2 # <- Angle here
+      - Tail_3
 
 57-58:
   ROOT_DIR: "B:/BIF_StaffSci/Christoph/sweengrp/paper_videos/57-58"
@@ -151,9 +178,9 @@ MOVING_PLOT_TIME_SPAN_MIN: 15
   AREA_EXPLORED_OUTDIR: "area_explored"
   
   LOCOMOTION_NODE: "Tail_1"
-  LOCOMOTION_MOVING_THRESH: 0.0002
+  LOCOMOTION_MOVING_THRESH: 0.02
   LOCOMOTION_TEMPORAL_SIGMA: 30
-  LOCOMOTION_SPATIAL_SIGMA: 60
+  LOCOMOTION_SPATIAL_SIGMA: 1
   LOCOMOTION_DC_SUBSAMPLE: 8
 
   ALIGN_CENTRAL: "Tail_1"
@@ -198,6 +225,18 @@ MOVING_PLOT_TIME_SPAN_MIN: 15
       - Left_Ankle
       - Left_Foot
       - Left_toe
+
+  ANGLE_RANGE_MOVING_NODE: "Tail_1"
+  ANGLE_RANGE_MOVING_NODE_THRESH: 0.01
+  ANGLE_RANGE_FOR:
+    tail_stem:
+      - Tail_1
+      - Tail_2 # <- Angle here
+      - Tail_3
+    leg_ankle:
+      - Left_Knee
+      - Left_Ankle # <- Angle here
+      - Left_Foot
 
 59-62:
   ROOT_DIR: "B:/BIF_StaffSci/Christoph/sweengrp/paper_videos/59-62"
@@ -213,9 +252,9 @@ MOVING_PLOT_TIME_SPAN_MIN: 15
   
   LOCOMOTION_NODE: "Tail_1"
   LOCOMOTION_OUTDIR: "locomotion"
-  LOCOMOTION_MOVING_THRESH: 0.0002
+  LOCOMOTION_MOVING_THRESH: 0.02
   LOCOMOTION_TEMPORAL_SIGMA: 30
-  LOCOMOTION_SPATIAL_SIGMA: 60
+  LOCOMOTION_SPATIAL_SIGMA: 1
   LOCOMOTION_DC_SUBSAMPLE: 8
 
   FREQ_MOVING_NODE: "Tail_1"
@@ -257,6 +296,18 @@ MOVING_PLOT_TIME_SPAN_MIN: 15
       - Left_Ankle
       - Left_Foot
       - Left_toe
+
+  ANGLE_RANGE_MOVING_NODE: "Tail_1"
+  ANGLE_RANGE_MOVING_NODE_THRESH: 0.01
+  ANGLE_RANGE_FOR:
+    tail_stem:
+      - Tail_1
+      - Tail_2 # <- Angle here
+      - Tail_3
+    leg_ankle:
+      - Left_Knee
+      - Left_Ankle # <- Angle here
+      - Left_Foot
 
 63-64:
   ROOT_DIR: "B:/BIF_StaffSci/Christoph/sweengrp/paper_videos/63-64"
@@ -268,9 +319,9 @@ MOVING_PLOT_TIME_SPAN_MIN: 15
   AREA_EXPLORED_OUTDIR: "area_explored"
   
   LOCOMOTION_NODE: "Tail_1"
-  LOCOMOTION_MOVING_THRESH: 0.0002
+  LOCOMOTION_MOVING_THRESH: 0.02
   LOCOMOTION_TEMPORAL_SIGMA: 30
-  LOCOMOTION_SPATIAL_SIGMA: 60
+  LOCOMOTION_SPATIAL_SIGMA: 1
   LOCOMOTION_DC_SUBSAMPLE: 8
 
   ALIGN_CENTRAL: "Tail_1"
@@ -316,6 +367,18 @@ MOVING_PLOT_TIME_SPAN_MIN: 15
       - Left_Foot
       - Left_toe
 
+  ANGLE_RANGE_MOVING_NODE: "Tail_1"
+  ANGLE_RANGE_MOVING_NODE_THRESH: 0.01
+  ANGLE_RANGE_FOR:
+    tail_stem:
+      - Tail_1
+      - Tail_2 # <- Angle here
+      - Tail_3
+    leg_ankle:
+      - Left_Knee
+      - Left_Ankle # <- Angle here
+      - Left_Foot
+
 Juv:
   ROOT_DIR: "B:/BIF_StaffSci/Christoph/sweengrp/paper_videos/Juv"
                
@@ -325,14 +388,16 @@ Juv:
   AREA_EXPLORED_BINS: 128
   AREA_EXPLORED_OUTDIR: "area_explored"
 
-  ALIGN_CENTRAL: "Tail_1"
+  ALIGN_CENTRAL: "Tail_Stem"
   ALIGN_TOP: "Heart_Center"
   
   LOCOMOTION_NODE: "Tail_Stem"
-  LOCOMOTION_MOVING_THRESH: 0.0002
+  LOCOMOTION_MOVING_THRESH: 0.02
   LOCOMOTION_TEMPORAL_SIGMA: 30
-  LOCOMOTION_SPATIAL_SIGMA: 60
+  LOCOMOTION_SPATIAL_SIGMA: 1
   LOCOMOTION_DC_SUBSAMPLE: 8
+
+  FREQ_TEMP_ANGLE_SMOOTH: 0.1
 
   PCA_PARTS:
     Leg: 
@@ -342,5 +407,13 @@ Juv:
       - Left_Ankle
       - Left_Foot
       - Left_toe
+
+  ANGLE_RANGE_MOVING_NODE: "Tail_Stem"
+  ANGLE_RANGE_MOVING_NODE_THRESH: 0.01
+  ANGLE_RANGE_FOR:
+    leg_ankle:
+      - Left_Knee
+      - Left_Ankle # <- Angle here
+      - Left_Foot
 
 
