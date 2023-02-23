@@ -165,12 +165,11 @@ def run(STAGES, cfg):
         run_stage(STAGE, cfg)
 
 
-if __name__ == "__main__":
-
+def main():
     cfg = settings()
 
     STAGES = [
-        # "37-38",
+        "37-38",
         "44-48",
         "52-54",
         "57-58",
@@ -179,3 +178,8 @@ if __name__ == "__main__":
         "Juv",
     ]
     run(STAGES, cfg)
+
+
+if __name__ == "__main__":
+
+    main()

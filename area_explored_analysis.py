@@ -153,8 +153,7 @@ def run(STAGES, cfg):
     return tab_stg
 
 
-if __name__ == "__main__":
-
+def main():
     cfg = settings()
     os.makedirs(cfg["AREA_EXPLORED_OUTDIR"], exist_ok=True)
 
@@ -168,3 +167,8 @@ if __name__ == "__main__":
         "Juv",
     ]
     run(STAGES, cfg)
+
+
+if __name__ == "__main__":
+
+    main()
