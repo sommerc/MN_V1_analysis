@@ -37,7 +37,10 @@ def compute_angle_wavlet_psd_mean(tad, tid, scales, wavelet, a, b, c, cfgs):
     t_wvlt_psd = np.abs(t_wvlt.T) ** 2
 
     speed_px_per_frame = tad.speed(
-        cfgs["FREQ_MOVING_NODE"], track_idx=tid, pre_sigma=60, sigma=30
+        cfgs["FREQ_MOVING_NODE"],
+        track_idx=tid,
+        pre_sigma=cfgs["LOCOMOTION_SPATIAL_SIGMA"],
+        sigma=cfgs["LOCOMOTION_SPATIAL_SIGMA"],
     )
     speed_calib = speed_px_per_frame * tadpose.utils.calibrate_by_dish(tad, 14)
 
@@ -165,13 +168,13 @@ def run(STAGES, cfg):
     # return tab_stg
 
 
-if __name__ == "__main__":
+def main():
     cfg = settings()
     os.makedirs(cfg["FREQUENCY_OUTDIR"], exist_ok=True)
 
     STAGES = [
-        # "37-38",
-        # "44-48",
+        "37-38",
+        "44-48",
         "52-54",
         "57-58",
         "59-62",
@@ -179,3 +182,7 @@ if __name__ == "__main__":
         "Juv",
     ]
     run(STAGES, cfg)
+
+
+if __name__ == "__main__":
+    main()
