@@ -134,6 +134,7 @@ def run(STAGES, cfg):
 
 def main():
     cfg = settings()
+    os.makedirs(cfg["LOCOMOTION_OUTDIR"], exist_ok=True)
 
     STAGES = [
         "37-38",

@@ -11,7 +11,7 @@ def plot_by_stage(cfg):
     TAB = pd.read_csv("angle_range/angle_range_res.tab", sep="\t", index_col=0)
 
     TAB["angle_std"] = np.rad2deg(TAB["angle_std"])
-    TAB["angle_p95-5_dist"] = np.rad2deg(TAB["angle_p95-5_dist"])
+    TAB["angle_moving_std"] = np.rad2deg(TAB["angle_moving_std"])
     STAGES = [
         "37-38",
         "44-48",
@@ -31,7 +31,7 @@ def plot_by_stage(cfg):
             tab_sub = TAB[(TAB.Stage == stg) & (TAB.angle_at == angle_at)]
             if len(tab_sub) > 0:
                 for feature in [
-                    "angle_p95-5_dist",
+                    "angle_moving_std",
                     "angle_std",
                 ]:
                     f, ax = plt.subplots(figsize=(14, 4))
@@ -68,7 +68,7 @@ def plot_by_geno(cfg):
     TAB = pd.read_csv("angle_range/angle_range_res.tab", sep="\t", index_col=0)
 
     TAB["angle_std"] = np.rad2deg(TAB["angle_std"])
-    TAB["angle_p95-5_dist"] = np.rad2deg(TAB["angle_p95-5_dist"])
+    TAB["angle_moving_std"] = np.rad2deg(TAB["angle_moving_std"])
     GENO = TAB.Genotype.unique()
     AR_AT = TAB.angle_at.unique()
 
@@ -112,9 +112,12 @@ def plot_by_geno(cfg):
                     plt.close(f)
 
 
-if __name__ == "__main__":
-
-    cfg = settings()
-
+def plot(cfg):
     plot_by_geno(cfg)
     plot_by_stage(cfg)
+
+
+if __name__ == "__main__":
+    cfg = settings()
+
+    plot(cfg)

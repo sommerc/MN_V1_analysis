@@ -52,14 +52,14 @@ def angle_range(all_movs, stg, nodes, cfg):
             # )
 
             speed_px_per_frame = tad.speed(
-                cfgs["FREQ_MOVING_NODE"],
+                cfgs["ANGLE_RANGE_MOVING_NODE"],
                 track_idx=tid,
                 pre_sigma=cfgs["LOCOMOTION_SPATIAL_SIGMA"],
                 sigma=cfgs["LOCOMOTION_SPATIAL_SIGMA"],
             )
             speed_calib = speed_px_per_frame * tadpose.utils.calibrate_by_dish(tad, 14)
 
-            moving_bin = speed_calib > cfgs["FREQ_MOVING_NODE_THRESH"]
+            moving_bin = speed_calib > cfgs["ANGLE_RANGE_MOVING_NODE_THRESH"]
 
             if moving_bin.sum() > 0:
                 ang_std_mov = ang_smooth[moving_bin].std()
