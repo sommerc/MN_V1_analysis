@@ -34,13 +34,13 @@ def angle_range(all_movs, stg, nodes, cfg):
         file_path = tad.video_fn
         base_file = os.path.basename(file_path)[:-4]
 
-        aligner = tadpose.alignment.RotationalAligner(
-            central_part=cfgs["ALIGN_CENTRAL"], aligned_part=cfgs["ALIGN_TOP"]
-        )
+        # aligner = tadpose.alignment.RotationalAligner(
+        #     central_part=cfgs["ALIGN_CENTRAL"], aligned_part=cfgs["ALIGN_TOP"]
+        # )
 
-        aligner.tracks_to_align = track_okay_idx
+        # aligner.tracks_to_align = track_okay_idx
 
-        tad.aligner = aligner
+        # tad.aligner = aligner
 
         for tid in track_okay_idx:
             ang = tadpose.analysis.angles(
@@ -55,7 +55,7 @@ def angle_range(all_movs, stg, nodes, cfg):
                 cfgs["ANGLE_RANGE_MOVING_NODE"],
                 track_idx=tid,
                 pre_sigma=cfgs["LOCOMOTION_SPATIAL_SIGMA"],
-                sigma=cfgs["LOCOMOTION_SPATIAL_SIGMA"],
+                sigma=cfgs["LOCOMOTION_TEMPORAL_SIGMA"],
             )
             speed_calib = speed_px_per_frame * tadpose.utils.calibrate_by_dish(tad, 14)
 
@@ -91,7 +91,6 @@ def run_stage(STAGE, cfg):
 
     tab_ar_dict = {}
     if "ANGLE_RANGE_FOR" in cfgs:
-
         for name, nodes in cfgs["ANGLE_RANGE_FOR"].items():
             tab_ar = angle_range(all_movs, STAGE, nodes, cfg)
 

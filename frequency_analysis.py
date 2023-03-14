@@ -40,7 +40,7 @@ def compute_angle_wavlet_psd_mean(tad, tid, scales, wavelet, a, b, c, cfgs):
         cfgs["FREQ_MOVING_NODE"],
         track_idx=tid,
         pre_sigma=cfgs["LOCOMOTION_SPATIAL_SIGMA"],
-        sigma=cfgs["LOCOMOTION_SPATIAL_SIGMA"],
+        sigma=cfgs["LOCOMOTION_TEMPORAL_SIGMA"],
     )
     speed_calib = speed_px_per_frame * tadpose.utils.calibrate_by_dish(tad, 14)
 
@@ -56,7 +56,6 @@ def dominant_freqency(sig, freq):
     peaks, props = signal.find_peaks(sig, height=(None, None))
 
     if len(peaks) > 0:
-
         peak_pos = np.argmax(props["peak_heights"])
         return freq[peaks[peak_pos]]
 
@@ -142,7 +141,6 @@ def run_stage(STAGE, cfg):
 
     tab_freq_dict = {}
     if "FREQ_FOR" in cfgs:
-
         for name, nodes in cfgs["FREQ_FOR"].items():
             tab_freq = frequency_analysis(all_movs, STAGE, nodes, cfg)
 

@@ -46,7 +46,6 @@ def locomotion(tad, tids, cfgs):
         moving_sub = moving_bin[:: cfgs["LOCOMOTION_DC_SUBSAMPLE"]][1:-1]
 
         if np.any(moving_sub):
-
             directional_change_mean = dc_angles[moving_sub].mean()
             directional_change_std = dc_angles[moving_sub].std()
             directional_change_95 = np.percentile(dc_angles[moving_sub], 95)
@@ -149,5 +148,4 @@ def main():
 
 
 if __name__ == "__main__":
-
     main()
