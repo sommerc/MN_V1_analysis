@@ -75,7 +75,6 @@ def pca_plot(tad, tids, stg, gen, cfg):
     size_plot = cfg["PCA_PLOT_N"]
 
     for part_name, parts in parts_dict.items():
-
         norm = colors.Normalize(vmin=-5, vmax=5, clip=True)
         f, axs = plt.subplots(1, len(tids), squeeze=False, sharey=True)
 
@@ -181,5 +180,4 @@ def main():
 
 
 if __name__ == "__main__":
-
     main()
