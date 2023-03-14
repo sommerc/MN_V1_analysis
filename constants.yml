@@ -106,10 +106,18 @@ ANGLE_LR_CORR_OUTDIR: angle_lr_corr
   ANGLE_RANGE_MOVING_NODE: "Tail_1"
   ANGLE_RANGE_MOVING_NODE_THRESH: 0.02
   ANGLE_RANGE_FOR:
-    tail_stem:
+    tail_2:
       - Tail_1
       - Tail_2 # <- Angle here
       - Tail_3
+    tail_4:
+      - Tail_3
+      - Tail_4 # <- Angle here
+      - Tail_5
+    tail_6:
+      - Tail_5
+      - Tail_6 # <- Angle here
+      - Tail_Tip
 
   ANGLE_LR_CORRELATION_FOR:
     ankle:
@@ -168,10 +176,26 @@ ANGLE_LR_CORR_OUTDIR: angle_lr_corr
   ANGLE_RANGE_MOVING_NODE: "Tail_1"
   ANGLE_RANGE_MOVING_NODE_THRESH: 0.02
   ANGLE_RANGE_FOR:
-    tail_stem:
+    tail_2:
       - Tail_1
       - Tail_2 # <- Angle here
       - Tail_3
+    tail_4:
+      - Tail_3
+      - Tail_4 # <- Angle here
+      - Tail_5
+    tail_6:
+      - Tail_5
+      - Tail_6 # <- Angle here
+      - Tail_7
+    tail_8:
+      - Tail_7
+      - Tail_8 # <- Angle here
+      - Tail_9
+    tail_10:
+      - Tail_9
+      - Tail_10 # <- Angle here
+      - Tail_Tip
 
 57-58:
   ROOT_DIR: "B:/BIF_StaffSci/Christoph/sweengrp/paper_videos/57-58"
@@ -208,6 +232,33 @@ ANGLE_LR_CORR_OUTDIR: angle_lr_corr
       - Tail_9 # <- Angle here
       - Tail_10
 
+    left_knee:
+      - Left_Hip
+      - Left_Knee
+      - Left_Ankle
+    left_ankle:
+      - Left_Knee
+      - Left_Ankle
+      - Left_Foot
+    left_foot:
+      - Left_Ankle
+      - Left_Foot
+      - Left_toe
+
+    right_knee:
+      - Right_Hip
+      - Right_Knee
+      - Right_Ankle
+    right_ankle:
+      - Right_Knee
+      - Right_Ankle
+      - Right_Foot
+    right_foot:
+      - Right_Ankle
+      - Right_Foot
+      - Right_toe
+      
+
   PCA_PARTS:
     Tail:
       - Heart_Center
@@ -223,7 +274,8 @@ ANGLE_LR_CORR_OUTDIR: angle_lr_corr
       - Tail_9
       - Tail_10
       - Tail_Tip
-    Leg: 
+
+    Left_Leg: 
       - Tail_1
       - Left_Hip
       - Left_Knee
@@ -231,17 +283,62 @@ ANGLE_LR_CORR_OUTDIR: angle_lr_corr
       - Left_Foot
       - Left_toe
 
+    Right_Leg: 
+      - Tail_1
+      - Right_Hip
+      - Right_Knee
+      - Right_Ankle
+      - Right_Foot
+      - Right_toe
+
   ANGLE_RANGE_MOVING_NODE: "Tail_1"
   ANGLE_RANGE_MOVING_NODE_THRESH: 0.02
   ANGLE_RANGE_FOR:
-    tail_stem:
+    tail_2:
       - Tail_1
       - Tail_2 # <- Angle here
       - Tail_3
-    leg_ankle:
+    tail_4:
+      - Tail_3
+      - Tail_4 # <- Angle here
+      - Tail_5
+    tail_6:
+      - Tail_5
+      - Tail_6 # <- Angle here
+      - Tail_7
+    tail_8:
+      - Tail_7
+      - Tail_8 # <- Angle here
+      - Tail_9
+    tail_10:
+      - Tail_9
+      - Tail_10 # <- Angle here
+      - Tail_Tip
+    left_ankle:
       - Left_Knee
       - Left_Ankle # <- Angle here
       - Left_Foot
+    left_knee:
+      - Left_Hip
+      - Left_Knee
+      - Left_Ankle 
+    left_foot:
+      - Left_Ankle 
+      - Left_Foot
+      - Left_toe
+    right_ankle:
+      - Right_Knee
+      - Right_Ankle
+      - Right_Foot
+    right_knee:
+      - Right_Hip
+      - Right_Knee
+      - Right_Ankle
+    right_foot:
+      - Right_Ankle
+      - Right_Foot
+      - Right_toe
+      
 
 59-62:
   ROOT_DIR: "B:/BIF_StaffSci/Christoph/sweengrp/paper_videos/59-62"
@@ -278,6 +375,31 @@ ANGLE_LR_CORR_OUTDIR: angle_lr_corr
       - Tail_8
       - Tail_9 # <- Angle here
       - Tail_10
+    left_knee:
+      - Left_Hip
+      - Left_Knee
+      - Left_Ankle
+    left_ankle:
+      - Left_Knee
+      - Left_Ankle
+      - Left_Foot
+    left_foot:
+      - Left_Ankle
+      - Left_Foot
+      - Left_toe
+
+    right_knee:
+      - Right_Hip
+      - Right_Knee
+      - Right_Ankle
+    right_ankle:
+      - Right_Knee
+      - Right_Ankle
+      - Right_Foot
+    right_foot:
+      - Right_Ankle
+      - Right_Foot
+      - Right_toe
 
   PCA_PARTS:
     Tail:
@@ -294,7 +416,8 @@ ANGLE_LR_CORR_OUTDIR: angle_lr_corr
       - Tail_9
       - Tail_10
       - Tail_Tip
-    Leg: 
+
+    Left_Leg: 
       - Tail_1
       - Left_Hip
       - Left_Knee
@@ -302,17 +425,61 @@ ANGLE_LR_CORR_OUTDIR: angle_lr_corr
       - Left_Foot
       - Left_toe
 
+    Right_Leg: 
+      - Tail_1
+      - Right_Hip
+      - Right_Knee
+      - Right_Ankle
+      - Right_Foot
+      - Right_toe
+
   ANGLE_RANGE_MOVING_NODE: "Tail_1"
   ANGLE_RANGE_MOVING_NODE_THRESH: 0.02
   ANGLE_RANGE_FOR:
-    tail_stem:
+    tail_2:
       - Tail_1
       - Tail_2 # <- Angle here
       - Tail_3
-    leg_ankle:
+    tail_4:
+      - Tail_3
+      - Tail_4 # <- Angle here
+      - Tail_5
+    tail_6:
+      - Tail_5
+      - Tail_6 # <- Angle here
+      - Tail_7
+    tail_8:
+      - Tail_7
+      - Tail_8 # <- Angle here
+      - Tail_9
+    tail_10:
+      - Tail_9
+      - Tail_10 # <- Angle here
+      - Tail_Tip
+    left_ankle:
       - Left_Knee
       - Left_Ankle # <- Angle here
       - Left_Foot
+    left_knee:
+      - Left_Hip
+      - Left_Knee
+      - Left_Ankle 
+    left_foot:
+      - Left_Ankle 
+      - Left_Foot
+      - Left_toe
+    right_ankle:
+      - Right_Knee
+      - Right_Ankle
+      - Right_Foot
+    right_knee:
+      - Right_Hip
+      - Right_Knee
+      - Right_Ankle
+    right_foot:
+      - Right_Ankle
+      - Right_Foot
+      - Right_toe
 
 63-64:
   ROOT_DIR: "B:/BIF_StaffSci/Christoph/sweengrp/paper_videos/63-64"
@@ -349,6 +516,32 @@ ANGLE_LR_CORR_OUTDIR: angle_lr_corr
       - Tail_9 # <- Angle here
       - Tail_10
 
+    left_knee:
+      - Left_Hip
+      - Left_Knee
+      - Left_Ankle
+    left_ankle:
+      - Left_Knee
+      - Left_Ankle
+      - Left_Foot
+    left_foot:
+      - Left_Ankle
+      - Left_Foot
+      - Left_toe
+
+    right_knee:
+      - Right_Hip
+      - Right_Knee
+      - Right_Ankle
+    right_ankle:
+      - Right_Knee
+      - Right_Ankle
+      - Right_Foot
+    right_foot:
+      - Right_Ankle
+      - Right_Foot
+      - Right_toe
+
   PCA_PARTS:
     Tail:
       - Heart_Center
@@ -364,7 +557,8 @@ ANGLE_LR_CORR_OUTDIR: angle_lr_corr
       - Tail_9
       - Tail_10
       - Tail_Tip
-    Leg: 
+
+    Left_Leg: 
       - Tail_1
       - Left_Hip
       - Left_Knee
@@ -372,17 +566,61 @@ ANGLE_LR_CORR_OUTDIR: angle_lr_corr
       - Left_Foot
       - Left_toe
 
+    Right_Leg: 
+      - Tail_1
+      - Right_Hip
+      - Right_Knee
+      - Right_Ankle
+      - Right_Foot
+      - Right_toe
+
   ANGLE_RANGE_MOVING_NODE: "Tail_1"
   ANGLE_RANGE_MOVING_NODE_THRESH: 0.02
   ANGLE_RANGE_FOR:
-    tail_stem:
+    tail_2:
       - Tail_1
       - Tail_2 # <- Angle here
       - Tail_3
-    leg_ankle:
+    tail_4:
+      - Tail_3
+      - Tail_4 # <- Angle here
+      - Tail_5
+    tail_6:
+      - Tail_5
+      - Tail_6 # <- Angle here
+      - Tail_7
+    tail_8:
+      - Tail_7
+      - Tail_8 # <- Angle here
+      - Tail_9
+    tail_10:
+      - Tail_9
+      - Tail_10 # <- Angle here
+      - Tail_Tip
+    left_ankle:
       - Left_Knee
       - Left_Ankle # <- Angle here
       - Left_Foot
+    left_knee:
+      - Left_Hip
+      - Left_Knee
+      - Left_Ankle 
+    left_foot:
+      - Left_Ankle 
+      - Left_Foot
+      - Left_toe
+    right_ankle:
+      - Right_Knee
+      - Right_Ankle
+      - Right_Foot
+    right_knee:
+      - Right_Hip
+      - Right_Knee
+      - Right_Ankle
+    right_foot:
+      - Right_Ankle
+      - Right_Foot
+      - Right_toe
 
 Juv:
   ROOT_DIR: "B:/BIF_StaffSci/Christoph/sweengrp/paper_videos/Juv"
@@ -402,10 +640,38 @@ Juv:
   LOCOMOTION_SPATIAL_SIGMA: 1
   LOCOMOTION_DC_SUBSAMPLE: 8
 
+  FREQ_MOVING_NODE: "Tail_Stem"
+  FREQ_MOVING_NODE_THRESH: 0.02
   FREQ_TEMP_ANGLE_SMOOTH: 0.1
+  FREQ_FOR:     
+    left_knee:
+      - Left_Hip
+      - Left_Knee
+      - Left_Ankle
+    left_ankle:
+      - Left_Knee
+      - Left_Ankle
+      - Left_Foot
+    left_foot:
+      - Left_Ankle
+      - Left_Foot
+      - Left_toe
+
+    right_knee:
+      - Right_Hip
+      - Right_Knee
+      - Right_Ankle
+    right_ankle:
+      - Right_Knee
+      - Right_Ankle
+      - Right_Foot
+    right_foot:
+      - Right_Ankle
+      - Right_Foot
+      - Right_toe
 
   PCA_PARTS:
-    Leg: 
+    Left_Leg: 
       - Tail_Stem
       - Left_Hip
       - Left_Knee
@@ -413,12 +679,40 @@ Juv:
       - Left_Foot
       - Left_toe
 
+    Right_Leg: 
+      - Tail_Stem
+      - Right_Hip
+      - Right_Knee
+      - Right_Ankle
+      - Right_Foot
+      - Right_toe
+
   ANGLE_RANGE_MOVING_NODE: "Tail_Stem"
   ANGLE_RANGE_MOVING_NODE_THRESH: 0.02
   ANGLE_RANGE_FOR:
-    leg_ankle:
+    left_ankle:
       - Left_Knee
       - Left_Ankle # <- Angle here
       - Left_Foot
+    left_knee:
+      - Left_Hip
+      - Left_Knee
+      - Left_Ankle 
+    left_foot:
+      - Left_Ankle 
+      - Left_Foot
+      - Left_toe
+    right_ankle:
+      - Right_Knee
+      - Right_Ankle
+      - Right_Foot
+    right_knee:
+      - Right_Hip
+      - Right_Knee
+      - Right_Ankle
+    right_foot:
+      - Right_Ankle
+      - Right_Foot
+      - Right_toe
 
 
