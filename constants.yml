@@ -28,7 +28,7 @@ MOVING_OUTDIR: moving_plots
 MOVING_PLOT_TIME_SPAN_MIN: 15
 
 ANGLE_RANGE_OUTDIR: angle_range
-ANGLE_LR_CORR_OUTDIR: angle_lr_corr
+ANGLE_CORR_OUTDIR: angle_correlation
 
 
 37-38:
@@ -118,14 +118,7 @@ ANGLE_LR_CORR_OUTDIR: angle_lr_corr
       - Tail_5
       - Tail_6 # <- Angle here
       - Tail_Tip
-
-  ANGLE_LR_CORRELATION_FOR:
-    ankle:
-      - Knee
-      - Ankle # <- Angle here
-      - Foot
     
-
 52-54:
   ROOT_DIR: "B:/BIF_StaffSci/Christoph/sweengrp/paper_videos/52-54"
                
@@ -338,8 +331,34 @@ ANGLE_LR_CORR_OUTDIR: angle_lr_corr
       - Right_Ankle
       - Right_Foot
       - Right_toe
+  
+  ANGLE_CORR_ACTIVE_THRESH: 0.1
+  ANGLE_CORR_ACTIVE_SMOOTH: 15
+  ANGLE_CORR_TEMP_ANGLE_SMOOTH: 1
+  ANGLE_CORR_WIN_SIZE: 31
+  ANGLE_CORR_FOR:
+    LR_ankle:
+      - - Left_Knee
+        - Left_Ankle  # <- Angle A
+        - Left_Foot   #      |
+      - - Right_Knee  #      |
+        - Right_Ankle # <- Angle B
+        - Right_Foot
+    LR_knee:
+      - - Left_Hip
+        - Left_Knee
+        - Left_Ankle 
+      - - Right_Hip
+        - Right_Knee
+        - Right_Ankle
+    LR_foot:
+      - - Left_Ankle 
+        - Left_Foot
+        - Left_toe
+      - - Right_Ankle
+        - Right_Foot
+        - Right_toe
       
-
 59-62:
   ROOT_DIR: "B:/BIF_StaffSci/Christoph/sweengrp/paper_videos/59-62"
                
@@ -480,6 +499,34 @@ ANGLE_LR_CORR_OUTDIR: angle_lr_corr
       - Right_Ankle
       - Right_Foot
       - Right_toe
+
+  ANGLE_CORR_ACTIVE_THRESH: 0.1
+  ANGLE_CORR_ACTIVE_SMOOTH: 15
+  ANGLE_CORR_TEMP_ANGLE_SMOOTH: 1
+  ANGLE_CORR_WIN_SIZE: 31
+  ANGLE_CORR_FOR:
+    LR_ankle:
+      - - Left_Knee
+        - Left_Ankle  # <- Angle A
+        - Left_Foot   #      |
+      - - Right_Knee  #      |
+        - Right_Ankle # <- Angle B
+        - Right_Foot
+    LR_knee:
+      - - Left_Hip
+        - Left_Knee
+        - Left_Ankle 
+      - - Right_Hip
+        - Right_Knee
+        - Right_Ankle
+    LR_foot:
+      - - Left_Ankle 
+        - Left_Foot
+        - Left_toe
+      - - Right_Ankle
+        - Right_Foot
+        - Right_toe
+
 
 63-64:
   ROOT_DIR: "B:/BIF_StaffSci/Christoph/sweengrp/paper_videos/63-64"
@@ -622,6 +669,33 @@ ANGLE_LR_CORR_OUTDIR: angle_lr_corr
       - Right_Foot
       - Right_toe
 
+  ANGLE_CORR_ACTIVE_THRESH: 0.1
+  ANGLE_CORR_ACTIVE_SMOOTH: 15
+  ANGLE_CORR_TEMP_ANGLE_SMOOTH: 1
+  ANGLE_CORR_WIN_SIZE: 31
+  ANGLE_CORR_FOR:
+    LR_ankle:
+      - - Left_Knee
+        - Left_Ankle  # <- Angle A
+        - Left_Foot   #      |
+      - - Right_Knee  #      |
+        - Right_Ankle # <- Angle B
+        - Right_Foot
+    LR_knee:
+      - - Left_Hip
+        - Left_Knee
+        - Left_Ankle 
+      - - Right_Hip
+        - Right_Knee
+        - Right_Ankle
+    LR_foot:
+      - - Left_Ankle 
+        - Left_Foot
+        - Left_toe
+      - - Right_Ankle
+        - Right_Foot
+        - Right_toe
+
 Juv:
   ROOT_DIR: "B:/BIF_StaffSci/Christoph/sweengrp/paper_videos/Juv"
                
@@ -715,4 +789,33 @@ Juv:
       - Right_Foot
       - Right_toe
 
+  ANGLE_CORR_ACTIVE_THRESH: 0.1
+  ANGLE_CORR_ACTIVE_SMOOTH: 15
+  ANGLE_CORR_TEMP_ANGLE_SMOOTH: 1
+  ANGLE_CORR_WIN_SIZE: 31
+  ANGLE_CORR_FOR:
+    LR_ankle:
+      - - Left_Knee
+        - Left_Ankle  # <- Angle A
+        - Left_Foot   #      |
+      - - Right_Knee  #      |
+        - Right_Ankle # <- Angle B
+        - Right_Foot
+    LR_knee:
+      - - Left_Hip
+        - Left_Knee
+        - Left_Ankle 
+      - - Right_Hip
+        - Right_Knee
+        - Right_Ankle
+    LR_foot:
+      - - Left_Ankle 
+        - Left_Foot
+        - Left_toe
+      - - Right_Ankle
+        - Right_Foot
+        - Right_toe
 
+
+
+  
