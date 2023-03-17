@@ -86,7 +86,6 @@ def plot_by_geno(cfg):
         for freq_for in FREQ_FOR:
             tab_sub = TAB[(TAB.Genotype == gen) & (TAB.frequency_for == freq_for)]
             if len(tab_sub) > 0:
-
                 f, ax = plt.subplots(
                     1, tab_sub.Stage.nunique(), sharey=True, figsize=(20, 4)
                 )

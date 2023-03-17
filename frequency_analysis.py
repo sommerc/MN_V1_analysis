@@ -22,7 +22,7 @@ from scipy import signal
 from shared import settings, get_good_tracks
 
 
-def compute_angle_wavlet_psd_mean(tad, tid, scales, wavelet, a, b, c, cfgs):
+def compute_angle_wavlet_psd_mean(tad, tid, scales, wavelet, a, b, c, fps, cfgs):
     ang = tadpose.analysis.angles(tad, (a, b), (b, c), win=None, track_idx=tid)
     ang_smooth = gaussian_filter1d(ang, cfgs["FREQ_TEMP_ANGLE_SMOOTH"])
     ang_zscore = (ang_smooth - ang_smooth.mean()) / ang_smooth.std()
@@ -31,7 +31,7 @@ def compute_angle_wavlet_psd_mean(tad, tid, scales, wavelet, a, b, c, cfgs):
         ang_zscore,
         scales,
         wavelet,
-        sampling_period=1 / 60,
+        sampling_period=1 / fps,
         method="fft",
     )
     t_wvlt_psd = np.abs(t_wvlt.T) ** 2
@@ -65,17 +65,17 @@ def get_frequency_params(cfg):
     wavelet = cfg["FREQUENCY_WAVELET"]
 
     # Fc = pywt.central_frequency(wavelet)
-    fps = 60
+    fps = cfg["FPS"]
     sp = 1 / fps
 
     scales = 2 ** np.linspace(1, 6, N)  # <- dyadic 1-30HZ
     frequencies = pywt.scale2frequency(wavelet, scales) / sp
-    return scales, frequencies, wavelet
+    return scales, frequencies, wavelet, fps
 
 
 def frequency_analysis(all_movs, stg, nodes, cfg):
     cfgs = cfg[stg]
-    scales, freq, wavelet = get_frequency_params(cfg)
+    scales, freq, wavelet, fps = get_frequency_params(cfg)
     tab_all = []
     for fn in tqdm(all_movs):
         gen = fn.parent.stem
@@ -89,17 +89,17 @@ def frequency_analysis(all_movs, stg, nodes, cfg):
         file_path = tad.video_fn
         base_file = os.path.basename(file_path)[:-4]
 
-        aligner = tadpose.alignment.RotationalAligner(
-            central_part=cfgs["ALIGN_CENTRAL"], aligned_part=cfgs["ALIGN_TOP"]
-        )
+        # aligner = tadpose.alignment.RotationalAligner(
+        #     central_part=cfgs["ALIGN_CENTRAL"], aligned_part=cfgs["ALIGN_TOP"]
+        # )
 
-        aligner.tracks_to_align = track_okay_idx
+        # aligner.tracks_to_align = track_okay_idx
 
-        tad.aligner = aligner
+        # tad.aligner = aligner
 
         for tid in track_okay_idx:
             mean_psd_moving, freq, computed_on = compute_angle_wavlet_psd_mean(
-                tad, tid, scales, wavelet, tail_a, tail_b, tail_c, cfgs
+                tad, tid, scales, wavelet, tail_a, tail_b, tail_c, fps, cfgs
             )
 
             dom_freq = dominant_freqency(mean_psd_moving, freq)
