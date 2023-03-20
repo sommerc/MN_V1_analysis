@@ -56,6 +56,8 @@ def area_explored(tad, tids, cfg, stg, gen, write_img=False):
         x_a, x_b = roi.left, roi.right
         y_a, y_b = roi.top, roi.bottom
 
+        coords = roi.coordinates()
+
         if "mutant_side" in tad.info and tad.info["mutant_side"] == "right":
             print("mirror LR in locs")
 
@@ -66,11 +68,11 @@ def area_explored(tad, tids, cfg, stg, gen, write_img=False):
             x_a = width - roi.right
             x_b = width - roi.left
 
+            coords[:, 0] = width - coords[:, 0]
+
         hist = np.histogram2d(y_loc, x_loc, bins=bins, range=[(y_a, y_b), (x_a, x_b)])[
             0
         ]
-
-        # coords = roi.coordinates()
 
         area_expl = (hist > 0).sum()
         area_expl_ratio = area_expl / mask_area
@@ -86,7 +88,7 @@ def area_explored(tad, tids, cfg, stg, gen, write_img=False):
 
             f, ax = plt.subplots(figsize=(10, 10))
             ax.imshow(img, "gray")
-            ax.plot(*roi.coordinates().T, "y.-")
+            ax.plot(*coords.T, "y.-")
 
             ax.imshow(
                 np.log(hist + 1), alpha=0.3, extent=[x_a, x_b, y_b, y_a], cmap="hot"
@@ -170,11 +172,11 @@ def main():
     os.makedirs(f'{cfg["AREA_EXPLORED_OUTDIR"]}/imgs', exist_ok=True)
 
     STAGES = [
-        # "37-38",
-        # "44-48",
-        # "52-54",
-        # "57-58",
-        # "59-62",
+        "37-38",
+        "44-48",
+        "52-54",
+        "57-58",
+        "59-62",
         "63-64",
         "Juv",
     ]
