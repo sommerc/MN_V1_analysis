@@ -91,7 +91,6 @@ def angle_correlation(all_movs, stg, name, nodes, cfg):
             )
 
             #### Plots
-            name = "LR_ankle"
             f, ax = plt.subplots(figsize=(6, 6))
             ax.hist(corr_active, bins=100, range=[-1, 1])
             ax.set_title(f"{name} {stg} {gen}\n{base_file}")
