@@ -56,6 +56,16 @@ def area_explored(tad, tids, cfg, stg, gen, write_img=False):
         x_a, x_b = roi.left, roi.right
         y_a, y_b = roi.top, roi.bottom
 
+        if "mutant_side" in tad.info and tad.info["mutant_side"] == "right":
+            print("mirror LR in locs")
+
+            cap = cv2.VideoCapture(tad.video_fn)
+            width = cap.get(cv2.CAP_PROP_FRAME_WIDTH)
+            cap.release()
+
+            x_a = width - roi.right
+            x_b = width - roi.left
+
         hist = np.histogram2d(y_loc, x_loc, bins=bins, range=[(y_a, y_b), (x_a, x_b)])[
             0
         ]
@@ -72,7 +82,6 @@ def area_explored(tad, tids, cfg, stg, gen, write_img=False):
 
         ##########################################
         if write_img:
-
             img = tad.image(0)
 
             f, ax = plt.subplots(figsize=(10, 10))
@@ -161,11 +170,11 @@ def main():
     os.makedirs(f'{cfg["AREA_EXPLORED_OUTDIR"]}/imgs', exist_ok=True)
 
     STAGES = [
-        "37-38",
-        "44-48",
-        "52-54",
-        "57-58",
-        "59-62",
+        # "37-38",
+        # "44-48",
+        # "52-54",
+        # "57-58",
+        # "59-62",
         "63-64",
         "Juv",
     ]
@@ -173,5 +182,4 @@ def main():
 
 
 if __name__ == "__main__":
-
     main()
