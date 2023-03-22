@@ -5,11 +5,13 @@ from locomotion_analysis import main as locomotion_analysis
 from frequency_analysis import main as frequency_analysis
 from angle_range_analysis import main as angle_range_analysis
 from pca_moving_plots import main as pca_moving_plots
+from angle_correlation_analysis import main as angle_corr
 
 from area_explored_plots import plot as aep
 from angle_range_plots import plot as arp
 from frequency_plots import plot as fp
 from locomotion_plots import plot as lp
+from angle_correlation_plots import plot as acp
 
 from shared import settings
 
@@ -20,6 +22,7 @@ if __name__ == "__main__":
         "locomotion_analysis": locomotion_analysis,
         "frequency_analysis": frequency_analysis,
         "pca_moving_plots": pca_moving_plots,
+        "angle_correlation": angle_corr,
     }
 
     res = []
@@ -37,3 +40,4 @@ if __name__ == "__main__":
     arp(cfg)
     aep(cfg)
     fp(cfg)
+    acp(cfg)
