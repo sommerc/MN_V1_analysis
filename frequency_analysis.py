@@ -22,9 +22,19 @@ from scipy import signal
 from shared import settings, get_good_tracks
 
 
-def compute_angle_wavlet_psd_mean(tad, tid, scales, wavelet, a, b, c, fps, cfgs):
+def compute_angle_wavlet_psd_mean(
+    tad, tid, scales, wavelet, a, b, c, fps, sub_bgrd, cfgs
+):
     ang = tadpose.analysis.angles(tad, (a, b), (b, c), win=None, track_idx=tid)
     ang_smooth = gaussian_filter1d(ang, cfgs["FREQ_TEMP_ANGLE_SMOOTH"])
+
+    if sub_bgrd:
+        ang_background = gaussian_filter1d(ang, cfgs["FREQ_ACTIVE_SMOOTH"])
+    else:
+        ang_background = 0
+
+    ang_smooth -= ang_background
+
     ang_zscore = (ang_smooth - ang_smooth.mean()) / ang_smooth.std()
 
     t_wvlt, freq = pywt.cwt(
@@ -36,15 +46,22 @@ def compute_angle_wavlet_psd_mean(tad, tid, scales, wavelet, a, b, c, fps, cfgs)
     )
     t_wvlt_psd = np.abs(t_wvlt.T) ** 2
 
-    speed_px_per_frame = tad.speed(
-        cfgs["FREQ_MOVING_NODE"],
-        track_idx=tid,
-        pre_sigma=cfgs["LOCOMOTION_SPATIAL_SIGMA"],
-        sigma=cfgs["LOCOMOTION_TEMPORAL_SIGMA"],
-    )
-    speed_calib = speed_px_per_frame * tadpose.utils.calibrate_by_dish(tad, 14)
+    # speed_px_per_frame = tad.speed(
+    #     cfgs["FREQ_MOVING_NODE"],
+    #     track_idx=tid,
+    #     pre_sigma=cfgs["LOCOMOTION_SPATIAL_SIGMA"],
+    #     sigma=cfgs["LOCOMOTION_TEMPORAL_SIGMA"],
+    # )
+    # speed_calib = speed_px_per_frame * tadpose.utils.calibrate_by_dish(tad, 14)
 
-    moving_bin = speed_calib > cfgs["FREQ_MOVING_NODE_THRESH"]
+    # moving_bin = speed_calib > cfgs["FREQ_MOVING_NODE_THRESH"]
+
+    ang_grad_mag = gaussian_filter1d(
+        np.abs(np.gradient(ang_zscore)), cfgs["FREQ_ACTIVE_SMOOTH"]
+    )
+
+    moving_bin = ang_grad_mag > cfgs["FREQ_ACTIVE_THRESH"]
+
     computed_on = moving_bin.sum() / tad.nframes
 
     mean_psd_moving = t_wvlt_psd[moving_bin].mean(0)
@@ -53,11 +70,14 @@ def compute_angle_wavlet_psd_mean(tad, tid, scales, wavelet, a, b, c, fps, cfgs)
 
 
 def dominant_freqency(sig, freq):
-    peaks, props = signal.find_peaks(sig, height=(None, None))
+    peaks, props = signal.find_peaks(sig, height=(None, None), prominence=(None, None))
 
     if len(peaks) > 0:
         peak_pos = np.argmax(props["peak_heights"])
-        return freq[peaks[peak_pos]]
+        dom_f = freq[peaks[peak_pos]]
+        dom_p = props["prominences"][peak_pos]
+        return dom_f, dom_p
+    return None, None
 
 
 def get_frequency_params(cfg):
@@ -73,7 +93,7 @@ def get_frequency_params(cfg):
     return scales, frequencies, wavelet, fps
 
 
-def frequency_analysis(all_movs, stg, nodes, cfg):
+def frequency_analysis(all_movs, stg, nodes, sub_bgrd, cfg):
     cfgs = cfg[stg]
     scales, freq, wavelet, fps = get_frequency_params(cfg)
     tab_all = []
@@ -89,20 +109,12 @@ def frequency_analysis(all_movs, stg, nodes, cfg):
         file_path = tad.video_fn
         base_file = os.path.basename(file_path)[:-4]
 
-        # aligner = tadpose.alignment.RotationalAligner(
-        #     central_part=cfgs["ALIGN_CENTRAL"], aligned_part=cfgs["ALIGN_TOP"]
-        # )
-
-        # aligner.tracks_to_align = track_okay_idx
-
-        # tad.aligner = aligner
-
         for tid in track_okay_idx:
             mean_psd_moving, freq, computed_on = compute_angle_wavlet_psd_mean(
-                tad, tid, scales, wavelet, tail_a, tail_b, tail_c, fps, cfgs
+                tad, tid, scales, wavelet, tail_a, tail_b, tail_c, fps, sub_bgrd, cfgs
             )
 
-            dom_freq = dominant_freqency(mean_psd_moving, freq)
+            dom_freq, dom_prom = dominant_freqency(mean_psd_moving, freq)
 
             tab_all.append(
                 [
@@ -111,6 +123,7 @@ def frequency_analysis(all_movs, stg, nodes, cfg):
                     gen,
                     tid,
                     dom_freq,
+                    dom_prom,
                     computed_on,
                 ]
                 + mean_psd_moving.tolist()
@@ -124,7 +137,8 @@ def frequency_analysis(all_movs, stg, nodes, cfg):
             "Genotype",
             "Track_idx",
             "dominant_freq",
-            "computed_on_ratio",
+            "dominant_freq_prominence",
+            "freq_active_ratio",
         ]
         + freq.tolist(),
     )
@@ -142,12 +156,23 @@ def run_stage(STAGE, cfg):
     tab_freq_dict = {}
     if "FREQ_FOR" in cfgs:
         for name, nodes in cfgs["FREQ_FOR"].items():
-            tab_freq = frequency_analysis(all_movs, STAGE, nodes, cfg)
+            # Without background sub
+            tab_freq = frequency_analysis(all_movs, STAGE, nodes, False, cfg)
 
             tab_freq.to_csv(
                 f"{cfg['FREQUENCY_OUTDIR']}/frequency_{STAGE}_{name}_res.tab", sep="\t"
             )
             tab_freq_dict[name] = tab_freq
+
+            # With
+            tab_freq = frequency_analysis(all_movs, STAGE, nodes, True, cfg)
+
+            tab_freq.to_csv(
+                f"{cfg['FREQUENCY_OUTDIR']}/frequency_bs_{STAGE}_{name}_res.tab",
+                sep="\t",
+            )
+            tab_freq_dict["bs_" + name] = tab_freq
+
     else:
         print("  -- no FREQ_FOR set")
 

@@ -12,6 +12,8 @@ STAGES:
   - 63-64
   - Juv
 
+RESULTS_ROOT_DIR: "."
+
 LOCOMOTION_OUTDIR: "locomotion"
 
 AREA_EXPLORED_OUTDIR: "area_explored"
@@ -32,7 +34,7 @@ ANGLE_CORR_OUTDIR: angle_correlation
 
 
 37-38:
-  ROOT_DIR: "B:/BIF_StaffSci/Christoph/sweengrp/paper_videos/37-38"
+  ROOT_DIR: "Z:/People/Chris/paper_videos/37-38"
   TRACK_SELECT_THRES: 0.1
 
   AREA_EXPLORED_NODE: "Tail_1"
@@ -56,12 +58,14 @@ ANGLE_CORR_OUTDIR: angle_correlation
       - Tail_2
       - Tail_Tip
 
-  FREQ_MOVING_NODE: "Tail_1"
-  FREQ_MOVING_NODE_THRESH: 0.02
+  # FREQ_MOVING_NODE: "Tail_1"
+  # FREQ_MOVING_NODE_THRESH: 0.02
+  FREQ_ACTIVE_THRESH: 0.1
+  FREQ_ACTIVE_SMOOTH: 15
   FREQ_TEMP_ANGLE_SMOOTH: 0.1
 
 44-48:
-  ROOT_DIR: "B:/BIF_StaffSci/Christoph/sweengrp/paper_videos/44-48"
+  ROOT_DIR: "Z:/People/Chris/paper_videos/44-48"
                
   TRACK_SELECT_THRES: 0.1
 
@@ -78,9 +82,13 @@ ANGLE_CORR_OUTDIR: angle_correlation
   ALIGN_CENTRAL: "Tail_1"
   ALIGN_TOP: "Heart_Center"
 
-  FREQ_MOVING_NODE: "Tail_1"
-  FREQ_MOVING_NODE_THRESH: 0.02
+  # FREQ_MOVING_NODE: "Tail_1"
+  # FREQ_MOVING_NODE_THRESH: 0.02
+
+  FREQ_ACTIVE_THRESH: 0.1
+  FREQ_ACTIVE_SMOOTH: 15
   FREQ_TEMP_ANGLE_SMOOTH: 0.1
+
   FREQ_FOR:
     tail_stem:
       - Tail_1
@@ -120,7 +128,7 @@ ANGLE_CORR_OUTDIR: angle_correlation
       - Tail_Tip
     
 52-54:
-  ROOT_DIR: "B:/BIF_StaffSci/Christoph/sweengrp/paper_videos/52-54"
+  ROOT_DIR: "Z:/People/Chris/paper_videos/52-54"
                
   TRACK_SELECT_THRES: 0.1
 
@@ -137,8 +145,11 @@ ANGLE_CORR_OUTDIR: angle_correlation
   ALIGN_CENTRAL: "Tail_1"
   ALIGN_TOP: "Heart_Center"
 
-  FREQ_MOVING_NODE: "Tail_1"
-  FREQ_MOVING_NODE_THRESH: 0.02
+  # FREQ_MOVING_NODE: "Tail_1"
+  # FREQ_MOVING_NODE_THRESH: 0.02
+
+  FREQ_ACTIVE_THRESH: 0.1
+  FREQ_ACTIVE_SMOOTH: 15
   FREQ_TEMP_ANGLE_SMOOTH: 0.1
   FREQ_FOR:
     tail_stem:
@@ -191,7 +202,7 @@ ANGLE_CORR_OUTDIR: angle_correlation
       - Tail_Tip
 
 57-58:
-  ROOT_DIR: "B:/BIF_StaffSci/Christoph/sweengrp/paper_videos/57-58"
+  ROOT_DIR: "Z:/People/Chris/paper_videos/57-58"
                
   TRACK_SELECT_THRES: 0.1
 
@@ -208,8 +219,10 @@ ANGLE_CORR_OUTDIR: angle_correlation
   ALIGN_CENTRAL: "Tail_1"
   ALIGN_TOP: "Heart_Center"
 
-  FREQ_MOVING_NODE: "Tail_1"
-  FREQ_MOVING_NODE_THRESH: 0.02
+  # FREQ_MOVING_NODE: "Tail_1"
+  # FREQ_MOVING_NODE_THRESH: 0.02
+  FREQ_ACTIVE_THRESH: 0.1
+  FREQ_ACTIVE_SMOOTH: 15
   FREQ_TEMP_ANGLE_SMOOTH: 0.1
   FREQ_FOR:
     tail_stem:
@@ -360,7 +373,7 @@ ANGLE_CORR_OUTDIR: angle_correlation
         - Right_toe
       
 59-62:
-  ROOT_DIR: "B:/BIF_StaffSci/Christoph/sweengrp/paper_videos/59-62"
+  ROOT_DIR: "Z:/People/Chris/paper_videos/59-62"
                
   TRACK_SELECT_THRES: 0.1
 
@@ -378,8 +391,10 @@ ANGLE_CORR_OUTDIR: angle_correlation
   LOCOMOTION_SPATIAL_SIGMA: 1
   LOCOMOTION_DC_SUBSAMPLE: 8
 
-  FREQ_MOVING_NODE: "Tail_1"
-  FREQ_MOVING_NODE_THRESH: 0.01
+  # FREQ_MOVING_NODE: "Tail_1"
+  # FREQ_MOVING_NODE_THRESH: 0.02
+  FREQ_ACTIVE_THRESH: 0.1
+  FREQ_ACTIVE_SMOOTH: 15
   FREQ_TEMP_ANGLE_SMOOTH: 0.1
   FREQ_FOR:
     tail_stem:
@@ -529,7 +544,7 @@ ANGLE_CORR_OUTDIR: angle_correlation
 
 
 63-64:
-  ROOT_DIR: "B:/BIF_StaffSci/Christoph/sweengrp/paper_videos/63-64"
+  ROOT_DIR: "Z:/People/Chris/paper_videos/63-64"
                
   TRACK_SELECT_THRES: 0.1
 
@@ -546,8 +561,10 @@ ANGLE_CORR_OUTDIR: angle_correlation
   ALIGN_CENTRAL: "Tail_1"
   ALIGN_TOP: "Heart_Center"
 
-  FREQ_MOVING_NODE: "Tail_1"
-  FREQ_MOVING_NODE_THRESH: 0.02
+  # FREQ_MOVING_NODE: "Tail_1"
+  # FREQ_MOVING_NODE_THRESH: 0.02
+  FREQ_ACTIVE_THRESH: 0.1
+  FREQ_ACTIVE_SMOOTH: 15
   FREQ_TEMP_ANGLE_SMOOTH: 0.1
   FREQ_FOR:
     tail_stem:
@@ -697,7 +714,7 @@ ANGLE_CORR_OUTDIR: angle_correlation
         - Right_toe
 
 Juv:
-  ROOT_DIR: "B:/BIF_StaffSci/Christoph/sweengrp/paper_videos/Juv"
+  ROOT_DIR: "Z:/People/Chris/paper_videos/Juv"
                
   TRACK_SELECT_THRES: 0.1
 
@@ -714,8 +731,10 @@ Juv:
   LOCOMOTION_SPATIAL_SIGMA: 1
   LOCOMOTION_DC_SUBSAMPLE: 8
 
-  FREQ_MOVING_NODE: "Tail_Stem"
-  FREQ_MOVING_NODE_THRESH: 0.02
+  # FREQ_MOVING_NODE: "Tail_Stem"
+  # FREQ_MOVING_NODE_THRESH: 0.02
+  FREQ_ACTIVE_THRESH: 0.1
+  FREQ_ACTIVE_SMOOTH: 15
   FREQ_TEMP_ANGLE_SMOOTH: 0.1
   FREQ_FOR:     
     left_knee:
