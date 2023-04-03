@@ -157,20 +157,29 @@ def run_stage(STAGE, cfg):
     if "FREQ_FOR" in cfgs:
         for name, nodes in cfgs["FREQ_FOR"].items():
             # Without background sub
-            tab_freq = frequency_analysis(all_movs, STAGE, nodes, False, cfg)
 
-            tab_freq.to_csv(
-                f"{cfg['FREQUENCY_OUTDIR']}/frequency_{STAGE}_{name}_res.tab", sep="\t"
-            )
+            out_f1 = f"{cfg['FREQUENCY_OUTDIR']}/frequency_{STAGE}_{name}_res.tab"
+            if not os.path.exists(out_f1):
+                tab_freq = frequency_analysis(all_movs, STAGE, nodes, False, cfg)
+
+                tab_freq.to_csv(out_f1, sep="\t")
+            else:
+                tab_freq = pd.read_csv(out_f1, sep="\t", index_col=0)
+
             tab_freq_dict[name] = tab_freq
 
             # With
-            tab_freq = frequency_analysis(all_movs, STAGE, nodes, True, cfg)
+            out_f2 = f"{cfg['FREQUENCY_OUTDIR']}/frequency_bs_{STAGE}_{name}_res.tab"
+            if not os.path.exists(out_f2):
+                tab_freq = frequency_analysis(all_movs, STAGE, nodes, True, cfg)
 
-            tab_freq.to_csv(
-                f"{cfg['FREQUENCY_OUTDIR']}/frequency_bs_{STAGE}_{name}_res.tab",
-                sep="\t",
-            )
+                tab_freq.to_csv(
+                    out_f2,
+                    sep="\t",
+                )
+            else:
+                tab_freq = pd.read_csv(out_f2, sep="\t", index_col=0)
+
             tab_freq_dict["bs_" + name] = tab_freq
 
     else:

@@ -97,14 +97,14 @@ def plot_by_stage(cfg):
                 cc = ax[0]._get_lines.prop_cycler
 
                 for i, (gen, tab) in enumerate(tab_sub.groupby("Genotype")):
-                    a = tab.T.iloc[6:-1].mean(1)
-                    b = tab.T.iloc[6:-1].std(1)
+                    a = tab.T.iloc[7:-1].mean(1)
+                    b = tab.T.iloc[7:-1].std(1)
                     x_vals = a.index.astype("float")
                     color = next(cc)["color"]
                     ax[i].plot(x_vals, a, color=color)
                     ax[i].fill_between(x_vals, (a - b), (a + b), alpha=0.3, color=color)
-                    ax[i].set_title(stg)
-                    ax[i].set_ylim(0, 10)
+                    ax[i].set_title(gen)
+                    ax[i].set_ylim(0, 16)
                     sns.despine(ax=ax[i])
                     ax[i].set_xlabel(f"Frequency of angle change at {freq_for}")
                     ax[i].set_ylabel("Mean CWT power spectrum")
@@ -144,8 +144,8 @@ def plot_by_stage(cfg):
                     alpha=0.8,
                 )
                 sns.despine(ax=ax)
-                ax.set_title(f"{gen}_{freq_for}")
-                plt.savefig(f"{OUT_DIR}/{gen}_{freq_for}_dominant+prominence_freq.pdf")
+                ax.set_title(f"{stg}_{freq_for}")
+                plt.savefig(f"{OUT_DIR}/{stg}_{freq_for}_dominant+prominence_freq.pdf")
                 plt.close(f)
 
 
@@ -171,14 +171,14 @@ def plot_by_geno(cfg):
                 cc = ax[0]._get_lines.prop_cycler
 
                 for i, (stg, tab) in enumerate(tab_sub.groupby("Stage")):
-                    a = tab.T.iloc[6:-1].mean(1)
-                    b = tab.T.iloc[6:-1].std(1)
+                    a = tab.T.iloc[7:-1].mean(1)
+                    b = tab.T.iloc[7:-1].std(1)
                     x_vals = a.index.astype("float")
                     color = next(cc)["color"]
                     ax[i].plot(x_vals, a, color=color)
                     ax[i].fill_between(x_vals, (a - b), (a + b), alpha=0.3, color=color)
                     ax[i].set_title(stg)
-                    ax[i].set_ylim(0, 10)
+                    ax[i].set_ylim(0, 16)
                     sns.despine(ax=ax[i])
                     ax[i].set_xlabel(f"Frequency of angle change at {freq_for}")
                     ax[i].set_ylabel("Mean CWT power spectrum")
