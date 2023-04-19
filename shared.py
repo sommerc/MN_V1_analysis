@@ -1,3 +1,4 @@
+import os
 import h5py
 import yaml
 
@@ -5,9 +6,19 @@ import numpy as np
 from scipy.ndimage import gaussian_filter1d
 
 
-def settings():
-    with open("H:/projects/068_lora_tadpole/paper_code/constants.yml", "r") as ymlfile:
-        return yaml.safe_load(ymlfile)
+def settings(config_yml=None):
+    if config_yml is None:
+        config_yml = "H:/projects/068_lora_tadpole/paper_code/constants.yml"
+
+    with open(config_yml, "r") as ymlfile:
+        config_dict = yaml.safe_load(ymlfile)
+
+    for key in config_dict.keys():
+        result_root = config_dict["RESULTS_ROOT_DIR"]
+        if key.endswith("_OUTDIR"):
+            config_dict[key] = os.path.join(result_root, config_dict[key])
+
+    return config_dict
 
 
 def get_good_tracks(fn, cfgs, node=None):
