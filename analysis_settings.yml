@@ -12,7 +12,7 @@ STAGES:
   - 63-64
   - Juv
 
-RESULTS_ROOT_DIR: "."
+RESULTS_ROOT_DIR: "./results"
 
 LOCOMOTION_OUTDIR: "locomotion"
 

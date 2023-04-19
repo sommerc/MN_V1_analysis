@@ -8,7 +8,7 @@ from scipy.ndimage import gaussian_filter1d
 
 def settings(config_yml=None):
     if config_yml is None:
-        config_yml = "H:/projects/068_lora_tadpole/paper_code/constants.yml"
+        config_yml = "H:/projects/068_lora_tadpole/paper_code/analysis_settings.yml"
 
     with open(config_yml, "r") as ymlfile:
         config_dict = yaml.safe_load(ymlfile)

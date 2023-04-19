@@ -9,7 +9,7 @@ import tadpose
 
 from tqdm.auto import tqdm, trange
 
-from shared import get_good_tracks, settings, directional_change
+from ..shared import get_good_tracks, settings, directional_change
 
 
 def locomotion(tad, tids, cfgs):
