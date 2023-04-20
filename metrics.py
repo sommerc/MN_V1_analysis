@@ -47,15 +47,7 @@ with open("constants.yml", "r") as ymlfile:
     cfg = yaml.safe_load(ymlfile)
 
 
-STAGES = [
-    "37-38",
-    "44-48",
-    "52-54",
-    "57-58",
-    "59-62",
-    "63-64",
-    "Juv",
-]
+STAGES = cfg["STAGES"]
 
 METRICS = [
     "vis.precision",

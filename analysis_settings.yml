@@ -36,7 +36,7 @@ ANGLE_CORR_OUTDIR: angle_correlation
 
 37-38:
   ROOT_DIR: "Z:/People/Chris/paper_videos/37-38"
-  TRACK_SELECT_THRES: 0.1
+  TRACK_SELECT_THRES: 0.9
 
   AREA_EXPLORED_NODE: "Tail_1"
   AREA_EXPLORED_BINS: 128
@@ -68,7 +68,7 @@ ANGLE_CORR_OUTDIR: angle_correlation
 44-48:
   ROOT_DIR: "Z:/People/Chris/paper_videos/44-48"
                
-  TRACK_SELECT_THRES: 0.1
+  TRACK_SELECT_THRES: 0.9
 
   AREA_EXPLORED_NODE: "Tail_1"
   AREA_EXPLORED_BINS: 128
@@ -146,7 +146,7 @@ ANGLE_CORR_OUTDIR: angle_correlation
 52-54:
   ROOT_DIR: "Z:/People/Chris/paper_videos/52-54"
                
-  TRACK_SELECT_THRES: 0.1
+  TRACK_SELECT_THRES: 0.9
 
   AREA_EXPLORED_NODE: "Tail_1"
   AREA_EXPLORED_BINS: 128
@@ -235,7 +235,7 @@ ANGLE_CORR_OUTDIR: angle_correlation
 57-58:
   ROOT_DIR: "Z:/People/Chris/paper_videos/57-58"
                
-  TRACK_SELECT_THRES: 0.1
+  TRACK_SELECT_THRES: 0.9
 
   AREA_EXPLORED_NODE: "Tail_1"
   AREA_EXPLORED_BINS: 128
@@ -422,7 +422,7 @@ ANGLE_CORR_OUTDIR: angle_correlation
 59-62:
   ROOT_DIR: "Z:/People/Chris/paper_videos/59-62"
                
-  TRACK_SELECT_THRES: 0.1
+  TRACK_SELECT_THRES: 0.9
 
   AREA_EXPLORED_NODE: "Tail_1"
   AREA_EXPLORED_BINS: 128
@@ -610,7 +610,7 @@ ANGLE_CORR_OUTDIR: angle_correlation
 63-64:
   ROOT_DIR: "Z:/People/Chris/paper_videos/63-64"
                
-  TRACK_SELECT_THRES: 0.1
+  TRACK_SELECT_THRES: 0.9
 
   AREA_EXPLORED_NODE: "Tail_1"
   AREA_EXPLORED_BINS: 128
@@ -796,7 +796,7 @@ ANGLE_CORR_OUTDIR: angle_correlation
 Juv:
   ROOT_DIR: "Z:/People/Chris/paper_videos/Juv"
                
-  TRACK_SELECT_THRES: 0.1
+  TRACK_SELECT_THRES: 0.9
 
   AREA_EXPLORED_NODE: "Tail_Stem"
   AREA_EXPLORED_BINS: 128

@@ -12,15 +12,7 @@ def plot_by_stage(cfg):
 
     TAB["angle_std"] = np.rad2deg(TAB["angle_std"])
     TAB["angle_moving_std"] = np.rad2deg(TAB["angle_moving_std"])
-    STAGES = [
-        "37-38",
-        "44-48",
-        "52-54",
-        "57-58",
-        "59-62",
-        "63-64",
-        "Juv",
-    ]
+    STAGES = cfg["STAGES"]
 
     AR_AT = TAB.angle_at.unique()
 

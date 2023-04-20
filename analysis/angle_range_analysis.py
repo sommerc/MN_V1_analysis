@@ -15,7 +15,7 @@ from matplotlib import colors as mpl_colors
 from skimage import draw
 from tqdm.auto import tqdm, trange
 from scipy.ndimage import gaussian_filter1d
-from shared import settings, get_good_tracks
+from shared import settings
 
 
 def angle_range(all_movs, stg, nodes, cfg):
@@ -29,7 +29,10 @@ def angle_range(all_movs, stg, nodes, cfg):
         tail_a, tail_b, tail_c = nodes
 
         tad = tadpose.Tadpole.from_sleap(str(fn))
-        track_okay_idx = get_good_tracks(tad.analysis_file, cfgs, tail_b)
+        track_okay_idx = np.nonzero(
+            tad.parts_detected(parts=(tail_b,), track_idx=None).sum(0) / tad.nframes
+            > cfgs["TRACK_SELECT_THRES"]
+        )[0]
 
         file_path = tad.video_fn
         base_file = os.path.basename(file_path)[:-4]
@@ -87,7 +90,7 @@ def run_stage(STAGE, cfg):
     ROOT_DIR = pathlib.Path(cfgs["ROOT_DIR"])
 
     all_movs = list(ROOT_DIR.rglob("*.mp4"))
-    print(f"Processing Stage {STAGE} with {len(all_movs)} movies")
+    print(f" - Processing Stage {STAGE} with {len(all_movs)} movies")
 
     tab_ar_dict = {}
     if "ANGLE_RANGE_FOR" in cfgs:
@@ -147,19 +150,13 @@ def merge_results():
     TAB.to_csv(cfg["ANGLE_RANGE_OUTDIR"] + "/" + "angle_range_merged.tab", sep="\t")
 
 
-def main():
-    cfg = settings()
+def main(cfg=None):
+    if cfg is None:
+        cfg = settings()
+
     os.makedirs(cfg["ANGLE_RANGE_OUTDIR"], exist_ok=True)
 
-    STAGES = [
-        "37-38",
-        "44-48",
-        "52-54",
-        "57-58",
-        "59-62",
-        "63-64",
-        "Juv",
-    ]
+    STAGES = cfg["STAGES"]
     run(STAGES, cfg)
 
 

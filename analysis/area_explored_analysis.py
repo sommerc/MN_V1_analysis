@@ -15,7 +15,7 @@ from matplotlib import colors as mpl_colors
 from skimage import draw
 from tqdm.auto import tqdm, trange
 
-from shared import settings, get_good_tracks
+from shared import settings
 
 
 def area_explored(tad, tids, cfg, stg, gen, write_img=False):
@@ -127,7 +127,7 @@ def run_stage(STAGE, cfg):
     ROOT_DIR = pathlib.Path(cfgs["ROOT_DIR"])
 
     all_movs = list(ROOT_DIR.rglob("*.mp4"))
-    print(f"Processing Stage {STAGE} with {len(all_movs)} movies")
+    print(f" - Processing Stage {STAGE} with {len(all_movs)} movies")
 
     tab_stg = []
     for fn in tqdm(all_movs):
@@ -135,9 +135,13 @@ def run_stage(STAGE, cfg):
         stg = fn.parent.parent.stem
 
         tad = tadpose.Tadpole.from_sleap(str(fn))
-        track_okay_idx = get_good_tracks(
-            tad.analysis_file, cfgs, node=cfgs["AREA_EXPLORED_NODE"]
-        )
+        track_okay_idx = np.nonzero(
+            tad.parts_detected(parts=(cfgs["AREA_EXPLORED_NODE"],), track_idx=None).sum(
+                0
+            )
+            / tad.nframes
+            > cfgs["TRACK_SELECT_THRES"]
+        )[0]
 
         tab_mov = area_explored(tad, track_okay_idx, cfg, stg, gen, write_img=True)
         tab_mov.insert(1, "Genotype", gen)
@@ -166,20 +170,13 @@ def run(STAGES, cfg):
     return tab_stg
 
 
-def main():
-    cfg = settings()
+def main(cfg=None):
+    if cfg is None:
+        cfg = settings()
     os.makedirs(cfg["AREA_EXPLORED_OUTDIR"], exist_ok=True)
     os.makedirs(f'{cfg["AREA_EXPLORED_OUTDIR"]}/imgs', exist_ok=True)
 
-    STAGES = [
-        "37-38",
-        "44-48",
-        "52-54",
-        "57-58",
-        "59-62",
-        "63-64",
-        "Juv",
-    ]
+    STAGES = cfg["STAGES"]
     run(STAGES, cfg)
 
 

@@ -19,7 +19,7 @@ from scipy.ndimage import gaussian_filter1d
 import pywt
 from scipy import signal
 
-from shared import settings, get_good_tracks
+from shared import settings
 
 
 def compute_angle_wavlet_psd_mean(
@@ -104,7 +104,10 @@ def frequency_analysis(all_movs, stg, nodes, sub_bgrd, cfg):
         tail_a, tail_b, tail_c = nodes
 
         tad = tadpose.Tadpole.from_sleap(str(fn))
-        track_okay_idx = get_good_tracks(tad.analysis_file, cfgs, tail_b)
+        track_okay_idx = np.nonzero(
+            tad.parts_detected(parts=(tail_b,), track_idx=None).sum(0) / tad.nframes
+            > cfgs["TRACK_SELECT_THRES"]
+        )[0]
 
         file_path = tad.video_fn
         base_file = os.path.basename(file_path)[:-4]
@@ -151,7 +154,7 @@ def run_stage(STAGE, cfg):
     ROOT_DIR = pathlib.Path(cfgs["ROOT_DIR"])
 
     all_movs = list(ROOT_DIR.rglob("*.mp4"))
-    print(f"Processing Stage {STAGE} with {len(all_movs)} movies")
+    print(f" - Processing Stage {STAGE} with {len(all_movs)} movies")
 
     tab_freq_dict = {}
     if "FREQ_FOR" in cfgs:
@@ -206,19 +209,12 @@ def run(STAGES, cfg):
     return tab_collect
 
 
-def main():
-    cfg = settings()
+def main(cfg=None):
+    if cfg is None:
+        cfg = settings()
     os.makedirs(cfg["FREQUENCY_OUTDIR"], exist_ok=True)
 
-    STAGES = [
-        "37-38",
-        "44-48",
-        "52-54",
-        "57-58",
-        "59-62",
-        "63-64",
-        "Juv",
-    ]
+    STAGES = cfg["STAGES"]
     run(STAGES, cfg)
 
 

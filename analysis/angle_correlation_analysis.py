@@ -9,7 +9,6 @@ from matplotlib import pyplot as plt
 from matplotlib import colors as mpl_colors
 from tqdm.auto import tqdm
 from scipy.ndimage import gaussian_filter1d
-from shared import settings, get_good_tracks
 
 
 def angle_correlation(all_movs, stg, name, nodes, cfg):
@@ -23,7 +22,12 @@ def angle_correlation(all_movs, stg, name, nodes, cfg):
         a_nodes, b_nodes = nodes
 
         tad = tadpose.Tadpole.from_sleap(str(fn))
-        track_okay_idx = get_good_tracks(tad.analysis_file, cfgs, a_nodes[1])
+
+        track_okay_idx = np.nonzero(
+            tad.parts_detected(parts=(cfgs["LOCOMOTION_NODE"],), track_idx=None).sum(0)
+            / tad.nframes
+            > cfgs["TRACK_SELECT_THRES"]
+        )[0]
 
         file_path = tad.video_fn
         base_file = os.path.basename(file_path)[:-4]
@@ -126,7 +130,7 @@ def run_stage(STAGE, cfg):
     ROOT_DIR = pathlib.Path(cfgs["ROOT_DIR"])
 
     all_movs = list(ROOT_DIR.rglob("*.mp4"))
-    print(f"Processing Stage {STAGE} with {len(all_movs)} movies")
+    print(f" - Processing Stage {STAGE} with {len(all_movs)} movies")
 
     tab_ar_dict = {}
     if "ANGLE_CORR_FOR" in cfgs:
@@ -164,20 +168,14 @@ def run(STAGES, cfg):
     return tab_collect
 
 
-def main():
-    cfg = settings()
+def main(cfg=None):
+    if cfg is None:
+        cfg = settings()
+
     os.makedirs(cfg["ANGLE_CORR_OUTDIR"], exist_ok=True)
     os.makedirs(cfg["ANGLE_CORR_OUTDIR"] + "/imgs", exist_ok=True)
 
-    STAGES = [
-        "37-38",
-        "44-48",
-        "52-54",
-        "57-58",
-        "59-62",
-        "63-64",
-        "Juv",
-    ]
+    STAGES = cfg["STAGES"]
     run(STAGES, cfg)
 
 

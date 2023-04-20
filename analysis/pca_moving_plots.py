@@ -20,7 +20,7 @@ from skimage import draw
 from sklearn.decomposition import PCA
 from tqdm.auto import tqdm, trange
 
-from shared import settings, get_good_tracks
+from shared import settings
 
 
 def moving_plots(tad, tids, stg, gen, cfg):
@@ -136,16 +136,18 @@ def run_stage(STAGE, cfg):
     ROOT_DIR = pathlib.Path(cfgs["ROOT_DIR"])
 
     all_movs = list(ROOT_DIR.rglob("*.mp4"))
-    print(f"Processing Stage {STAGE} with {len(all_movs)} movies")
+    print(f" - Processing Stage {STAGE} with {len(all_movs)} movies")
 
     for fn in tqdm(all_movs[:]):
         gen = fn.parent.stem
         stg = fn.parent.parent.stem
 
         tad = tadpose.Tadpole.from_sleap(str(fn))
-        track_okay_idx = get_good_tracks(
-            tad.analysis_file, cfgs, node=cfgs["LOCOMOTION_NODE"]
-        )
+        track_okay_idx = np.nonzero(
+            tad.parts_detected(parts=(cfgs["LOCOMOTION_NODE"],), track_idx=None).sum(0)
+            / tad.nframes
+            > cfgs["TRACK_SELECT_THRES"]
+        )[0]
 
         if len(track_okay_idx) > 0:
             moving_plots(tad, track_okay_idx, stg, gen, cfg)
@@ -164,18 +166,11 @@ def run(STAGES, cfg):
         run_stage(STAGE, cfg)
 
 
-def main():
-    cfg = settings()
+def main(cfg=None):
+    if cfg is None:
+        cfg = settings()
 
-    STAGES = [
-        "37-38",
-        "44-48",
-        "52-54",
-        "57-58",
-        "59-62",
-        "63-64",
-        "Juv",
-    ]
+    STAGES = cfg["STAGES"]
     run(STAGES, cfg)
 
 

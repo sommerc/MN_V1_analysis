@@ -11,15 +11,7 @@ from shared import settings
 
 
 def plot_by_stage(cfg):
-    STAGES = [
-        "37-38",
-        "44-48",
-        "52-54",
-        "57-58",
-        "59-62",
-        "63-64",
-        "Juv",
-    ]
+    STAGES = cfg["STAGES"]
     OUT_DIR = cfg["LOCOMOTION_OUTDIR"]
 
     for STAGE in STAGES:

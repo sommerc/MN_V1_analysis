@@ -9,7 +9,7 @@ import tadpose
 
 from tqdm.auto import tqdm, trange
 
-from ..shared import get_good_tracks, settings, directional_change
+from shared import settings, directional_change
 
 
 def locomotion(tad, tids, cfgs):
@@ -93,7 +93,7 @@ def run_stage(STAGE, cfg):
     ROOT_DIR = pathlib.Path(cfgs["ROOT_DIR"])
 
     all_movs = list(ROOT_DIR.rglob("*.mp4"))
-    print(f"Processing Stage {STAGE} with {len(all_movs)} movies")
+    print(f" - Processing Stage {STAGE} with {len(all_movs)} movies")
 
     tab_stg = []
     for fn in tqdm(all_movs[:]):
@@ -102,9 +102,11 @@ def run_stage(STAGE, cfg):
         assert stg == STAGE, "Stage mismatch!!"
 
         tad = tadpose.Tadpole.from_sleap(str(fn))
-        track_okay_idx = get_good_tracks(
-            tad.analysis_file, cfgs, cfgs["LOCOMOTION_NODE"]
-        )
+        track_okay_idx = np.nonzero(
+            tad.parts_detected(parts=(cfgs["LOCOMOTION_NODE"],), track_idx=None).sum(0)
+            / tad.nframes
+            > cfgs["TRACK_SELECT_THRES"]
+        )[0]
 
         tab_mov = locomotion(tad, track_okay_idx, cfgs)
         tab_stg.append(tab_mov)
@@ -131,19 +133,12 @@ def run(STAGES, cfg):
     return tab_all
 
 
-def main():
-    cfg = settings()
+def main(cfg=None):
+    if cfg is None:
+        cfg = settings()
     os.makedirs(cfg["LOCOMOTION_OUTDIR"], exist_ok=True)
 
-    STAGES = [
-        "37-38",
-        "44-48",
-        "52-54",
-        "57-58",
-        "59-62",
-        "63-64",
-        "Juv",
-    ]
+    STAGES = cfg["STAGES"]
     run(STAGES, cfg)
 
 
