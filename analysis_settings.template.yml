@@ -1,0 +1,171 @@
+EPS: 0.000000000001
+FPS: 60
+DISH_SIZE: 14 # cm
+
+
+STAGES:
+  - 52-54
+  - 57-58
+
+
+RESULTS_ROOT_DIR: "./results_test"
+
+LOCOMOTION_OUTDIR: "locomotion"
+
+AREA_EXPLORED_OUTDIR: "area_explored"
+
+FREQUENCY_OUTDIR: "frequency"
+FREQUENCY_N: 24
+FREQUENCY_WAVELET: cmorl1.5-1.0
+
+PCA_FIT_ON_N: 8000
+PCA_PLOT_N: 256
+PCA_OUTDIR: pca_plots
+
+MOVING_OUTDIR: moving_plots
+MOVING_PLOT_TIME_SPAN_MIN: 15
+
+ANGLE_RANGE_OUTDIR: angle_range
+ANGLE_CORR_OUTDIR: angle_correlation
+
+### 37-38 ###
+
+
+
+### 52-54 ####
+    
+52-54:
+  ROOT_DIR: "Z:/People/Chris/paper_videos/52-54"
+               
+  TRACK_SELECT_THRES: 0.9
+
+  AREA_EXPLORED_NODE: "Tail_1"
+  AREA_EXPLORED_BINS: 128
+  
+  LOCOMOTION_NODE: "Tail_1"
+  LOCOMOTION_MOVING_THRESH: 0.02
+  LOCOMOTION_TEMPORAL_SIGMA: 30
+  LOCOMOTION_SPATIAL_SIGMA: 1
+  LOCOMOTION_DC_SUBSAMPLE: 8
+
+  ALIGN_CENTRAL: "Tail_1"
+  ALIGN_TOP: "Heart_Center"
+
+  PCA_PARTS:
+    Tail:
+      - Heart_Center
+      - Tail_Stem
+      - Tail_1
+      - Tail_2
+      - Tail_3
+      - Tail_4
+      - Tail_5
+      - Tail_6
+      - Tail_7
+      - Tail_8
+      - Tail_9
+      - Tail_10
+      - Tail_Tip
+
+  FREQ_ACTIVE_THRESH: 0.1
+  FREQ_ACTIVE_SMOOTH: 15
+  FREQ_TEMP_ANGLE_SMOOTH: 0.1
+  FREQ_FOR:
+    tail_2:
+      - Tail_1
+      - Tail_2 # <- Angle here
+      - Tail_3
+
+  ANGLE_RANGE_MOVING_NODE: "Tail_1"
+  ANGLE_RANGE_MOVING_NODE_THRESH: 0.02
+  ANGLE_RANGE_FOR:
+    tail_2:
+      - Tail_1
+      - Tail_2 # <- Angle here
+      - Tail_3
+
+### 57-58 ####
+
+57-58:
+  ROOT_DIR: "Z:/People/Chris/paper_videos/57-58"
+               
+  TRACK_SELECT_THRES: 0.9
+
+  AREA_EXPLORED_NODE: "Tail_1"
+  AREA_EXPLORED_BINS: 128
+  
+  LOCOMOTION_NODE: "Tail_1"
+  LOCOMOTION_MOVING_THRESH: 0.02
+  LOCOMOTION_TEMPORAL_SIGMA: 30
+  LOCOMOTION_SPATIAL_SIGMA: 1
+  LOCOMOTION_DC_SUBSAMPLE: 8
+
+  ALIGN_CENTRAL: "Tail_1"
+  ALIGN_TOP: "Heart_Center"
+ 
+
+  FREQ_ACTIVE_THRESH: 0.1
+  FREQ_ACTIVE_SMOOTH: 15
+  FREQ_TEMP_ANGLE_SMOOTH: 0.1
+  FREQ_FOR:
+    tail_2:
+      - Tail_1
+      - Tail_2 # <- Angle here
+      - Tail_3
+   
+    left_knee:
+      - Left_Hip
+      - Left_Knee
+      - Left_Ankle
+         
+
+  PCA_PARTS:
+    Tail:
+      - Heart_Center
+      - Tail_Stem
+      - Tail_1
+      - Tail_2
+      - Tail_3
+      - Tail_4
+      - Tail_5
+      - Tail_6
+      - Tail_7
+      - Tail_8
+      - Tail_9
+      - Tail_10
+      - Tail_Tip
+
+    Left_Leg: 
+      - Tail_1
+      - Left_Hip
+      - Left_Knee
+      - Left_Ankle
+      - Left_Foot
+      - Left_toe
+
+   
+  ANGLE_RANGE_MOVING_NODE: "Tail_1"
+  ANGLE_RANGE_MOVING_NODE_THRESH: 0.02
+  ANGLE_RANGE_FOR:
+    tail_2:
+      - Tail_1
+      - Tail_2 # <- Angle here
+      - Tail_3
+    tail_4:
+      - Tail_3
+      - Tail_4 # <- Angle here
+      - Tail_5
+     
+  ANGLE_CORR_ACTIVE_THRESH: 0.1
+  ANGLE_CORR_ACTIVE_SMOOTH: 15
+  ANGLE_CORR_TEMP_ANGLE_SMOOTH: 1
+  ANGLE_CORR_WIN_SIZE: 31
+  ANGLE_CORR_FOR:
+    LR_ankle:
+      - - Left_Knee
+        - Left_Ankle  # <- Angle A
+        - Left_Foot   #      |
+      - - Right_Knee  #      |
+        - Right_Ankle # <- Angle B
+        - Right_Foot
+
