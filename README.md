@@ -1,63 +1,52 @@
-## Frog Analysis
+# Frog Analysis
 ---
-
 **work in progress**
 
-#### Settings and analysis paramters:
-Are in `constants.yml`
+## Analsyis
+There are several kinds of locomations and behavioural analyses implemented:
+
+* [Basic Locomotion](./locomotion.md)
+* [Area explored](./area_explored.md)
+* [Angle ranges](./angle_range.md)
+* [Angle correlation](./angle_correlation.md)
+* [Frequency](./angle_correlation.md)
+* [PCA and Moving visiualizations](./pca_moving.md)
+
+## Settings and analysis paramters:
+Settings and parameters are organzied in YAML. The current pipeline is configured in [analysis_settings.yml](analysis_settings.yml). For an more minimal example template see [analysis_settings.template.yml](analysis_settings.template.yml)
+
+The overall input Folder structure has two levels.
+
+Stages and genotypes. 
+
+```bash
+├── MOVIE_ROOT
+│   ├── STAGE_GRP_1
+│   │   ├── GENOTYPE_1
+│   │   ├── GENOTYPE_2
+│   │   │   ├── movie.mp4
+│   │   │   ├── movie.roi
+│   │   │   ├── movie.json (optional)
+│   │   │   ├── movie.prediction.slp
+│   │   │   ├── movie.prediction.analysis.h5
+│   ├── STAGE_GRP_2
+│   │   ├── GENOTYPE_1
+│   │   ├── GENOTYPE_3
+```
+Each .mp4 movie needs and SLEAP .h5 output and a Fiji .roi annotation.
 
 
-#### Angle range analysis
-```
-angle_range_analysis.py 
-angle_range_plots.py
-```
+## Run 
 
-#### Area explored analysis
+To run the current pipeline type
 
 ```
-area_explored_analysis.py
-area_explored_plots.py
+cd analysis
+python analyis_run.py -h
 ```
 
-#### Frequency analysis
-
-```
-frequency_analysis.py
-frequency_plots.py
-```
-
-#### Locomation analysis
-
-```
-locomotion_analysis.py
-locomotion_plots.py
-```
-
-#### PCA and moving episode plots
-```
-pca_moving_plots.py
-```
-
-#### Shared functions
-```
-shared.py
-```
-
-#### Trigger pipeline (in parallel)
-```
-analysis.py
-```
-
-#### Fiji script to anotate dish ROIs
-```
-create_dish_roi_semi_automatic.ijm
-```
-
-#### Extract SLEAP training metrics (note needs to run in sleap environment)
-```
-metrics.py
-```
+## Dependencies
+The analysis dependes heavyly on [tadpose](https://github.com/sommerc/tadpose) and the usual scientific Python stack.
 
 
 
