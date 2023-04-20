@@ -24,6 +24,8 @@ shopt -s globstar nullglob
 ls MOVIE_ROOT/**/*.mp4 | wc -l
 ```
 
+Important: you need to create a `logs` folder next to the script on the cluster to retrieve outputs from the SLURM array job.
+
 ### Manual annotation of the dish ROI using ImageJ/Fiji
 For the calibration of pixel sizes, one needs to annotate the dish with a circle ROI. The script `create_dish_roi_semi_automatic.ijm` will create a <movie_name>.roi file located next to the movie. All movies need to be ROI-annotated.
 
