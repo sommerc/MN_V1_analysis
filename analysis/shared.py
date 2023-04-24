@@ -8,7 +8,23 @@ from scipy.ndimage import gaussian_filter1d
 
 def settings(config_yml=None):
     if config_yml is None:
-        config_yml = "H:/projects/068_lora_tadpole/paper_code/analysis_settings.yml"
+        import tkinter as tk
+        from tkinter import filedialog
+
+        root = tk.Tk()
+        root.withdraw()
+
+        config_yml = filedialog.askopenfilename(
+            parent=root,
+            title="Choose analysis settings YAML",
+            defaultextension=".yml",
+            filetypes=[("YAML file", ".yml")],
+        )
+
+        if len(config_yml) == 0:
+            raise RuntimeError(f"YAML file '{config_yml}' does not exist... abort")
+
+        # config_yml = "H:/projects/068_lora_tadpole/paper_code/analysis_settings.yml"
 
     print(f"Using settings '{config_yml}'")
 
@@ -21,28 +37,6 @@ def settings(config_yml=None):
             config_dict[key] = os.path.join(result_root, config_dict[key])
 
     return config_dict
-
-
-# def get_good_tracks(fn, cfgs, node=None):
-#     with h5py.File(fn, "r") as hf:
-#         n_tracks, _, n_skel, n_frames = hf["tracks"].shape
-#         tracks = hf["tracks"]
-#         if node is None:
-#             track_is_lost = np.any(np.isnan(tracks), axis=(1, 2)).sum(1) / n_frames
-#             track_okay_idx = np.nonzero(track_is_lost < cfgs["TRACK_SELECT_THRES"])[0]
-#         else:
-#             for i, n in enumerate(hf["node_names"]):
-#                 if n.decode() == node:
-#                     break
-#             else:
-#                 raise RuntimeError(f"Node {node} not found")
-
-#             track_is_lost = (
-#                 np.any(np.isnan(tracks[:, :, i]), axis=(1,)).sum(1) / n_frames
-#             )
-#             track_okay_idx = np.nonzero(track_is_lost < cfgs["TRACK_SELECT_THRES"])[0]
-
-#     return track_okay_idx
 
 
 def angles(vec1, vec2):
