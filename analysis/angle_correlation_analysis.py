@@ -161,6 +161,9 @@ def run(STAGES, cfg):
             tab["angle_corr_of"] = name
             tab_collect.append(tab)
 
+    if len(tab_collect) == 0:
+        return
+
     tab_collect = pd.concat(tab_collect, axis=0, ignore_index=True)
     tab_collect.to_csv(
         f"{cfg['ANGLE_CORR_OUTDIR']}/angle_correlation_res.tab", sep="\t"

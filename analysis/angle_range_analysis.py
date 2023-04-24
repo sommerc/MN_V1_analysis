@@ -121,6 +121,9 @@ def run(STAGES, cfg):
             tab["angle_at"] = name
             tab_collect.append(tab)
 
+    if len(tab_collect) == 0:
+        return
+
     tab_collect = pd.concat(tab_collect, axis=0, ignore_index=True)
     tab_collect.to_csv(f"{cfg['ANGLE_RANGE_OUTDIR']}/angle_range_res.tab", sep="\t")
     return tab_collect
