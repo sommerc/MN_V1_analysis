@@ -47,7 +47,8 @@ def plot_by_stage(cfg):
 
 
 def plot_by_geno(cfg):
-    TAB = pd.read_csv("area_explored/area_explored_res.tab", sep="\t", index_col=0)
+    OUT_DIR = cfg["AREA_EXPLORED_OUTDIR"]
+    TAB = pd.read_csv(f"{OUT_DIR}/area_explored_res.tab", sep="\t", index_col=0)
 
     GENO = TAB.Genotype.unique()
 

@@ -97,7 +97,8 @@ def plot_by_stage(cfg):
 
 
 def plot_by_geno(cfg):
-    TAB = pd.read_csv("locomotion/locomotion_res.tab", sep="\t", index_col=0)
+    OUT_DIR = cfg["LOCOMOTION_OUTDIR"]
+    TAB = pd.read_csv(f"{OUT_DIR}/locomotion_res.tab", sep="\t", index_col=0)
 
     GENO = TAB.Genotype.unique()
 

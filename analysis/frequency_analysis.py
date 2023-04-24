@@ -97,7 +97,7 @@ def frequency_analysis(all_movs, stg, nodes, sub_bgrd, cfg):
     cfgs = cfg[stg]
     scales, freq, wavelet, fps = get_frequency_params(cfg)
     tab_all = []
-    for fn in tqdm(all_movs):
+    for fn in tqdm(all_movs, desc=f"Frequency {nodes[1]}"):
         gen = fn.parent.stem
         stg = fn.parent.parent.stem
 

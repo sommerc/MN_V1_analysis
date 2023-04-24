@@ -15,7 +15,7 @@ def angle_correlation(all_movs, stg, name, nodes, cfg):
     cfgs = cfg[stg]
 
     tab_all = []
-    for fn in tqdm(all_movs):
+    for fn in tqdm(all_movs, desc=f"Angle correlation {name}"):
         gen = fn.parent.stem
         stg = fn.parent.parent.stem
 

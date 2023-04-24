@@ -130,7 +130,7 @@ def run_stage(STAGE, cfg):
     print(f" - Processing Stage {STAGE} with {len(all_movs)} movies")
 
     tab_stg = []
-    for fn in tqdm(all_movs):
+    for fn in tqdm(all_movs, desc=f"Area explored"):
         gen = fn.parent.stem
         stg = fn.parent.parent.stem
 

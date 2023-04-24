@@ -22,7 +22,7 @@ def angle_range(all_movs, stg, nodes, cfg):
     cfgs = cfg[stg]
 
     tab_all = []
-    for fn in tqdm(all_movs):
+    for fn in tqdm(all_movs, desc=f"Angle range {nodes[1]}"):
         gen = fn.parent.stem
         stg = fn.parent.parent.stem
 

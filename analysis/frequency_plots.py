@@ -76,7 +76,8 @@ from shared import settings
 
 
 def plot_by_stage(cfg):
-    TAB = pd.read_csv("frequency/frequency_res.tab", sep="\t", index_col=0)
+    OUT_DIR = cfg["FREQUENCY_OUTDIR"]
+    TAB = pd.read_csv(f"{OUT_DIR}/frequency_res.tab", sep="\t", index_col=0)
     STAGES = TAB.Stage.unique()
     FREQ_FOR = TAB.frequency_for.unique()
 
@@ -150,7 +151,9 @@ def plot_by_stage(cfg):
 
 
 def plot_by_geno(cfg):
-    TAB = pd.read_csv("frequency/frequency_res.tab", sep="\t", index_col=0)
+    OUT_DIR = cfg["FREQUENCY_OUTDIR"]
+    TAB = pd.read_csv(f"{OUT_DIR}/frequency_res.tab", sep="\t", index_col=0)
+
     GENO = TAB.Genotype.unique()
     FREQ_FOR = TAB.frequency_for.unique()
 
