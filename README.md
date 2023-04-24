@@ -2,7 +2,7 @@
 ---
 **work in progress**
 
-## Analsyis
+## Analysis
 There are several kinds of locomations and behavioural analyses implemented:
 
 * [Basic Locomotion](./locomotion.md)
@@ -10,9 +10,9 @@ There are several kinds of locomations and behavioural analyses implemented:
 * [Angle ranges](./angle_range.md)
 * [Angle correlation](./angle_correlation.md)
 * [Frequency](./frequency.md)
-* [PCA and Moving visiualizations](./pca_moving.md)
+* [PCA and Moving visualizations](./pca_moving.md)
 
-## Folder structure, settings and analysis paramters:
+## Folder structure, settings and analysis parameters:
 ---
 
 Settings and parameters are organzied in YAML. The current pipeline is configured in [analysis_settings.yml](analysis_settings.yml). For an more minimal example template see [analysis_settings.template.yml](analysis_settings.template.yml)
@@ -37,7 +37,7 @@ Stages and genotypes.
 ```
 Each .mp4 movie needs and SLEAP .h5 output and a Fiji .roi annotation.
 
-The settings YAML file contains gerneral parameters at its root level and specific analysis parameters per `STAGE_GRP`. Hence, movies below a stage group are processed with the same parameters.
+The settings YAML file contains general parameters at its root level and specific analysis parameters per `STAGE_GRP`. Hence, movies below a stage group are processed with the same parameters.
 
 
 ## Run 
@@ -47,10 +47,10 @@ To run the current pipeline type
 
 ```
 cd analysis
-python analyis_run.py
+python analysis_run.py
 
 # For help use: 
-# python analyis_run.py -h 
+# python analysis_run.py -h 
 ```
 
 ## Dependencies
