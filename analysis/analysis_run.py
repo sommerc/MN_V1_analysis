@@ -58,8 +58,17 @@ if __name__ == "__main__":
     for r in res:
         r.join()
 
-    area_explored_plot(cfg)
-    angle_range_plots(cfg)
-    frequency_plots(cfg)
-    locomotion_plots(cfg)
-    angle_correlation_plots(cfg)
+    analysis_plot = [
+        area_explored_plot,
+        angle_range_plots,
+        frequency_plots,
+        locomotion_plots,
+        angle_correlation_plots,
+    ]
+
+    for func in analysis_plot:
+        try:
+            func(cfg)
+        except FileNotFoundError:
+            # No inputs create, cannot plot
+            pass

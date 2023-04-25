@@ -10,6 +10,8 @@ from matplotlib import colors as mpl_colors
 from tqdm.auto import tqdm
 from scipy.ndimage import gaussian_filter1d
 
+from shared import settings
+
 
 def angle_correlation(all_movs, stg, name, nodes, cfg):
     cfgs = cfg[stg]
