@@ -37,24 +37,15 @@ def compute_angle_wavlet_psd_mean(
 
     ang_zscore = (ang_smooth - ang_smooth.mean()) / ang_smooth.std()
 
-    t_wvlt, freq = pywt.cwt(
+    cwt_coeff, freq = pywt.cwt(
         ang_zscore,
         scales,
         wavelet,
         sampling_period=1 / fps,
         method="fft",
     )
-    t_wvlt_psd = np.abs(t_wvlt.T) ** 2
 
-    # speed_px_per_frame = tad.speed(
-    #     cfgs["FREQ_MOVING_NODE"],
-    #     track_idx=tid,
-    #     pre_sigma=cfgs["LOCOMOTION_SPATIAL_SIGMA"],
-    #     sigma=cfgs["LOCOMOTION_TEMPORAL_SIGMA"],
-    # )
-    # speed_calib = speed_px_per_frame * tadpose.utils.calibrate_by_dish(tad, 14)
-
-    # moving_bin = speed_calib > cfgs["FREQ_MOVING_NODE_THRESH"]
+    t_wvlt_psd = np.abs(cwt_coeff * np.conj(cwt_coeff)).T
 
     ang_grad_mag = gaussian_filter1d(
         np.abs(np.gradient(ang_zscore)), cfgs["FREQ_ACTIVE_SMOOTH"]
