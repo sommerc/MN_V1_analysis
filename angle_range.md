@@ -4,7 +4,19 @@
 ## Basics
 Angle range features extract information about the variance of angle distributions at defined body-part segments.
 
-### More to come
+### Setup and settings
+For the angle range analysis, three settings need to be set in the settings YAML file. These entries need be specified in each `STAGE_GRP` section.
+
+```
+  ANGLE_RANGE_MOVING_NODE: "Tail_1"
+  ANGLE_RANGE_MOVING_NODE_THRESH: 0.02
+  ANGLE_RANGE_FOR:
+    tail_2:
+      - Tail_1
+      - Tail_2 # <- Angle here
+      - Tail_3
+
+```
 
 ## Run specifically with default `analysis_settings.yml`:
 Result tables and plots are stored in `RESULTS_ROOT_DIR/ANGLE_RANGE_OUTDIR` (default: ./angle_range)
