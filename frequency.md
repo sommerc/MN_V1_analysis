@@ -16,8 +16,8 @@ FREQUENCY_WAVELET: cmorl1.5-1.0
 
 We use the complex valued Morlet (aka Gabor) wavelet function for frequency estimation. The complex Morlet wavelet ("cmorB-C" with floating point values B, C) is given by:
 
-$$\psi(t) = \frac{1}{\sqrt{\pi B}} \exp^{-\frac{t^2}{B}}
-          \exp^{\mathrm{j} 2\pi C t}$$
+$\psi(t) = \frac{1}{\sqrt{\pi B}} \exp^{-\frac{t^2}{B}}
+          \exp^{\mathrm{j} 2\pi C t}$
 
 where $B$ is the bandwidth and $C$ is the center frequency.
 
