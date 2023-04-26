@@ -1,9 +1,8 @@
 # Frog Analysis
 ---
-**work in progress**
 
-## Analysis
-There are several kinds of locomations and behavioural analyses implemented:
+## Introduction
+There are several kinds of locomotion and behavioral analyses implemented grouped into six categories.
 
 * [Basic Locomotion](./locomotion.md)
 * [Area explored](./area_explored.md)
@@ -11,6 +10,12 @@ There are several kinds of locomations and behavioural analyses implemented:
 * [Angle correlation](./angle_correlation.md)
 * [Frequency](./frequency.md)
 * [PCA and Moving visualizations](./pca_moving.md)
+
+To each category there are two Python (ver. > 3.5) scripts:
+* \<category\>_analysis.py
+* \<category\>_plots.py
+
+All scripts reside in the "analysis" folder. For convenicne the entire pipeline can be triggered in parallel from a single [entry script](#run)
 
 ## Folder structure, settings and analysis parameters:
 ---
@@ -43,20 +48,29 @@ The settings YAML file contains general parameters at its root level and specifi
 ## Run 
 ---
 
-To run the current pipeline type
+To run the pipeline for all analysis categories.
 
-```
+```bash
 cd analysis
-python analysis_run.py
+python analysis_run.py --settings <path-to-yaml>
 
-# For help use: 
-# python analysis_run.py -h 
+# For help on other parameters use: 
+python analysis_run.py --help
 ```
+
+Results are stored in `RESULTS_ROOT_DIR` set globally in the YAML settings file. It can be given as argument to `analysis_run.py`.
 
 ## Dependencies
 ---
 
-The analysis dependes heavyly on [tadpose](https://github.com/sommerc/tadpose) and the usual scientific Python stack. The Python SLEAP package is typically not required (only for [metrics](scripts/README.md))
+The analysis depends heavily on [tadpose](https://github.com/sommerc/tadpose) and the typical scientific Python stack. The Python SLEAP package is typically not required (only for [metrics](scripts/README.md))
+
+## Contributors
+Lora Sweeney
+Mara Julseth
+Alexia Wilson
+Zoe Harrington
+
 
 
 
