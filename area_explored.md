@@ -16,8 +16,6 @@ The `AREA_EXPLORED_NODE` defines which body-part is used. The square containing 
 Visualization of the histogram are stored in `RESULTS_ROOT_DIR/AREA_EXPLORED_OUTDIR/imgs`. 
 
 
-
-
 ## Run specifically
 Result tables and plots are stored in `RESULTS_ROOT_DIR/AREA_EXPLORED_OUTDIR` (default: ./area_explored)
 ```

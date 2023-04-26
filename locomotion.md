@@ -3,7 +3,7 @@
 ## Basics
 Locomotion features extract information about the basic movement of an SLEAP-tracked body-part. Due to noise in the images, SLEAP body-part locations may exhibit dislocations of up-to few pixels. To make the locomotion analysis robust custom pre-processing is applied. The parameters of the pre-processing steps can be set in the settings YAML file.
 
-## Setup and settings
+### Setup and settings
 For the locomotion analysis settings for each `STAGE_GRP` section must be provided. For instance:
 ```
   LOCOMOTION_NODE: "Tail_1"
