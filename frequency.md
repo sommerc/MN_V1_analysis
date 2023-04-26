@@ -40,12 +40,35 @@ where `FREQ_FOR` defines for which body-part locations the angle frequencies are
 
 
 ### Selection of *active* episodes
-The defined angle values defined in `FREQ_FOR` are first smoothed with a Gaussian of sigma=`FREQ_ACTIVE_SMOOTH` using `scipy.ndimage.gaussian_filter1d` function. Then, the gradient magnitude is computed using central differences with `numpy.gradient`. The resulting magnitude is thresholded with `FREQ_ACTIVE_THRESH`. Only frequency estimates from time frames exceeding this threshold are used the compute the power spectral desity distribution.
+All angles are preprocessed by slightly smoothing with a Gaussian with sigma=`FREQ_TEMP_ANGLE_SMOOTH`, followed by computing the z-score.
+
+The preprocessed angle values defined in `FREQ_FOR` are first smoothed with a Gaussian of sigma=`FREQ_ACTIVE_SMOOTH` using `scipy.ndimage.gaussian_filter1d` function. Then, the gradient magnitude is computed using central differences with `numpy.gradient`. The resulting magnitude is thresholded with `FREQ_ACTIVE_THRESH`. Only frequency estimates (mean power spectral density) from time frames exceeding this threshold are used the compute the mean PSD distribution.
+
+### Converting frequency bins to wavelet *scales*
+The continuous wavelet transform requires *scaling* factors. Scaling factors are inversely proportional to frequency. We use the PyWavelet function `pywt.scale2frequency()` to define scales corresponding to the used frequency bins. 
 
 ### Computing the power spectral density
-The correlation is computed by a centered, rolling Pearson correlation using `A.rolling(win, center=True).corr(B)` where A and B are the smoothed and z-scored input angle time courses. The resulting correlation distribution ranging $\in [-1,1]$ are visualized in `RESULTS_ROOT_DIR/ANGLE_CORR_OUTDIR/imgs`.
+First the coefficients of the continuous wavelet transform are computed by
+
+```python
+pywt.cwt(
+        ang_zscore,
+        scales,
+        wavelet,
+        sampling_period=1/fps,
+        method="fft",
+    )
+```
+
+To obtain the power spectral density (PSD) we build the magnitude of the coefficients multiplied by their complex conjugate.
+
+Now, the time-resolved PSD is averaged in *active* frames as described above.
+
 
 ### Background subtraction
+In order to remove spurious low frequency content, we additionally apply background subtraction to the smoothed angle z-scores. The background is estimated by smoothing the signal with a Gaussian of sigma=`FREQ_ACTIVE_SMOOTH`.
+
+Background subtracted results are indicated by the string *"_bs"* in the result tables.
 
 ## Run specifically
 Result tables and plots are stored in `RESULTS_ROOT_DIR/FREQUENCY_OUTDIR` (default: ./resutls/frequency)
@@ -59,9 +82,13 @@ python frequency_plots.py
 
 ## Computed features
 ### dominant_freq
+Peak finding on the mean power spectral density is applied using the function `scipy.signal.find_peaks` to obtain the dominant frequency bin. The dominant frequency hence corresponds to a local maxima in the mean PSD.
             
 ### dominant_freq_prominence
+The prominence of a peak at the dominant frequency bin measures how much a peak stands out from the surrounding baseline of the signal and is defined as the vertical distance between the peak and its lowest contour line.
 
 ### freq_active_ratio
+The ratio of frames which where thresholded to be *active*.
 
-### Power spectral density for frequency bins in range $(0,30]$ Hz
+### Power spectral density for frequency bins $\in (0,30]$ Hz
+The raw mean power spectral density in active episodes
