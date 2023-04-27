@@ -15,12 +15,12 @@ To each category there are two Python (ver. > 3.5) scripts:
 * \<category\>_analysis.py
 * \<category\>_plots.py
 
-All scripts reside in the "analysis" folder. For convenicne the entire pipeline can be triggered in parallel from a single [entry script](#run)
+All scripts reside in the "analysis" folder. For convenience the entire computation can be triggered in parallel from a single [entry script](#run)
 
 ## Folder structure, settings and analysis parameters:
 ---
 
-Settings and parameters are organzied in YAML. The current pipeline is configured in [analysis_settings.yml](analysis_settings.yml). For an more minimal example template see [analysis_settings.template.yml](analysis_settings.template.yml)
+Settings and parameters are organized in YAML. The current pipeline is configured in [analysis_settings.yml](analysis_settings.yml). For an more minimal example template see [analysis_settings.template.yml](analysis_settings.template.yml)
 
 The overall input Folder structure has two levels.
 
@@ -40,7 +40,7 @@ Stages and genotypes.
 │   │   ├── GENOTYPE_1
 │   │   ├── GENOTYPE_3
 ```
-Each .mp4 movie needs and SLEAP .h5 output and a Fiji .roi annotation.
+Each .mp4 movie needs and SLEAP .h5 output and a [Fiji .roi](./scripts/README.md#manual-annotation-of-the-dish-roi-using-imagejfiji) annotation.
 
 The settings YAML file contains general parameters at its root level and specific analysis parameters per `STAGE_GRP`. Hence, movies below a stage group are processed with the same parameters.
 
@@ -66,6 +66,7 @@ Results are stored in `RESULTS_ROOT_DIR` set globally in the YAML settings file.
 The analysis depends heavily on [tadpose](https://github.com/sommerc/tadpose) and the typical scientific Python stack. The Python SLEAP package is typically not required (only for [metrics](scripts/README.md))
 
 ## Contributors
+---
 Lora Sweeney
 Mara Julseth
 Alexia Wilson
