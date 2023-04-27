@@ -1,5 +1,5 @@
 import os
-import h5py
+import shutil
 import yaml
 
 import numpy as np
@@ -26,7 +26,7 @@ def settings(config_yml=None):
 
         # config_yml = "H:/projects/068_lora_tadpole/paper_code/analysis_settings.yml"
 
-    print(f"Using settings '{config_yml}'")
+    print(f" - Using settings '{config_yml}'")
 
     with open(config_yml, "r") as ymlfile:
         config_dict = yaml.safe_load(ymlfile)
@@ -35,6 +35,11 @@ def settings(config_yml=None):
         result_root = config_dict["RESULTS_ROOT_DIR"]
         if key.endswith("_OUTDIR"):
             config_dict[key] = os.path.join(result_root, config_dict[key])
+
+    os.makedirs(config_dict["RESULTS_ROOT_DIR"], exist_ok=True)
+    print(f" - Results -> '{config_dict['RESULTS_ROOT_DIR']}'")
+
+    shutil.copy(config_yml, f'{config_dict["RESULTS_ROOT_DIR"]}/used_settings.yaml')
 
     return config_dict
 
