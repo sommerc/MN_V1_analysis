@@ -66,8 +66,14 @@ def angle_range(all_movs, stg, nodes, cfg):
 
             if moving_bin.sum() > 0:
                 ang_std_mov = ang_smooth[moving_bin].std()
+                ang_min_mov = ang_smooth[moving_bin].min()
+                ang_mean_mov = ang_smooth[moving_bin].mean()
+                ang_max_mov = ang_smooth[moving_bin].max()
             else:
-                ang_std_mov = 0
+                ang_std_mov = np.nan
+                ang_min_mov = np.nan
+                ang_mean_mov = np.nan
+                ang_max_mov = np.nan
 
             tab_all.append(
                 [
@@ -77,9 +83,9 @@ def angle_range(all_movs, stg, nodes, cfg):
                     tid,
                     ang_smooth.std(),
                     ang_std_mov,
-                    ang_smooth[moving_bin].min(),
-                    ang_smooth[moving_bin].mean(),
-                    ang_smooth[moving_bin].max(),
+                    ang_min_mov,
+                    ang_mean_mov,
+                    ang_max_mov,
                 ]
             )
 
