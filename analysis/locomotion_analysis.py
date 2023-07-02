@@ -34,7 +34,7 @@ def locomotion(tad, tids, cfgs):
         speed_mean = speed_calib.mean()
         speed_std = speed_calib.std()
 
-        # acceleration = np.gradient(speed_calib)
+        acceleration = np.gradient(speed_calib)
 
         part_loc = tad.locs(parts=(cfgs["LOCOMOTION_NODE"],), track_idx=tid).squeeze()
         dc_angles = directional_change(
@@ -69,6 +69,9 @@ def locomotion(tad, tids, cfgs):
                 directional_change_mean,
                 directional_change_std,
                 directional_change_95,
+                acceleration.min(),
+                acceleration.mean(),
+                acceleration.max(),
             ]
         )
 
@@ -84,6 +87,9 @@ def locomotion(tad, tids, cfgs):
             "directional_change_mean",
             "directional_change_std",
             "directional_change_95",
+            "acceleration_min",
+            "acceleration_mean",
+            "acceleration_max",
         ],
     )
 
