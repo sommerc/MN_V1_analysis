@@ -69,7 +69,19 @@ def angle_range(all_movs, stg, nodes, cfg):
             else:
                 ang_std_mov = 0
 
-            tab_all.append([base_file, stg, gen, tid, ang_smooth.std(), ang_std_mov])
+            tab_all.append(
+                [
+                    base_file,
+                    stg,
+                    gen,
+                    tid,
+                    ang_smooth.std(),
+                    ang_std_mov,
+                    ang_smooth[moving_bin].min(),
+                    ang_smooth[moving_bin].mean(),
+                    ang_smooth[moving_bin].max(),
+                ]
+            )
 
         tab_ar = pd.DataFrame(
             tab_all,
@@ -80,6 +92,9 @@ def angle_range(all_movs, stg, nodes, cfg):
                 "Track_idx",
                 "angle_std",
                 "angle_moving_std",
+                "angle_moving_min",
+                "angle_moving_mean",
+                "angle_moving_max",
             ],
         )
     return tab_ar
