@@ -26,6 +26,9 @@ def plot_by_stage(cfg):
                 for feature in [
                     "angle_moving_std",
                     "angle_std",
+                    "angle_moving_min",
+                    "angle_moving_mean",
+                    "angle_moving_max",
                 ]:
                     f, ax = plt.subplots(figsize=(14, 4))
                     a = sns.boxenplot(
@@ -75,6 +78,9 @@ def plot_by_geno(cfg):
                 for feature in [
                     "angle_moving_std",
                     "angle_std",
+                    "angle_moving_min",
+                    "angle_moving_mean",
+                    "angle_moving_max",
                 ]:
                     f, ax = plt.subplots(figsize=(14, 4))
                     a = sns.boxenplot(

@@ -28,7 +28,10 @@ def plot_by_stage(cfg):
             "time_spend_moving",
             "directional_change_mean",
             "directional_change_std",
-            # "directional_change_95"
+            "directional_change_95",
+            "acceleration_min",
+            "acceleration_mean",
+            "acceleration_max",
         ]:
             f, ax = plt.subplots(figsize=(14, 4))
             a = sns.boxenplot(
@@ -113,7 +116,10 @@ def plot_by_geno(cfg):
             "time_spend_moving",
             "directional_change_mean",
             "directional_change_std",
-            # "directional_change_95"
+            "directional_change_95",
+            "acceleration_min",
+            "acceleration_mean",
+            "acceleration_max",
         ]:
             f, ax = plt.subplots(figsize=(14, 4))
             a = sns.boxenplot(
