@@ -42,24 +42,26 @@ def moving_plots(tad, tids, stg, gen, cfg):
         mov_result.append(moving_bin)
 
     mov_pd = np.stack(mov_result)
-    start = np.random.randint(
-        mov_pd.shape[1] - cfg["MOVING_PLOT_TIME_SPAN_MIN"] * 60 * 60
-    )
-    mov_pd = pd.DataFrame(
-        mov_pd[:, start : start + 36000],
-        index=[f"Animal {i+1}" for i in range(len(tids))],
-    )
 
-    f, ax = plt.subplots(figsize=(8, len(tids) / 2))
-    hm = sns.heatmap(mov_pd, cmap="gray_r", cbar=False, xticklabels=False, ax=ax)
-    hm.set_yticklabels(hm.get_yticklabels(), rotation=0)
+    if (mov_pd.shape[1] - cfg["MOVING_PLOT_TIME_SPAN_MIN"] * 60 * 60) > 0:
+        start = np.random.randint(
+            mov_pd.shape[1] - cfg["MOVING_PLOT_TIME_SPAN_MIN"] * 60 * 60
+        )
+        mov_pd = pd.DataFrame(
+            mov_pd[:, start : start + 36000],
+            index=[f"Animal {i+1}" for i in range(len(tids))],
+        )
 
-    ax.set_title(f"{base_file}")
+        f, ax = plt.subplots(figsize=(8, len(tids) / 2))
+        hm = sns.heatmap(mov_pd, cmap="gray_r", cbar=False, xticklabels=False, ax=ax)
+        hm.set_yticklabels(hm.get_yticklabels(), rotation=0)
 
-    plt.savefig(
-        f"{cfg['MOVING_OUTDIR']}/{stg}_{gen}_{base_file}_{cfg['MOVING_PLOT_TIME_SPAN_MIN']}min-random.png"
-    )
-    plt.close(f)
+        ax.set_title(f"{base_file}")
+
+        plt.savefig(
+            f"{cfg['MOVING_OUTDIR']}/{stg}_{gen}_{base_file}_{cfg['MOVING_PLOT_TIME_SPAN_MIN']}min-random.png"
+        )
+        plt.close(f)
 
 
 def pca_plot(tad, tids, stg, gen, cfg):

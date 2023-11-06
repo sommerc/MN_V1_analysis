@@ -80,33 +80,51 @@ def angle_correlation(all_movs, stg, name, nodes, cfg):
 
             corr_active = corr_active[~np.isnan(corr_active)]
 
-            tab_all.append(
-                [
-                    base_file,
-                    stg,
-                    gen,
-                    tid,
-                    name,
-                    np.median(corr_active),
-                    np.percentile(corr_active, 5),
-                    np.percentile(corr_active, 95),
-                    skew(corr_active),
-                    corr_active.std(),
-                    len(corr_active) / tad.nframes,
-                ]
-            )
+            if len(corr_active) > 0:
+                tab_all.append(
+                    [
+                        base_file,
+                        stg,
+                        gen,
+                        tid,
+                        name,
+                        np.median(corr_active),
+                        np.percentile(corr_active, 5),
+                        np.percentile(corr_active, 95),
+                        skew(corr_active),
+                        corr_active.std(),
+                        len(corr_active) / tad.nframes,
+                    ]
+                )
 
-            #### Plots
-            f, ax = plt.subplots(figsize=(6, 6))
-            ax.hist(corr_active, bins=100, range=[-1, 1])
-            ax.set_title(f"{name} {stg} {gen}\n{base_file}")
-            ax.set_xlabel("Correlation {name}")
-            ax.set_ylabel("Count")
-            plt.tight_layout()
-            plt.savefig(
-                f"{cfg['ANGLE_CORR_OUTDIR']}/imgs/{stg}_{gen}_{name}_{base_file}.png"
-            )
-            plt.close(f)
+                #### Plots
+                f, ax = plt.subplots(figsize=(6, 6))
+                ax.hist(corr_active, bins=100, range=[-1, 1])
+                ax.set_title(f"{name} {stg} {gen}\n{base_file}")
+                ax.set_xlabel("Correlation {name}")
+                ax.set_ylabel("Count")
+                plt.tight_layout()
+                plt.savefig(
+                    f"{cfg['ANGLE_CORR_OUTDIR']}/imgs/{stg}_{gen}_{name}_{base_file}.png"
+                )
+                plt.close(f)
+
+            else:
+                ab_all.append(
+                    [
+                        base_file,
+                        stg,
+                        gen,
+                        tid,
+                        name,
+                        np.nan,
+                        np.nan,
+                        np.nan,
+                        np.nan,
+                        np.nan,
+                        0,
+                    ]
+                )
 
         tab_ar = pd.DataFrame(
             tab_all,
