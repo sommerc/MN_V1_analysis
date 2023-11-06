@@ -43,7 +43,7 @@ def plot_by_stage(cfg):
                 box_kws={"alpha": 0.4},
                 dodge=False,
             )
-            a.legend_.remove()
+            # a.legend_.remove()
             b = sns.stripplot(
                 y=feature,
                 x="Genotype",
@@ -131,7 +131,7 @@ def plot_by_geno(cfg):
                 box_kws={"alpha": 0.4},
                 dodge=False,
             )
-            a.legend_.remove()
+            # a.legend_.remove()
             b = sns.stripplot(
                 y=feature,
                 x="Stage",
