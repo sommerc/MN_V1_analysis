@@ -53,7 +53,7 @@ if __name__ == "__main__":
         locomotion_plots(cfg)
     elif args.type.lower() == "f":
         print("FREQUENCY")
-        frequency_plots(cfg)
+        frequency_analysis(cfg)
         frequency_plots(cfg)
     elif args.type.lower() == "p":
         print("PCA PLOTS")
