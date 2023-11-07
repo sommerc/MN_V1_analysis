@@ -110,7 +110,7 @@ def angle_correlation(all_movs, stg, name, nodes, cfg):
                 plt.close(f)
 
             else:
-                ab_all.append(
+                tab_all.append(
                     [
                         base_file,
                         stg,
