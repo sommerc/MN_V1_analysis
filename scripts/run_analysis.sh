@@ -6,7 +6,7 @@
 #SBATCH --time=10:00:00
 #SBATCH --mem=128G
 
-#SBATCH --ntasks=6
+#SBATCH -N=6
 #SBATCH --mail-user=christoph.sommer@ist.ac.at
 #SBATCH --mail-type=ALL
 #SBATCH --no-requeue
@@ -35,12 +35,12 @@ fi
 
 SETTINGS_YAML=$1
 
-srun --cpu_bind=verbose python ../analysis/analysis_cluster.py -t L -s $SETTINGS_YAML &
-srun --cpu_bind=verbose python ../analysis/analysis_cluster.py -t F -s $SETTINGS_YAML &
-srun --cpu_bind=verbose python ../analysis/analysis_cluster.py -t P -s $SETTINGS_YAML &
-srun --cpu_bind=verbose python ../analysis/analysis_cluster.py -t AE -s $SETTINGS_YAML &
-srun --cpu_bind=verbose python ../analysis/analysis_cluster.py -t AC -s $SETTINGS_YAML &
-srun --cpu_bind=verbose python ../analysis/analysis_cluster.py -t AR -s $SETTINGS_YAML &
+srun --cpu_bind=verbose -N 1 python ../analysis/analysis_cluster.py -t L -s $SETTINGS_YAML &
+srun --cpu_bind=verbose -N 1 python ../analysis/analysis_cluster.py -t F -s $SETTINGS_YAML &
+srun --cpu_bind=verbose -N 1 python ../analysis/analysis_cluster.py -t P -s $SETTINGS_YAML &
+srun --cpu_bind=verbose -N 1 python ../analysis/analysis_cluster.py -t AE -s $SETTINGS_YAML &
+srun --cpu_bind=verbose -N 1 python ../analysis/analysis_cluster.py -t AC -s $SETTINGS_YAML &
+srun --cpu_bind=verbose -N 1 python ../analysis/analysis_cluster.py -t AR -s $SETTINGS_YAML &
 wait
  
 
