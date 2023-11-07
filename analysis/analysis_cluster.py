@@ -67,7 +67,7 @@ if __name__ == "__main__":
         angle_range_analysis(cfg)
         angle_range_plots(cfg)
     elif args.type.lower() == "ac":
-        print("ANGLE RANGE")
+        print("ANGLE CORRELATION")
         angle_correlation_analysis(cfg)
         angle_correlation_plots(cfg)
     else:
