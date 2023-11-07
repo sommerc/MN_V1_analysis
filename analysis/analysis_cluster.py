@@ -62,7 +62,7 @@ if __name__ == "__main__":
         print("AREA EXPLORED")
         area_explored_analysis(cfg)
         area_explored_plot(cfg)
-    elif args.type.lower() == "ae":
+    elif args.type.lower() == "ar":
         print("ANGLE RANGE")
         angle_range_analysis(cfg)
         angle_range_plots(cfg)
