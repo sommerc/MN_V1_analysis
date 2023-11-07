@@ -6,7 +6,7 @@
 #SBATCH --time=10:00:00
 #SBATCH --mem=128G
 
-#SBATCH -N=6
+#SBATCH --nodes=6
 #SBATCH --mail-user=christoph.sommer@ist.ac.at
 #SBATCH --mail-type=ALL
 #SBATCH --no-requeue
