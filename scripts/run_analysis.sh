@@ -40,7 +40,8 @@ srun --cpu_bind=verbose python ../analysis/analysis_cluster.py -t F -s $SETTINGS
 srun --cpu_bind=verbose python ../analysis/analysis_cluster.py -t P -s $SETTINGS_YAML &
 srun --cpu_bind=verbose python ../analysis/analysis_cluster.py -t AE -s $SETTINGS_YAML &
 srun --cpu_bind=verbose python ../analysis/analysis_cluster.py -t AC -s $SETTINGS_YAML &
-srun --cpu_bind=verbose python ../analysis/analysis_cluster.py -t AR -s $SETTINGS_YAML 
+srun --cpu_bind=verbose python ../analysis/analysis_cluster.py -t AR -s $SETTINGS_YAML &
+wait
  
 
 
