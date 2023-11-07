@@ -1,0 +1,10 @@
+name: frog_analysis
+dependencies:
+- python=3.8
+- pip
+- pip:
+  - numpy  - scipy  - scikit-learn  - scikit-image  - h5py  - roifile  - csaps  - opencv-python-headless  - matplotlib  - seaborn 
+  - pandas 
+  - tqdm 
+  - PyYaml
+  - git+https://github.com/sommerc/tadpose.git
