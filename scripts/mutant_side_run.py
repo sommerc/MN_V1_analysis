@@ -33,14 +33,12 @@ if __name__ == "__main__":
         "root",
         help="Movie root folder",
         type=str,
-        required=True,
     )
 
     parser.add_argument(
         "mutant_tab",
         help="Mutant tab file",
         type=str,
-        required=True,
     )
 
     args = parser.parse_args()
