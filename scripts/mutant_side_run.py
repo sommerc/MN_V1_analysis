@@ -3,8 +3,8 @@ import argparse
 import pandas as pd
 
 
-def run(ROOT):
-    tab = pd.read_csv("mutant_side.tab", sep="\t")
+def run(ROOT, mutant_side_tab_fn):
+    tab = pd.read_csv(mutant_side_tab_fn, sep="\t")
 
     for i, row in tab.iterrows():
         vid_fn = f"{ROOT}/{row.Stage}/{row.Genotype}/{row.Video}.mp4"
@@ -36,7 +36,15 @@ if __name__ == "__main__":
         required=True,
     )
 
+    parser.add_argument(
+        "mutant_tab",
+        help="Mutant tab file",
+        type=str,
+        required=True,
+    )
+
     args = parser.parse_args()
 
     assert os.path.exists(args.root), "Movie root dir does not exist"
-    run(args.root)
+    assert os.path.exists(args.mutant_tab), "Mutant tab file does not exist"
+    run(args.root, args.mutant_tab)
