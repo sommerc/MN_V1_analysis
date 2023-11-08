@@ -33,6 +33,7 @@ def locomotion(tad, tids, cfgs):
 
         speed_mean = speed_calib.mean()
         speed_std = speed_calib.std()
+        total_dist = speed_calib.sum()
 
         acceleration = np.gradient(speed_calib)
 
@@ -72,6 +73,7 @@ def locomotion(tad, tids, cfgs):
                 acceleration.min(),
                 acceleration.mean(),
                 acceleration.max(),
+                total_dist,
             ]
         )
 
@@ -90,6 +92,7 @@ def locomotion(tad, tids, cfgs):
             "acceleration_min",
             "acceleration_mean",
             "acceleration_max",
+            "total_distance",
         ],
     )
 
