@@ -40,7 +40,10 @@ SETTINGS_YAML=$1
 
 RUN_TYPE="${ANALYSIS_TYPES[${SLURM_ARRAY_TASK_ID}]}"
 
+echo RUN $RUN_TYPE
 echo srun --cpu_bind=verbose python ../analysis/analysis_cluster.py -t $RUN_TYPE -s $SETTINGS_YAML 
+echo *********************************************************************************************
+srun --cpu_bind=verbose python ../analysis/analysis_cluster.py -t $RUN_TYPE -s $SETTINGS_YAML 
  
 
 
