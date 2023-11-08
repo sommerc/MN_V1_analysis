@@ -3,6 +3,15 @@
 
 Collection of scripts for various tasks
 
+### Cluster run frog analysis
+First check the *settings.yaml* file to contain the correct paths for input and results. Make sure you have conda installed and an environmnet called `frog_analysis`. Then
+
+```bahs
+sbatch submit_analyisis.sh <settings.yaml>
+```
+
+will run the entireanalysis and plots. Results will be saved to the result folder specified in the *settings.yaml*.
+
 ### Cluster prediction of movies with SLEAP
 The SLURM sbatch script `predict_sleap.sh` can be used to predict `<N>` .mp4 movies organized in a folder structure below `MOVIE_ROOT` recursively. In addition, the two SLEAP models `SLEAP_CENTROID_MODEL`, `SLEAP_INSTANCE_MODEL` and the maximaum expected number of animals `MAX_ANAIMALS` is required.
 
@@ -35,7 +44,11 @@ The script `metrics.py` outputs a table containing most important SLEAP validati
 ### Mutant side switching
 If an animal is handicaped on one side, we use the manual annotation of the mutant side from `mutant.tab` to create an <movie_name>.json file. This contains the information whether all processing should be done on the original movie or on a mirrored version. The mutant side should always be on the left. 
 
-To generate these .json files, follow steps in `mutant_side_generate_from_tab.ipynb`
+To generate these .json files, use the script `mutant_side_run.py`.
+
+```bash
+python mutant_side_run.py <root-folder-of-movies> <path-to-tab-file>
+```
 
 ### Helper
-The cluster script `predict_sleap.sh` genrates .slp and .h5 output. After local proofreading of .slp files the .h5 analysis file needs to be regenerated. One can use the Windows batch script `slp2h5_win.bat` for that purpose.
+The cluster script `predict_sleap.sh` generates .slp and .h5 output. After local proofreading of .slp files the .h5 analysis file needs to be regenerated. One can use the Windows batch script `slp2h5_win.bat` for that purpose.
