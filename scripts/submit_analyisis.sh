@@ -37,12 +37,12 @@ fi
 
 SETTINGS_YAML=$1
 
-srun --cpu_bind=verbose --ntasks=1 --mem=30 python ../analysis/analysis_cluster.py -t L -s $SETTINGS_YAML &
-srun --cpu_bind=verbose --ntasks=1 --mem=30 python ../analysis/analysis_cluster.py -t F -s $SETTINGS_YAML &
-srun --cpu_bind=verbose --ntasks=1 --mem=30 python ../analysis/analysis_cluster.py -t P -s $SETTINGS_YAML &
-srun --cpu_bind=verbose --ntasks=1 --mem=30 python ../analysis/analysis_cluster.py -t AE -s $SETTINGS_YAML &
-srun --cpu_bind=verbose --ntasks=1 --mem=30 python ../analysis/analysis_cluster.py -t AC -s $SETTINGS_YAML &
-srun --cpu_bind=verbose --ntasks=1 --mem=30 python ../analysis/analysis_cluster.py -t AR -s $SETTINGS_YAML &
+srun --cpu_bind=verbose --ntasks=1 --mem-per-cpu=30 python ../analysis/analysis_cluster.py -t L -s $SETTINGS_YAML &
+srun --cpu_bind=verbose --ntasks=1 --mem-per-cpu=30 python ../analysis/analysis_cluster.py -t F -s $SETTINGS_YAML &
+srun --cpu_bind=verbose --ntasks=1 --mem-per-cpu=30 python ../analysis/analysis_cluster.py -t P -s $SETTINGS_YAML &
+srun --cpu_bind=verbose --ntasks=1 --mem-per-cpu=30 python ../analysis/analysis_cluster.py -t AE -s $SETTINGS_YAML &
+srun --cpu_bind=verbose --ntasks=1 --mem-per-cpu=30 python ../analysis/analysis_cluster.py -t AC -s $SETTINGS_YAML &
+srun --cpu_bind=verbose --ntasks=1 --mem-per-cpu=30 python ../analysis/analysis_cluster.py -t AR -s $SETTINGS_YAML &
 wait
  
 
