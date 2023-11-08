@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #SBATCH --job-name=frog_analysis
-#SBATCH --output=logs/%j_%a.out
+#SBATCH --output=logs/%j.out
 
 #SBATCH --time=10:00:00
 #SBATCH --mem=128G
@@ -9,6 +9,8 @@
 #SBATCH --ntasks=6
 #SBATCH --mail-user=christoph.sommer@ist.ac.at
 #SBATCH --mail-type=ALL
+#SBATCH --partition=gpu
+#SBATCH --gres=gpu:1
 #SBATCH --no-requeue
 #SBATCH --export=NONE
 
