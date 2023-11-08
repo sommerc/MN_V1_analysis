@@ -4,7 +4,7 @@
 #SBATCH --output=logs/%j.out
 
 #SBATCH --time=3:00:00
-#SBATCH --mem=240G
+#SBATCH --mem=600G
 
 #SBATCH --ntasks=6
 #SBATCH --mail-user=christoph.sommer@ist.ac.at
@@ -37,12 +37,12 @@ fi
 
 SETTINGS_YAML=$1
 
-srun --cpu_bind=verbose --ntasks=1 --mem-per-cpu=40 python ../analysis/analysis_cluster.py -t L -s $SETTINGS_YAML &
-srun --cpu_bind=verbose --ntasks=1 --mem-per-cpu=40 python ../analysis/analysis_cluster.py -t F -s $SETTINGS_YAML &
-srun --cpu_bind=verbose --ntasks=1 --mem-per-cpu=40 python ../analysis/analysis_cluster.py -t P -s $SETTINGS_YAML &
-srun --cpu_bind=verbose --ntasks=1 --mem-per-cpu=40 python ../analysis/analysis_cluster.py -t AE -s $SETTINGS_YAML &
-srun --cpu_bind=verbose --ntasks=1 --mem-per-cpu=40 python ../analysis/analysis_cluster.py -t AC -s $SETTINGS_YAML &
-srun --cpu_bind=verbose --ntasks=1 --mem-per-cpu=40 python ../analysis/analysis_cluster.py -t AR -s $SETTINGS_YAML &
+srun --cpu_bind=verbose --ntasks=1 --mem-per-cpu=100 python ../analysis/analysis_cluster.py -t L -s $SETTINGS_YAML &
+srun --cpu_bind=verbose --ntasks=1 --mem-per-cpu=100 python ../analysis/analysis_cluster.py -t F -s $SETTINGS_YAML &
+srun --cpu_bind=verbose --ntasks=1 --mem-per-cpu=100 python ../analysis/analysis_cluster.py -t P -s $SETTINGS_YAML &
+srun --cpu_bind=verbose --ntasks=1 --mem-per-cpu=100 python ../analysis/analysis_cluster.py -t AE -s $SETTINGS_YAML &
+srun --cpu_bind=verbose --ntasks=1 --mem-per-cpu=100 python ../analysis/analysis_cluster.py -t AC -s $SETTINGS_YAML &
+srun --cpu_bind=verbose --ntasks=1 --mem-per-cpu=100 python ../analysis/analysis_cluster.py -t AR -s $SETTINGS_YAML &
 wait
  
 
