@@ -13,7 +13,7 @@
 #SBATCH --partition=gpu
 #SBATCH --gres=gpu:1
 #SBATCH --no-requeue
-#SBATCH --export=NONE
+#SBATCH --export=TQDM_DISABLE=1
 
 unset SLURM_EXPORT_ENV
 export OMP_NUM_THREADS=1
@@ -42,7 +42,8 @@ RUN_TYPE="${ANALYSIS_TYPES[${SLURM_ARRAY_TASK_ID}]}"
 
 echo RUN $RUN_TYPE
 echo srun --cpu_bind=verbose python ../analysis/analysis_cluster.py -t $RUN_TYPE -s $SETTINGS_YAML 
-echo *********************************************************************************************
+echo ---------------------------------------------------------------------------------------------
+echo
 srun --cpu_bind=verbose python ../analysis/analysis_cluster.py -t $RUN_TYPE -s $SETTINGS_YAML 
  
 
