@@ -74,3 +74,4 @@ if __name__ == "__main__":
         print(
             f"ERROR: analysis type {args.type} not understood. choose L, F, P, AE, AR, or AC"
         )
+    print("DONE")
