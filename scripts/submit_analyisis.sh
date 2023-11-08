@@ -3,7 +3,7 @@
 #SBATCH --job-name=frog_analysis
 #SBATCH --output=logs/%j_%a.out
 
-#SBATCH --time=10:00:00
+#SBATCH --time=3:00:00
 #SBATCH --mem=128G
 
 #SBATCH --ntasks=6
