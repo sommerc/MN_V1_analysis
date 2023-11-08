@@ -19,7 +19,7 @@ unset SLURM_EXPORT_ENV
 export OMP_NUM_THREADS=1
 
 # get conda ready
-source /nfs/scistore08/imagegrp/csommer/.bashrc
+source ~/.bashrc
 conda activate sleap
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$CONDA_PREFIX/lib/
 
