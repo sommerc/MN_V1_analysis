@@ -1,12 +1,13 @@
 #!/bin/bash
 
 #SBATCH --job-name=frog_analysis
-#SBATCH --output=logs/%j.out
+#SBATCH --output=logs/%j_%a.out
 
 #SBATCH --time=3:00:00
-#SBATCH --mem=600G
+#SBATCH --mem=128G
+#SBATCH --array=0-5 
 
-#SBATCH --ntasks=6
+#SBATCH --ntasks=1
 #SBATCH --mail-user=christoph.sommer@ist.ac.at
 #SBATCH --mail-type=ALL
 #SBATCH --partition=gpu
@@ -34,16 +35,12 @@ if [ -z "$1" ]
 	exit 1
 fi
 
-
+ANALYSIS_TYPES=(F L P AE AC AR)
 SETTINGS_YAML=$1
 
-srun --cpu_bind=verbose --ntasks=1 --exclusive -c 1 python ../analysis/analysis_cluster.py -t L -s $SETTINGS_YAML &
-srun --cpu_bind=verbose --ntasks=1 --exclusive -c 1 python ../analysis/analysis_cluster.py -t F -s $SETTINGS_YAML &
-srun --cpu_bind=verbose --ntasks=1 --exclusive -c 1 python ../analysis/analysis_cluster.py -t P -s $SETTINGS_YAML &
-srun --cpu_bind=verbose --ntasks=1 --exclusive -c 1 python ../analysis/analysis_cluster.py -t AE -s $SETTINGS_YAML &
-srun --cpu_bind=verbose --ntasks=1 --exclusive -c 1 python ../analysis/analysis_cluster.py -t AC -s $SETTINGS_YAML &
-srun --cpu_bind=verbose --ntasks=1 --exclusive -c 1 python ../analysis/analysis_cluster.py -t AR -s $SETTINGS_YAML &
-wait
+RUN_TYPE="${ANALYSIS_TYPES[${SLURM_ARRAY_TASK_ID}]}"
+
+echo srun --cpu_bind=verbose python ../analysis/analysis_cluster.py -t $RUN_TYPE -s $SETTINGS_YAML 
  
 
 
