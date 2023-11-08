@@ -65,6 +65,12 @@ Results are stored in `RESULTS_ROOT_DIR` set globally in the YAML settings file.
 
 The analysis depends heavily on [tadpose](https://github.com/sommerc/tadpose) and the typical scientific Python stack. The Python SLEAP package is typically not required (only for [metrics](scripts/README.md))
 
+You can install all dependencies into a new environment **frog_analysis** by:
+
+```bash
+conda create -f environment.yaml
+```
+
 ## Contributors
 ---
 Lora Sweeney
