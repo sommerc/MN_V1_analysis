@@ -7,6 +7,9 @@ import pandas as pd
 def run(ROOT, mutant_side_tab_fn):
     tab = pd.read_csv(mutant_side_tab_fn, sep="\t")
 
+    print(f"Found {len(tab)} mutant side entries:")
+    print()
+
     for i, row in tab.iterrows():
         vid_fn = f"{ROOT}/{row.Stage}/{row.Genotype}/{row.Video}.mp4"
         json_fn = f"{ROOT}/{row.Stage}/{row.Genotype}/{row.Video}.json"
@@ -14,17 +17,12 @@ def run(ROOT, mutant_side_tab_fn):
         dictionary = {}
         dictionary["mutant_side"] = row.Mutant_Side
 
-        if not os.path.exists(json_fn):
-            if not os.path.exists(vid_fn):
-                print(f"WARNING: video file '{vid_fn}' for json does not exist")
-            with open(json_fn, "w") as outfile:
-                json.dump(dictionary, outfile)
-            print(f"Writing {json_fn}")
+        if not os.path.exists(vid_fn):
+            print(f"WARNING: video file '{vid_fn}' for json does not exist")
 
-        else:
-            if not os.path.exists(vid_fn):
-                print(f"WARNING: video file '{vid_fn}' for json does not exist")
-            print(f"{json_fn} okay")
+            print(f" -- writing {json_fn} -> {dictionary}")
+            with open(json_fn, "wt") as outfile:
+                json.dump(dictionary, outfile)
 
 
 if __name__ == "__main__":
