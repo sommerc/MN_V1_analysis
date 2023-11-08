@@ -19,10 +19,11 @@ def run(ROOT, mutant_side_tab_fn):
 
         if not os.path.exists(vid_fn):
             print(f"WARNING: video file '{vid_fn}' for json does not exist")
+            continue
 
-            print(f" -- writing {json_fn} -> {dictionary}")
-            with open(json_fn, "wt") as outfile:
-                json.dump(dictionary, outfile)
+        print(f" -- writing {json_fn} -> {dictionary}")
+        with open(json_fn, "wt") as outfile:
+            json.dump(dictionary, outfile)
 
 
 if __name__ == "__main__":
