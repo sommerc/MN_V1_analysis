@@ -18,7 +18,7 @@ def settings(config_yml=None):
             parent=root,
             title="Choose analysis settings YAML",
             defaultextension=".yml",
-            filetypes=[("YAML file", ".yml")],
+            filetypes=[("YAML file", ".yml, .yaml")],
         )
 
         if len(config_yml) == 0:
