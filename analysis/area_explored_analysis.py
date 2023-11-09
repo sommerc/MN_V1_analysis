@@ -59,8 +59,6 @@ def area_explored(tad, tids, cfg, stg, gen, write_img=False):
         coords = roi.coordinates()
 
         if "mutant_side" in tad.info and tad.info["mutant_side"] == "right":
-            print("mirror LR in locs")
-
             cap = cv2.VideoCapture(tad.video_fn)
             width = cap.get(cv2.CAP_PROP_FRAME_WIDTH)
             cap.release()
