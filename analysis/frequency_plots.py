@@ -32,8 +32,10 @@ def plot_by_stage(cfg):
                 cc = ax[0]._get_lines.prop_cycler
 
                 for i, (gen, tab) in enumerate(tab_sub.groupby("Genotype")):
-                    a = tab.T.iloc[8:-1].mean(1)
-                    b = tab.T.iloc[8:-1].std(1)
+                    freq_tab = tab.T.iloc[7:-1].astype("float32")
+                    a = freq_tab.mean(1)
+                    b = freq_tab.std(1)
+                    
                     x_vals = a.index.astype("float")
                     color = next(cc)["color"]
                     ax[i].plot(x_vals, a, color=color)
@@ -114,9 +116,10 @@ def plot_by_geno(cfg):
                 cc = ax[0]._get_lines.prop_cycler
 
                 for i, (stg, tab) in enumerate(tab_sub.groupby("Stage")):
-                    a = tab.T.iloc[8:-1].mean(1)
-                    b = tab.T.iloc[8:-1].std(1)
-                    x_vals = a.index.astype("float")
+                    freq_tab = tab.T.iloc[7:-1].astype("float32")
+                    a = freq_tab.mean(1)
+                    b = freq_tab.std(1)
+                    x_vals = a.index.astype("float32")
                     color = next(cc)["color"]
                     ax[i].plot(x_vals, a, color=color)
                     ax[i].fill_between(x_vals, (a - b), (a + b), alpha=0.3, color=color)
