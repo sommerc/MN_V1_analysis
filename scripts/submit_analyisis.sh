@@ -1,9 +1,9 @@
 #!/bin/bash
 
 #SBATCH --job-name=frog_analysis
-#SBATCH --output=logs/%j_%a.out
+#SBATCH --output=logs/%A_%a.out
 
-#SBATCH --time=3:00:00
+#SBATCH --time=5:00:00
 #SBATCH --mem=128G
 #SBATCH --array=0-5 
 
