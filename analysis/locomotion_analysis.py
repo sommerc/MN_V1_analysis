@@ -70,9 +70,9 @@ def locomotion(tad, tids, cfgs):
                 directional_change_mean,
                 directional_change_std,
                 directional_change_95,
-                acceleration.min(),
-                acceleration.mean(),
-                acceleration.max(),
+                acceleration[acceleration > 0].mean(),
+                np.percentile(acceleration[acceleration > 0], 95),
+                acceleration[acceleration > 0].max(),
                 total_dist,
             ]
         )
@@ -89,8 +89,8 @@ def locomotion(tad, tids, cfgs):
             "directional_change_mean",
             "directional_change_std",
             "directional_change_95",
-            "acceleration_min",
             "acceleration_mean",
+            "acceleration_p95",
             "acceleration_max",
             "total_distance",
         ],
