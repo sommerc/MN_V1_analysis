@@ -64,7 +64,7 @@ def moving_plots(tad, tids, stg, gen, cfg):
         plt.close(f)
 
 
-def pca_plot(tad, tids, stg, gen, cfg):
+def pca_plot(tad, tids, stg, gen, cfg, pca_on):
     os.makedirs(cfg["PCA_OUTDIR"], exist_ok=True)
     cfgs = cfg[stg]
     np.random.seed(42)
@@ -81,9 +81,42 @@ def pca_plot(tad, tids, stg, gen, cfg):
         f, axs = plt.subplots(1, len(tids), squeeze=False, sharey=True)
 
         for i, tid in enumerate(tids):
-            pca_sel = np.random.randint(tad.nframes, size=size_pca)
+            if pca_on in ["moving", "non-moving"]:
+                speed_px_per_frame = tad.speed(
+                    cfgs["LOCOMOTION_NODE"],
+                    track_idx=tid,
+                    pre_sigma=cfgs["LOCOMOTION_SPATIAL_SIGMA"],
+                    sigma=cfgs["LOCOMOTION_TEMPORAL_SIGMA"],
+                )
+                speed_calib = speed_px_per_frame * tadpose.utils.calibrate_by_dish(
+                    tad, 14
+                )
 
-            f
+                moving_bin = speed_calib > cfgs["LOCOMOTION_MOVING_THRESH"]
+
+                if pca_on.startswith("non"):
+                    moving_bin = ~moving_bin
+
+                try:
+                    pca_sel = np.random.choice(
+                        (moving_bin).nonzero()[0], size=size_pca, replace=False
+                    )
+                except ValueError:
+                    print(
+                        f"WARNING: PCA could not be done, since to few valid {pca_on} frames in {tad.video_fn} for tid {tid}"
+                    )
+                    continue
+
+            elif pca_on == "all":
+                pca_sel = np.random.randint(
+                    tad.nframes,
+                    size=size_pca,
+                )
+
+            else:
+                raise RuntimeError(
+                    f"PCA plots type {pca_on} not understood for file {tad.video_fn}"
+                )
 
             part_locs = tad.ego_locs(parts=parts, track_idx=tid, fill_missing=True)[
                 pca_sel
@@ -98,7 +131,9 @@ def pca_plot(tad, tids, stg, gen, cfg):
 
             if np.any(np.isnan(Xc)):
                 axs[0, i].set_axis_off()
-                print("NANANANA")
+                print(
+                    f"WARNING: PCA could not be done, NaN occured for {pca_on} frames in {tad.video_fn} for tid {tid}"
+                )
                 continue
 
             # Xp will contain the PCA components
@@ -118,7 +153,7 @@ def pca_plot(tad, tids, stg, gen, cfg):
                 axs[0, i].set_aspect(1.0)
                 axs[0, i].set_axis_off()
 
-        f.suptitle(f"PCA skeletons\n{stg} {gen} {part_name} {base_file}")
+        f.suptitle(f"PCA skeletons ({pca_on})\n{stg} {gen} {part_name} {base_file}")
 
         sm = plt.cm.ScalarMappable(cmap="seismic", norm=norm)
         cbar = plt.colorbar(
@@ -129,7 +164,9 @@ def pca_plot(tad, tids, stg, gen, cfg):
         )
         cbar.ax.set_ylabel("PC 0")
         plt.tight_layout()
-        plt.savefig(f"{cfg['PCA_OUTDIR']}/{stg}_{gen}_{part_name}_{base_file}.pdf")
+        plt.savefig(
+            f"{cfg['PCA_OUTDIR']}/{stg}_{gen}_{part_name}_{base_file}_{pca_on}.pdf"
+        )
         plt.close()
 
 
@@ -160,7 +197,9 @@ def run_stage(STAGE, cfg):
             aligner.tracks_to_align = track_okay_idx
 
             tad.aligner = aligner
-            pca_plot(tad, track_okay_idx, stg, gen, cfg)
+            pca_plot(tad, track_okay_idx, stg, gen, cfg, "moving")
+            pca_plot(tad, track_okay_idx, stg, gen, cfg, "non-moving")
+            pca_plot(tad, track_okay_idx, stg, gen, cfg, "all")
 
 
 def run(STAGES, cfg):
