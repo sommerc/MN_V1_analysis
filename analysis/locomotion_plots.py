@@ -29,7 +29,7 @@ def plot_by_stage(cfg):
             "directional_change_mean",
             "directional_change_std",
             "directional_change_95",
-            "acceleration_min",
+            "acceleration_p95",
             "acceleration_mean",
             "acceleration_max",
         ]:
@@ -117,7 +117,7 @@ def plot_by_geno(cfg):
             "directional_change_mean",
             "directional_change_std",
             "directional_change_95",
-            "acceleration_min",
+            "acceleration_p95",
             "acceleration_mean",
             "acceleration_max",
         ]:
