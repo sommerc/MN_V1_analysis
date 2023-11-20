@@ -124,17 +124,31 @@ def pca_plot(tad, tids, stg, gen, cfg, pca_on):
 
             X = part_locs.reshape(part_locs.shape[0], -1)
 
+            # save for plotting
+            X2plot = X.copy()
+
+            # not constant locations
             X = X[:, X.std(0) != 0]
 
             # center and make unit variance
             Xc = (X - X.mean(0)) / X.std(0)
 
             if np.any(np.isnan(Xc)):
-                axs[0, i].set_axis_off()
-                print(
-                    f"WARNING: PCA could not be done, NaN occured for {pca_on} frames in {tad.video_fn} for tid {tid}"
-                )
-                continue
+                # try to remove nan cols
+                nan_frames = np.any(np.isnan(Xc), axis=1)
+                if nan_frames.sum() < size_pca // 2:
+                    print(
+                        f"WARNING: NaN occured for {pca_on} frames in {tad.video_fn} for tid {tid}... trying to remove them and do PCA on fewer frames"
+                    )
+                    Xc = Xc[~nan_frames, :]
+                    X2plot = X2plot[~nan_frames, :]
+
+                else:
+                    axs[0, i].set_axis_off()
+                    print(
+                        f"WARNING: PCA could not be done, NaN occured for {pca_on} frames in {tad.video_fn} for tid {tid}"
+                    )
+                    continue
 
             # Xp will contain the PCA components
             pca = PCA(n_components=1)
@@ -143,8 +157,8 @@ def pca_plot(tad, tids, stg, gen, cfg, pca_on):
 
             pc = 0
 
-            for rand_ind in np.random.randint(X.shape[0], size=size_plot):
-                points = X[rand_ind, :]
+            for rand_ind in np.random.randint(X2plot.shape[0], size=size_plot):
+                points = X2plot[rand_ind, :]
                 load = Xpca[rand_ind, pc]
                 color = cm.seismic(norm(load))
                 p = axs[0, i].plot(
