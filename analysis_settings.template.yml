@@ -8,7 +8,7 @@ STAGES:
   - 57-58
 
 
-RESULTS_ROOT_DIR: "./results_test_pcatest"
+RESULTS_ROOT_DIR: "./results_test_"
 
 LOCOMOTION_OUTDIR: "locomotion"
 
