@@ -66,14 +66,28 @@ def angle_range(all_movs, stg, nodes, cfg):
 
             if moving_bin.sum() > 0:
                 ang_std_mov = ang_smooth[moving_bin].std()
-                ang_min_mov = ang_smooth[moving_bin].min()
+                ang_p05_mov, ang_p95_mov = np.percentile(
+                    ang_smooth[moving_bin], (5, 95)
+                )
                 ang_mean_mov = ang_smooth[moving_bin].mean()
-                ang_max_mov = ang_smooth[moving_bin].max()
             else:
                 ang_std_mov = np.nan
-                ang_min_mov = np.nan
+                ang_p05_mov = np.nan
                 ang_mean_mov = np.nan
-                ang_max_mov = np.nan
+                ang_p05_mov = np.nan
+
+            not_moving_bin = ~moving_bin
+            if not_moving_bin.sum() > 0:
+                ang_std_not_mov = ang_smooth[not_moving_bin].std()
+                ang_p05_not_mov, ang_p95_not_mov = np.percentile(
+                    ang_smooth[not_moving_bin], (5, 95)
+                )
+                ang_mean_not_mov = ang_smooth[not_moving_bin].mean()
+            else:
+                ang_std_not_mov = np.nan
+                ang_p05_not_mov = np.nan
+                ang_mean_not_mov = np.nan
+                ang_p05_not_mov = np.nan
 
             tab_all.append(
                 [
@@ -81,11 +95,21 @@ def angle_range(all_movs, stg, nodes, cfg):
                     stg,
                     gen,
                     tid,
+                    #
                     ang_smooth.std(),
+                    np.percentile(ang_smooth, 5),
+                    ang_smooth.mean(),
+                    np.percentile(ang_smooth, 95),
+                    #
                     ang_std_mov,
-                    ang_min_mov,
+                    ang_p05_mov,
                     ang_mean_mov,
-                    ang_max_mov,
+                    ang_p95_mov,
+                    #
+                    ang_std_not_mov,
+                    ang_p05_not_mov,
+                    ang_mean_not_mov,
+                    ang_p95_not_mov,
                 ]
             )
 
@@ -97,10 +121,17 @@ def angle_range(all_movs, stg, nodes, cfg):
                 "Genotype",
                 "Track_idx",
                 "angle_std",
+                "angle_p05",
+                "angle_mean",
+                "angle_p95",
                 "angle_moving_std",
-                "angle_moving_min",
+                "angle_moving_p05",
                 "angle_moving_mean",
-                "angle_moving_max",
+                "angle_moving_p95",
+                "angle_non-moving_std",
+                "angle_non-moving_p05",
+                "angle_non-moving_mean",
+                "angle_non-moving_p95",
             ],
         )
     return tab_ar
