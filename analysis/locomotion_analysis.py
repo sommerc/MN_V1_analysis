@@ -47,13 +47,35 @@ def locomotion(tad, tids, cfgs):
         moving_sub = moving_bin[:: cfgs["LOCOMOTION_DC_SUBSAMPLE"]][1:-1]
 
         if np.any(moving_sub):
-            directional_change_mean = dc_angles[moving_sub].mean()
-            directional_change_std = dc_angles[moving_sub].std()
-            directional_change_95 = np.percentile(dc_angles[moving_sub], 95)
+            dc_mov = dc_angles[moving_sub]
+            dc_abs = np.abs(dc_mov)
+            dc_pos = dc_mov[dc_mov > 0]
+            dc_neg = dc_mov[dc_mov < 0]
+
+            directional_change_mean = dc_abs.mean()
+            directional_change_std = dc_abs.std()
+            directional_change_95 = np.percentile(dc_abs, 95)
+
+            directional_change_pos_mean = dc_pos.mean()
+            directional_change_pos_std = dc_pos.std()
+            directional_change_pos_95 = np.percentile(dc_pos, 95)
+
+            directional_change_neg_mean = dc_neg.mean()
+            directional_change_neg_std = dc_neg.std()
+            directional_change_neg_95 = np.percentile(dc_neg, 5)
+
         else:
             directional_change_mean = np.nan
             directional_change_std = np.nan
             directional_change_95 = np.nan
+
+            directional_change_pos_mean = np.nan
+            directional_change_pos_std = np.nan
+            directional_change_pos_95 = np.nan
+
+            directional_change_neg_mean = np.nan
+            directional_change_neg_std = np.nan
+            directional_change_neg_95 = np.nan
 
         speed_moving_mean = 0
         if time_spent_moving > 0:
@@ -70,6 +92,12 @@ def locomotion(tad, tids, cfgs):
                 directional_change_mean,
                 directional_change_std,
                 directional_change_95,
+                directional_change_pos_mean,
+                directional_change_pos_std,
+                directional_change_pos_95,
+                directional_change_neg_mean,
+                directional_change_neg_std,
+                directional_change_neg_95,
                 acceleration[acceleration > 0].mean(),
                 np.percentile(acceleration[acceleration > 0], 95),
                 acceleration[acceleration > 0].max(),
@@ -89,6 +117,12 @@ def locomotion(tad, tids, cfgs):
             "directional_change_mean",
             "directional_change_std",
             "directional_change_95",
+            "directional_change_pos_mean",
+            "directional_change_pos_std",
+            "directional_change_pos_95",
+            "directional_change_neg_mean",
+            "directional_change_neg_std",
+            "directional_change_neg_95",
             "acceleration_mean",
             "acceleration_p95",
             "acceleration_max",
