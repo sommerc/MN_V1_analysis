@@ -78,8 +78,13 @@ def locomotion(tad, tids, cfgs):
             directional_change_neg_95 = np.nan
 
         speed_moving_mean = 0
+        speed_moving_std = np.nan
+        speed_moving_p95 = 0
+
         if time_spent_moving > 0:
             speed_moving_mean = speed_calib[moving_bin].mean()
+            speed_moving_std = speed_calib[moving_bin].std()
+            speed_moving_p95 = np.percentile(speed_calib[moving_bin], 95)
 
         tab_res.append(
             [
@@ -88,6 +93,8 @@ def locomotion(tad, tids, cfgs):
                 speed_mean,
                 speed_std,
                 speed_moving_mean,
+                speed_moving_std,
+                speed_moving_p95,
                 time_spent_moving,
                 directional_change_mean,
                 directional_change_std,
@@ -113,6 +120,8 @@ def locomotion(tad, tids, cfgs):
             "speed_mean",
             "speed_std",
             "speed_moving_mean",
+            "speed_moving_std",
+            "speed_moving_p95",
             "time_spend_moving",
             "directional_change_mean",
             "directional_change_std",
