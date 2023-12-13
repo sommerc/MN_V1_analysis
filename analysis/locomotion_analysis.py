@@ -50,7 +50,7 @@ def locomotion(tad, tids, cfgs):
             dc_mov = dc_angles[moving_sub]
             dc_abs = np.abs(dc_mov)
             dc_pos = dc_mov[dc_mov > 0]
-            dc_neg = dc_mov[dc_mov < 0]
+            dc_neg = np.abs(dc_mov[dc_mov < 0])
 
             directional_change_mean = dc_abs.mean()
             directional_change_std = dc_abs.std()
@@ -62,7 +62,7 @@ def locomotion(tad, tids, cfgs):
 
             directional_change_neg_mean = dc_neg.mean()
             directional_change_neg_std = dc_neg.std()
-            directional_change_neg_95 = np.percentile(dc_neg, 5)
+            directional_change_neg_95 = np.percentile(dc_neg, 95)
 
         else:
             directional_change_mean = np.nan

@@ -65,4 +65,4 @@ def directional_change(xy, sigma=None, subsample=2):
 
     xy_smo = xy_smo[::subsample]
     v = np.diff(xy_smo, axis=0)
-    return np.abs(angles(v[:-1], v[1:]))
+    return angles(v[:-1], v[1:])
