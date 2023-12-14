@@ -114,8 +114,8 @@ def frequency_analysis(all_movs, stg, nodes, sub_bgrd, cfg):
             dom_freq_prom = dominant_frequencies(mean_psd_moving, freq)
 
             freq_dom_split = 6
-            if "FREQ_DOMINANT_SPLIT" in cfgs:
-                freq_dom_split = cfgs["FREQ_DOMINANT_SPLIT"]
+            if "FREQ_DOMINANT_SPLIT" in cfg:
+                freq_dom_split = cfg["FREQ_DOMINANT_SPLIT"]
 
             dom_freq_prom_1 = (None, None)
             for f, p in dom_freq_prom:
@@ -180,10 +180,11 @@ def run_stage(STAGE, cfg):
             # Without background sub
 
             out_f1 = f"{cfg['FREQUENCY_OUTDIR']}/frequency_{STAGE}_{name}_res.tab"
-            if not os.path.exists(out_f1):
+            if True or not os.path.exists(out_f1):
                 tab_freq = frequency_analysis(all_movs, STAGE, nodes, False, cfg)
 
                 tab_freq.to_csv(out_f1, sep="\t")
+
             else:
                 tab_freq = pd.read_csv(out_f1, sep="\t", index_col=0)
 
@@ -191,13 +192,10 @@ def run_stage(STAGE, cfg):
 
             # With
             out_f2 = f"{cfg['FREQUENCY_OUTDIR']}/frequency_bs_{STAGE}_{name}_res.tab"
-            if not os.path.exists(out_f2):
+            if True or not os.path.exists(out_f2):
                 tab_freq = frequency_analysis(all_movs, STAGE, nodes, True, cfg)
 
-                tab_freq.to_csv(
-                    out_f2,
-                    sep="\t",
-                )
+                tab_freq.to_csv(out_f2, sep="\t")
             else:
                 tab_freq = pd.read_csv(out_f2, sep="\t", index_col=0)
 
