@@ -60,15 +60,18 @@ def compute_angle_wavlet_psd_mean(
     return mean_psd_moving, freq, computed_on
 
 
-def dominant_freqency(sig, freq):
+def dominant_frequencies(sig, freq, n_peaks=2):
     peaks, props = signal.find_peaks(sig, height=(None, None), prominence=(None, None))
 
-    if len(peaks) > 0:
-        peak_pos = np.argmax(props["peak_heights"])
+    res = [(None, None)] * n_peaks
+    for k, pp in enumerate(range(min(len(peaks), n_peaks))):
+        peak_pos = np.argsort(
+            props["peak_heights"],
+        )[-1 - pp]
         dom_f = freq[peaks[peak_pos]]
         dom_p = props["prominences"][peak_pos]
-        return dom_f, dom_p
-    return None, None
+        res[k] = (dom_f, dom_p)
+    return res
 
 
 def get_frequency_params(cfg):
@@ -108,7 +111,23 @@ def frequency_analysis(all_movs, stg, nodes, sub_bgrd, cfg):
                 tad, tid, scales, wavelet, tail_a, tail_b, tail_c, fps, sub_bgrd, cfgs
             )
 
-            dom_freq, dom_prom = dominant_freqency(mean_psd_moving, freq)
+            dom_freq_prom = dominant_frequencies(mean_psd_moving, freq)
+
+            freq_dom_split = 6
+            if "FREQ_DOMINANT_SPLIT" in cfgs:
+                freq_dom_split = cfgs["FREQ_DOMINANT_SPLIT"]
+
+            dom_freq_prom_1 = (None, None)
+            for f, p in dom_freq_prom:
+                if f and f <= freq_dom_split:
+                    dom_freq_prom_1 = (f, p)
+                    break
+
+            dom_freq_prom_2 = (None, None)
+            for f, p in dom_freq_prom:
+                if f and f > freq_dom_split:
+                    dom_freq_prom_2 = (f, p)
+                    break
 
             tab_all.append(
                 [
@@ -116,8 +135,12 @@ def frequency_analysis(all_movs, stg, nodes, sub_bgrd, cfg):
                     stg,
                     gen,
                     tid,
-                    dom_freq,
-                    dom_prom,
+                    dom_freq_prom[0][0],
+                    dom_freq_prom[0][1],
+                    dom_freq_prom_1[0],
+                    dom_freq_prom_1[1],
+                    dom_freq_prom_2[0],
+                    dom_freq_prom_2[1],
                     computed_on,
                 ]
                 + mean_psd_moving.tolist()
@@ -132,6 +155,10 @@ def frequency_analysis(all_movs, stg, nodes, sub_bgrd, cfg):
             "Track_idx",
             "dominant_freq",
             "dominant_freq_prominence",
+            f"dominant_freq_{freq_dom_split}-",
+            f"dominant_freq_prominence_{freq_dom_split}-",
+            f"dominant_freq_{freq_dom_split}+",
+            f"dominant_freq_prominence_{freq_dom_split}+",
             "freq_active_ratio",
         ]
         + freq.tolist(),
