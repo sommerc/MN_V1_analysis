@@ -50,9 +50,6 @@ def angle_range(all_movs, stg, nodes, cfg):
                 tad, (tail_a, tail_b), (tail_b, tail_c), win=None, track_idx=tid
             )
             ang_smooth = gaussian_filter1d(ang, cfgs["FREQ_TEMP_ANGLE_SMOOTH"])
-            # ang_p95_5_dist = np.percentile(ang_smooth, 95) - np.percentile(
-            #     ang_smooth, 5
-            # )
 
             speed_px_per_frame = tad.speed(
                 cfgs["ANGLE_RANGE_MOVING_NODE"],
@@ -70,11 +67,29 @@ def angle_range(all_movs, stg, nodes, cfg):
                     ang_smooth[moving_bin], (5, 95)
                 )
                 ang_mean_mov = ang_smooth[moving_bin].mean()
+
+                ang_speeds = np.gradient(ang_smooth)
+
+                ang_mov_speed_pos_mean = ang_speeds[ang_speeds > 0].mean()
+                ang_mov_speed_pos_std = ang_speeds[ang_speeds > 0].std()
+                ang_mov_speed_pos_p95 = np.percentile(ang_speeds[ang_speeds > 0], 95)
+
+                ang_mov_speed_neg_mean = -ang_speeds[ang_speeds < 0].mean()
+                ang_mov_speed_neg_std = -ang_speeds[ang_speeds < 0].std()
+                ang_mov_speed_neg_p95 = np.percentile(-ang_speeds[ang_speeds < 0], 95)
+
             else:
                 ang_std_mov = np.nan
                 ang_p05_mov = np.nan
                 ang_mean_mov = np.nan
                 ang_p05_mov = np.nan
+
+                ang_mov_speed_pos_mean = np.nan
+                ang_mov_speed_pos_std = np.nan
+                ang_mov_speed_pos_p95 = np.nan
+                ang_mov_speed_neg_mean = np.nan
+                ang_mov_speed_neg_std = np.nan
+                ang_mov_speed_neg_p95 = np.nan
 
             not_moving_bin = ~moving_bin
             if not_moving_bin.sum() > 0:
@@ -110,6 +125,12 @@ def angle_range(all_movs, stg, nodes, cfg):
                     ang_p05_not_mov,
                     ang_mean_not_mov,
                     ang_p95_not_mov,
+                    ang_mov_speed_pos_mean,
+                    ang_mov_speed_pos_std,
+                    ang_mov_speed_pos_p95,
+                    ang_mov_speed_neg_mean,
+                    ang_mov_speed_neg_std,
+                    ang_mov_speed_neg_p95,
                 ]
             )
 
@@ -132,6 +153,12 @@ def angle_range(all_movs, stg, nodes, cfg):
                 "angle_non-moving_p05",
                 "angle_non-moving_mean",
                 "angle_non-moving_p95",
+                "angular_speed_mov_pos_mean",
+                "angular_speed_mov_pos_std,",
+                "angular_speed_mov_pos_p95,",
+                "angular_speed_mov_neg_mean",
+                "angular_speed_mov_neg_std,",
+                "angular_speed_mov_neg_p95,",
             ],
         )
     return tab_ar
