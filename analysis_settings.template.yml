@@ -8,7 +8,7 @@ STAGES:
   - 57-58
 
 
-RESULTS_ROOT_DIR: "./results_test_"
+RESULTS_ROOT_DIR: "./results_test_subf"
 
 LOCOMOTION_OUTDIR: "locomotion"
 

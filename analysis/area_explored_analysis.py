@@ -24,6 +24,8 @@ def area_explored(tad, tids, cfg, stg, gen, write_img=False):
 
     hist_total = np.zeros((area_bins, area_bins))
 
+    os.makedirs(f'{cfg["AREA_EXPLORED_OUTDIR"]}/imgs/{stg}/{gen}', exist_ok=True)
+
     file_path = tad.video_fn
     base_file = os.path.basename(file_path)[:-4]
 
@@ -96,7 +98,7 @@ def area_explored(tad, tids, cfg, stg, gen, write_img=False):
             ax.set_title(f"{os.path.basename(file_path)}, Tid: {tid}")
 
             plt.savefig(
-                f"{cfg['AREA_EXPLORED_OUTDIR']}/imgs/{stg}_{gen}_{base_file}_{tid}.png"
+                f"{cfg['AREA_EXPLORED_OUTDIR']}/imgs/{stg}/{gen}/{base_file}_{tid}.png"
             )
             plt.close(f)
 
@@ -110,7 +112,7 @@ def area_explored(tad, tids, cfg, stg, gen, write_img=False):
         ax.set_title(f"{os.path.basename(file_path)}")
         plt.colorbar(im, extend="max")
         plt.savefig(
-            f"{cfg['AREA_EXPLORED_OUTDIR']}/imgs/{stg}_{gen}_{base_file}_all.png"
+            f"{cfg['AREA_EXPLORED_OUTDIR']}/imgs/{stg}/{gen}/{base_file}_all.png"
         )
         plt.close(f)
 

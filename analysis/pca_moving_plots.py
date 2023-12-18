@@ -26,6 +26,7 @@ from shared import settings
 def moving_plots(tad, tids, stg, gen, cfg):
     cfgs = cfg[stg]
     os.makedirs(cfg["MOVING_OUTDIR"], exist_ok=True)
+    os.makedirs(f'{cfg["MOVING_OUTDIR"]}/{stg}/{gen}', exist_ok=True)
 
     file_path = tad.video_fn
     base_file = os.path.basename(file_path)[:-4]
@@ -59,13 +60,14 @@ def moving_plots(tad, tids, stg, gen, cfg):
         ax.set_title(f"{base_file}")
 
         plt.savefig(
-            f"{cfg['MOVING_OUTDIR']}/{stg}_{gen}_{base_file}_{cfg['MOVING_PLOT_TIME_SPAN_MIN']}min-random.png"
+            f"{cfg['MOVING_OUTDIR']}/{stg}/{gen}/{base_file}_{cfg['MOVING_PLOT_TIME_SPAN_MIN']}min-random.png"
         )
         plt.close(f)
 
 
 def pca_plot(tad, tids, stg, gen, cfg, pca_on):
     os.makedirs(cfg["PCA_OUTDIR"], exist_ok=True)
+    os.makedirs(f'{cfg["PCA_OUTDIR"]}/{stg}/{gen}', exist_ok=True)
     cfgs = cfg[stg]
     np.random.seed(42)
 
@@ -179,7 +181,7 @@ def pca_plot(tad, tids, stg, gen, cfg, pca_on):
         cbar.ax.set_ylabel("PC 0")
         plt.tight_layout()
         plt.savefig(
-            f"{cfg['PCA_OUTDIR']}/{stg}_{gen}_{part_name}_{base_file}_{pca_on}.pdf"
+            f"{cfg['PCA_OUTDIR']}/{stg}/{gen}/{part_name}_{base_file}_{pca_on}.pdf"
         )
         plt.close()
 
