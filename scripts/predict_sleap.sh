@@ -8,7 +8,6 @@
 #SBATCH --mem=128G
 
 #SBATCH --ntasks=1
-#SBATCH --mail-user=christoph.sommer@ist.ac.at
 #SBATCH --mail-type=ALL
 #SBATCH --no-requeue
 #SBATCH --partition=gpu
