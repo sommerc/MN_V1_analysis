@@ -52,17 +52,32 @@ def locomotion(tad, tids, cfgs):
             dc_pos = dc_mov[dc_mov > 0]
             dc_neg = np.abs(dc_mov[dc_mov < 0])
 
-            directional_change_mean = dc_abs.mean()
-            directional_change_std = dc_abs.std()
-            directional_change_95 = np.percentile(dc_abs, 95)
+            if len(dc_abs) > 1:
+                directional_change_mean = dc_abs.mean()
+                directional_change_std = dc_abs.std()
+                directional_change_95 = np.percentile(dc_abs, 95)
+            else:
+                directional_change_mean = np.nan
+                directional_change_std = np.nan
+                directional_change_95 = np.nan
 
-            directional_change_pos_mean = dc_pos.mean()
-            directional_change_pos_std = dc_pos.std()
-            directional_change_pos_95 = np.percentile(dc_pos, 95)
+            if len(dc_pos) > 1:
+                directional_change_pos_mean = dc_pos.mean()
+                directional_change_pos_std = dc_pos.std()
+                directional_change_pos_95 = np.percentile(dc_pos, 95)
+            else:
+                directional_change_pos_mean = np.nan
+                directional_change_pos_std = np.nan
+                directional_change_pos_95 = np.nan
 
-            directional_change_neg_mean = dc_neg.mean()
-            directional_change_neg_std = dc_neg.std()
-            directional_change_neg_95 = np.percentile(dc_neg, 95)
+            if len(dc_neg) > 1:
+                directional_change_neg_mean = dc_neg.mean()
+                directional_change_neg_std = dc_neg.std()
+                directional_change_neg_95 = np.percentile(dc_neg, 95)
+            else:
+                directional_change_neg_mean = np.nan
+                directional_change_neg_std = np.nan
+                directional_change_neg_95 = np.nan
 
         else:
             directional_change_mean = np.nan
