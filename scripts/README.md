@@ -10,7 +10,23 @@ First check the *settings.yaml* file to contain the correct paths for input and 
 sbatch submit_analyisis.sh <settings.yaml>
 ```
 
-will run the entireanalysis and plots. Results will be saved to the result folder specified in the *settings.yaml*.
+will run the entire analysis and plots. Results will be saved to the result folder specified in the *settings.yaml*.
+
+To run only a subset of analyses, use
+
+```bahs
+sbatch --array=<i> submit_analyisis.sh <settings.yaml>
+```
+
+where <i> can be chosen from:
+0. Frequency
+1. Locomotion
+2. PCA + moving plots 
+3. Area explored
+4. Angle correlation 
+5. Angle range
+
+or, mix using *comma*. For instance, `<i>=2,4` would submit PCA and Angle correlation analysis
 
 ### Cluster prediction of movies with SLEAP
 The SLURM sbatch script `predict_sleap.sh` can be used to predict `<N>` .mp4 movies organized in a folder structure below `MOVIE_ROOT` recursively. In addition, the two SLEAP models `SLEAP_CENTROID_MODEL`, `SLEAP_INSTANCE_MODEL` and the maximaum expected number of animals `MAX_ANAIMALS` is required.
