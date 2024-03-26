@@ -57,7 +57,9 @@ def plot_by_stage(cfg):
                 for feature in [
                     "dominant_freq",
                     f"dominant_freq_{freq_dom_split}-",
+                    f"dominant_freq_power_{freq_dom_split}-",
                     f"dominant_freq_{freq_dom_split}+",
+                    f"dominant_freq_power_{freq_dom_split}+",
                 ]:
                     f, ax = plt.subplots(figsize=(14, 4))
 
@@ -79,25 +81,25 @@ def plot_by_stage(cfg):
                     plt.savefig(f"{OUT_DIR}/{stg}_{freq_for}_dominant_cwt_freq.pdf")
                     plt.close(f)
 
-                f, ax = plt.subplots(figsize=(8, 8))
+                # f, ax = plt.subplots(figsize=(8, 8))
 
-                if np.all(np.isnan(tab_sub["dominant_freq"])):
-                    ax.set_xlabel("No dominant frequency peaks could be detected")
-                else:
-                    sns.scatterplot(
-                        x="dominant_freq",
-                        y="dominant_freq_prominence",
-                        size="freq_active_ratio",
-                        data=tab_sub,
-                        hue="Genotype",
-                        legend="brief",
-                        edgecolor="none",
-                        alpha=0.8,
-                    )
-                sns.despine(ax=ax)
-                ax.set_title(f"{stg}_{freq_for}")
-                plt.savefig(f"{OUT_DIR}/{stg}_{freq_for}_dominant+prominence_freq.pdf")
-                plt.close(f)
+                # if np.all(np.isnan(tab_sub["dominant_freq"])):
+                #     ax.set_xlabel("No dominant frequency peaks could be detected")
+                # else:
+                #     sns.scatterplot(
+                #         x="dominant_freq",
+                #         y="dominant_freq_prominence",
+                #         size="freq_active_ratio",
+                #         data=tab_sub,
+                #         hue="Genotype",
+                #         legend="brief",
+                #         edgecolor="none",
+                #         alpha=0.8,
+                #     )
+                # sns.despine(ax=ax)
+                # ax.set_title(f"{stg}_{freq_for}")
+                # plt.savefig(f"{OUT_DIR}/{stg}_{freq_for}_dominant+prominence_freq.pdf")
+                # plt.close(f)
 
 
 def plot_by_geno(cfg):
@@ -148,7 +150,9 @@ def plot_by_geno(cfg):
                 for feature in [
                     "dominant_freq",
                     f"dominant_freq_{freq_dom_split}-",
+                    f"dominant_freq_power_{freq_dom_split}-",
                     f"dominant_freq_{freq_dom_split}+",
+                    f"dominant_freq_power_{freq_dom_split}+",
                 ]:
                     f, ax = plt.subplots(figsize=(14, 4))
 
@@ -171,25 +175,25 @@ def plot_by_geno(cfg):
                     plt.savefig(f"{OUT_DIR}/{gen}_{freq_for}_{feature}_cwt.pdf")
                     plt.close(f)
 
-            f, ax = plt.subplots(figsize=(8, 8))
+            # f, ax = plt.subplots(figsize=(8, 8))
 
-            if np.all(np.isnan(tab_sub[feature])):
-                ax.set_xlabel("No dominant frequency peaks could be detected")
-            else:
-                sns.scatterplot(
-                    x="dominant_freq",
-                    y="dominant_freq_prominence",
-                    size="freq_active_ratio",
-                    data=tab_sub,
-                    hue="Stage",
-                    legend="brief",
-                    edgecolor="none",
-                    alpha=0.8,
-                )
-            sns.despine(ax=ax)
-            ax.set_title(f"{gen}_{freq_for}")
-            plt.savefig(f"{OUT_DIR}/{gen}_{freq_for}_dominant+prominence_freq.pdf")
-            plt.close(f)
+            # if np.all(np.isnan(tab_sub[feature])):
+            #     ax.set_xlabel("No dominant frequency peaks could be detected")
+            # else:
+            #     sns.scatterplot(
+            #         x="dominant_freq",
+            #         y="dominant_freq_prominence",
+            #         size="freq_active_ratio",
+            #         data=tab_sub,
+            #         hue="Stage",
+            #         legend="brief",
+            #         edgecolor="none",
+            #         alpha=0.8,
+            #     )
+            # sns.despine(ax=ax)
+            # ax.set_title(f"{gen}_{freq_for}")
+            # plt.savefig(f"{OUT_DIR}/{gen}_{freq_for}_dominant+prominence_freq.pdf")
+            # plt.close(f)
 
 
 def plot(cfg):
