@@ -36,7 +36,7 @@ ANGLE_CORR_OUTDIR: angle_correlation
 ### 52-54 ####
     
 52-54:
-  ROOT_DIR: "Z:/People/Chris/paper_videos/52-54"
+  ROOT_DIR: "B:/group/sweengrp/People/Chris/paper_videos/52-54"
                
   TRACK_SELECT_THRES: 0.9
 
@@ -89,7 +89,7 @@ ANGLE_CORR_OUTDIR: angle_correlation
 ### 57-58 ####
 
 57-58:
-  ROOT_DIR: "Z:/People/Chris/paper_videos/57-58"
+  ROOT_DIR: "B:/group/sweengrp/People/Chris/paper_videos/57-58"
                
   TRACK_SELECT_THRES: 0.9
 
