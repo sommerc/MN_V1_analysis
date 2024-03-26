@@ -9,10 +9,12 @@ import tadpose
 
 from tqdm.auto import tqdm, trange
 
-from shared import settings, directional_change
+from shared import settings
+from tadpose.utils import directional_change
 
 
-def locomotion(tad, tids, cfgs):
+def locomotion(tad, tids, stg, cfg):
+    cfgs = cfg[stg]
     file_path = tad.video_fn
     base_file = os.path.basename(file_path)[:-4]
 
@@ -25,15 +27,23 @@ def locomotion(tad, tids, cfgs):
             pre_sigma=cfgs["LOCOMOTION_SPATIAL_SIGMA"],
             sigma=cfgs["LOCOMOTION_TEMPORAL_SIGMA"],
         )
-        speed_calib = speed_px_per_frame * tadpose.utils.calibrate_by_dish(tad, 14)
+        speed_calib = (
+            speed_px_per_frame
+            * cfg["FPS"]
+            * tadpose.utils.calibrate_by_dish(
+                tad,
+                dish_diamter_in_cm=14,
+            )
+        )
 
         moving_bin = speed_calib > cfgs["LOCOMOTION_MOVING_THRESH"]
 
         time_spent_moving = moving_bin.sum() / tad.nframes
 
-        speed_mean = speed_calib.mean()
-        speed_std = speed_calib.std()
-        total_dist = speed_calib.sum()
+        # speed_mean = speed_calib.mean()
+        # speed_std = speed_calib.std()
+
+        total_dist = speed_calib.sum() / cfg["FPS"]
 
         acceleration = np.gradient(speed_calib)
 
@@ -105,8 +115,8 @@ def locomotion(tad, tids, cfgs):
             [
                 base_file,
                 tid,
-                speed_mean,
-                speed_std,
+                # speed_mean,
+                # speed_std,
                 speed_moving_mean,
                 speed_moving_std,
                 speed_moving_p95,
@@ -122,7 +132,7 @@ def locomotion(tad, tids, cfgs):
                 directional_change_neg_95,
                 acceleration[acceleration > 0].mean(),
                 np.percentile(acceleration[acceleration > 0], 95),
-                acceleration[acceleration > 0].max(),
+                # acceleration[acceleration > 0].max(),
                 total_dist,
             ]
         )
@@ -132,12 +142,12 @@ def locomotion(tad, tids, cfgs):
         columns=[
             "Movie",
             "track_idx",
-            "speed_mean",
-            "speed_std",
+            # "speed_mean",
+            # "speed_std",
             "speed_moving_mean",
             "speed_moving_std",
             "speed_moving_p95",
-            "time_spend_moving",
+            "time_spend_moving_ratio",
             "directional_change_mean",
             "directional_change_std",
             "directional_change_95",
@@ -149,7 +159,7 @@ def locomotion(tad, tids, cfgs):
             "directional_change_neg_95",
             "acceleration_mean",
             "acceleration_p95",
-            "acceleration_max",
+            # "acceleration_max",
             "total_distance",
         ],
     )
@@ -175,7 +185,7 @@ def run_stage(STAGE, cfg):
             > cfgs["TRACK_SELECT_THRES"]
         )[0]
 
-        tab_mov = locomotion(tad, track_okay_idx, cfgs)
+        tab_mov = locomotion(tad, track_okay_idx, stg, cfg)
         tab_stg.append(tab_mov)
 
         tab_mov.insert(1, "Frames", tad.nframes)

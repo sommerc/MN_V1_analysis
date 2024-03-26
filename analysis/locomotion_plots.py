@@ -22,12 +22,12 @@ def plot_by_stage(cfg):
         os.makedirs(OUT_DIR, exist_ok=True)
 
         for feature in [
-            "speed_mean",
-            "speed_std",
+            # "speed_mean",
+            # "speed_std",
             "speed_moving_mean",
             "speed_moving_std",
             "speed_moving_p95",
-            "time_spend_moving",
+            "time_spend_moving_ratio",
             "directional_change_mean",
             "directional_change_std",
             "directional_change_95",
@@ -39,7 +39,7 @@ def plot_by_stage(cfg):
             "directional_change_neg_95",
             "acceleration_p95",
             "acceleration_mean",
-            "acceleration_max",
+            # "acceleration_max",
         ]:
             f, ax = plt.subplots(figsize=(14, 4))
             a = sns.boxenplot(
@@ -89,7 +89,7 @@ def plot_by_stage(cfg):
             .sum("Frames")
             .reset_index()
         )
-        time_tab["Hours"] = time_tab["Frames"] / (60 * 60 * 60)
+        time_tab["Hours"] = time_tab["Frames"] / (60 * 60 * cfg["FPS"])
 
         f, ax = plt.subplots(figsize=(14, 4))
         sns.barplot(
@@ -118,12 +118,12 @@ def plot_by_geno(cfg):
     for gen in GENO:
         tab_sub = TAB[(TAB.Genotype == gen)]
         for feature in [
-            "speed_mean",
-            "speed_std",
+            # "speed_mean",
+            # "speed_std",
             "speed_moving_mean",
             "speed_moving_std",
             "speed_moving_p95",
-            "time_spend_moving",
+            "time_spend_moving_ratio",
             "directional_change_mean",
             "directional_change_std",
             "directional_change_95",
@@ -135,7 +135,7 @@ def plot_by_geno(cfg):
             "directional_change_neg_95",
             "acceleration_p95",
             "acceleration_mean",
-            "acceleration_max",
+            # "acceleration_max",
         ]:
             f, ax = plt.subplots(figsize=(14, 4))
             a = sns.boxenplot(
