@@ -36,7 +36,14 @@ def moving_plots(tad, tids, stg, gen, cfg):
         speed_px_per_frame = tad.speed(
             cfgs["LOCOMOTION_NODE"], track_idx=tid, pre_sigma=60, sigma=30
         )
-        speed_calib = speed_px_per_frame * tadpose.utils.calibrate_by_dish(tad, 14)
+        speed_calib = (
+            speed_px_per_frame
+            * cfg["FPS"]
+            * tadpose.utils.calibrate_by_dish(
+                tad,
+                dish_diamter_in_cm=14,
+            )
+        )
 
         moving_bin = speed_calib > cfgs["LOCOMOTION_MOVING_THRESH"]
 
@@ -90,8 +97,13 @@ def pca_plot(tad, tids, stg, gen, cfg, pca_on):
                     pre_sigma=cfgs["LOCOMOTION_SPATIAL_SIGMA"],
                     sigma=cfgs["LOCOMOTION_TEMPORAL_SIGMA"],
                 )
-                speed_calib = speed_px_per_frame * tadpose.utils.calibrate_by_dish(
-                    tad, 14
+                speed_calib = (
+                    speed_px_per_frame
+                    * cfg["FPS"]
+                    * tadpose.utils.calibrate_by_dish(
+                        tad,
+                        dish_diamter_in_cm=14,
+                    )
                 )
 
                 moving_bin = speed_calib > cfgs["LOCOMOTION_MOVING_THRESH"]

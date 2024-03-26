@@ -8,6 +8,8 @@ from tqdm.auto import tqdm, trange
 
 from shared import settings
 
+from itertools import cycle
+
 
 def plot_by_stage(cfg):
     OUT_DIR = cfg["FREQUENCY_OUTDIR"]
@@ -33,15 +35,15 @@ def plot_by_stage(cfg):
                 except:
                     ax = [ax]
 
-                cc = ax[0]._get_lines.prop_cycler
+                cc = cycle(plt.rcParams["axes.prop_cycle"].by_key()["color"])
 
                 for i, (gen, tab) in enumerate(tab_sub.groupby("Genotype")):
-                    freq_tab = tab.T.iloc[11:-1].astype("float32")
+                    freq_tab = tab.T.iloc[14:-1].astype("float32")
                     a = freq_tab.mean(1)
                     b = freq_tab.std(1)
 
                     x_vals = a.index.astype("float")
-                    color = next(cc)["color"]
+                    color = next(cc)
                     ax[i].plot(x_vals, a, color=color)
                     ax[i].fill_between(x_vals, (a - b), (a + b), alpha=0.3, color=color)
                     ax[i].set_title(gen)
@@ -127,14 +129,15 @@ def plot_by_geno(cfg):
                 except:
                     ax = [ax]
 
-                cc = ax[0]._get_lines.prop_cycler
+                cc = cycle(plt.rcParams["axes.prop_cycle"].by_key()["color"])
 
                 for i, (stg, tab) in enumerate(tab_sub.groupby("Stage")):
-                    freq_tab = tab.T.iloc[11:-1].astype("float32")
+                    freq_tab = tab.T.iloc[14:-1].astype("float32")
                     a = freq_tab.mean(1)
                     b = freq_tab.std(1)
+
                     x_vals = a.index.astype("float32")
-                    color = next(cc)["color"]
+                    color = next(cc)
                     ax[i].plot(x_vals, a, color=color)
                     ax[i].fill_between(x_vals, (a - b), (a + b), alpha=0.3, color=color)
                     ax[i].set_title(stg)

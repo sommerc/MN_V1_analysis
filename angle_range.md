@@ -9,7 +9,7 @@ For the angle range analysis, three settings need to be set in the settings YAML
 
 ```
   ANGLE_RANGE_MOVING_NODE: "Tail_1"
-  ANGLE_RANGE_MOVING_NODE_THRESH: 0.02
+  ANGLE_RANGE_MOVING_NODE_THRESH: 1.2
   
   ANGLE_RANGE_FOR:
     tail_2:
