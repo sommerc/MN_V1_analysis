@@ -12,6 +12,7 @@ def settings(config_yml=None):
         from tkinter import filedialog
 
         root = tk.Tk()
+        root.wm_attributes('-topmost', 1)
         root.withdraw()
 
         config_yml = filedialog.askopenfilename(
