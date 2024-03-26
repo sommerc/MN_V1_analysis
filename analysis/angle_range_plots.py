@@ -24,10 +24,6 @@ def plot_by_stage(cfg):
             tab_sub = TAB[(TAB.Stage == stg) & (TAB.angle_at == angle_at)]
             if len(tab_sub) > 0:
                 for feature in [
-                    "angle_std",
-                    "angle_p05",
-                    "angle_mean",
-                    "angle_p95",
                     "angle_moving_std",
                     "angle_moving_p05",
                     "angle_moving_mean",
@@ -89,10 +85,6 @@ def plot_by_geno(cfg):
             tab_sub = TAB[(TAB.Genotype == gen) & (TAB.angle_at == angle_at)]
             if len(tab_sub) > 0:
                 for feature in [
-                    "angle_std",
-                    "angle_p05",
-                    "angle_mean",
-                    "angle_p95",
                     "angle_moving_std",
                     "angle_moving_p05",
                     "angle_moving_mean",

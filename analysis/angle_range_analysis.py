@@ -57,7 +57,14 @@ def angle_range(all_movs, stg, nodes, cfg):
                 pre_sigma=cfgs["LOCOMOTION_SPATIAL_SIGMA"],
                 sigma=cfgs["LOCOMOTION_TEMPORAL_SIGMA"],
             )
-            speed_calib = speed_px_per_frame * tadpose.utils.calibrate_by_dish(tad, 14)
+            speed_calib = (
+                speed_px_per_frame
+                * cfg["FPS"]
+                * tadpose.utils.calibrate_by_dish(
+                    tad,
+                    dish_diamter_in_cm=14,
+                )
+            )
 
             moving_bin = speed_calib > cfgs["ANGLE_RANGE_MOVING_NODE_THRESH"]
 
@@ -111,11 +118,6 @@ def angle_range(all_movs, stg, nodes, cfg):
                     gen,
                     tid,
                     #
-                    ang_smooth.std(),
-                    np.percentile(ang_smooth, 5),
-                    ang_smooth.mean(),
-                    np.percentile(ang_smooth, 95),
-                    #
                     ang_std_mov,
                     ang_p05_mov,
                     ang_mean_mov,
@@ -141,10 +143,6 @@ def angle_range(all_movs, stg, nodes, cfg):
                 "Stage",
                 "Genotype",
                 "Track_idx",
-                "angle_std",
-                "angle_p05",
-                "angle_mean",
-                "angle_p95",
                 "angle_moving_std",
                 "angle_moving_p05",
                 "angle_moving_mean",
