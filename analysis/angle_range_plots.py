@@ -11,8 +11,6 @@ def plot_by_stage(cfg):
     OUT_DIR = cfg["ANGLE_RANGE_OUTDIR"]
     TAB = pd.read_csv(f"{OUT_DIR}/angle_range_res.tab", sep="\t", index_col=0)
 
-    TAB["angle_std"] = np.rad2deg(TAB["angle_std"])
-    TAB["angle_moving_std"] = np.rad2deg(TAB["angle_moving_std"])
     STAGES = cfg["STAGES"]
 
     AR_AT = TAB.angle_at.unique()
@@ -73,8 +71,6 @@ def plot_by_geno(cfg):
     OUT_DIR = cfg["ANGLE_RANGE_OUTDIR"]
     TAB = pd.read_csv(f"{OUT_DIR}/angle_range_res.tab", sep="\t", index_col=0)
 
-    TAB["angle_std"] = np.rad2deg(TAB["angle_std"])
-    TAB["angle_moving_std"] = np.rad2deg(TAB["angle_moving_std"])
     GENO = TAB.Genotype.unique()
     AR_AT = TAB.angle_at.unique()
 
