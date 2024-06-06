@@ -43,7 +43,7 @@ def locomotion(tad, tids, stg, cfg):
         # speed_mean = speed_calib.mean()
         # speed_std = speed_calib.std()
 
-        total_dist = speed_calib.sum() / cfg["FPS"]
+        total_dist = speed_calib[moving_bin].sum() / cfg["FPS"]
 
         acceleration = np.gradient(speed_calib)
 
