@@ -120,7 +120,7 @@ def locomotion(tad, tids, stg, cfg):
                 speed_moving_mean,
                 speed_moving_std,
                 speed_moving_p95,
-                time_spent_moving,
+                time_spent_moving * 100,  # in percent
                 directional_change_mean,
                 directional_change_std,
                 directional_change_95,
