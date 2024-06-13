@@ -220,12 +220,13 @@ def show_pca(
                         )
 
                     if cmap_dots is not None:
+                        only_use = [k for (k, col) in enumerate(cmap_dots.colors) if col != "#00000000"]
 
                         p = axs[i, p_i].scatter(
-                            -points[::2].T,
-                            points[1::2].T,
+                            -points[::2].T[only_use],
+                            points[1::2].T[only_use],
                             alpha=alpha_dots,
-                            c=cmap_dots._lut[: len(points[::2])],
+                            c=cmap_dots._lut[: len(points[::2])][only_use],
                         )
 
                     axs[i, p_i].set_aspect(1.0)
