@@ -10,14 +10,14 @@ This is custom analysis code associated with the publication:
 ## Introduction
 There are several kinds of locomotion and behavioral analyses implemented grouped into six categories.
 
-* [Basic Locomotion](./locomotion.md)
-* [Area explored](./area_explored.md)
-* [Angle ranges](./angle_range.md)
-* [Angle correlation](./angle_correlation.md)
-* [Frequency](./frequency.md)
-* [PCA and Moving visualizations](./pca_moving.md)
+* [Basic Locomotion](doc/locomotion.md)
+* [Area explored](doc/area_explored.md)
+* [Angle ranges](doc/angle_range.md)
+* [Angle correlation](doc/angle_correlation.md)
+* [Frequency](doc/frequency.md)
+* [PCA and Moving visualizations](doc/pca_moving.md)
 
-To each category there are two Python (ver. > 3.5) scripts:
+To each category there are two Python (ver. > 3.6) scripts:
 * \<category\>_analysis.py
 * \<category\>_plots.py
 
