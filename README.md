@@ -1,4 +1,10 @@
-# Frog Analysis
+# MN_V1_analysis
+This is custom analysis code associated with the publication:
+> **Spinal cord neural diversity scales with movement complexity during frog metamorphosis**
+>
+> Contact Lora Sweeney (lora.sweeney@ista.ac.at)
+
+
 ---
 
 ## Introduction
@@ -74,6 +80,7 @@ conda env create -f environment.yaml
 ## Contributors
 ---
 Lora Sweeney
+Florina Toma
 Mara Julseth
 Alexia Wilson
 Zoe Harrington
