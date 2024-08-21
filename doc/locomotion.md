@@ -23,8 +23,9 @@ For directional change the angle between two succeeding time-points is computed.
 To get more robust to noise in the body part localizations, the raw yx-locations are smoothed with a Gaussian with sigma=`LOCOMOTION_SPATIAL_SIGMA` (default 1). In addition, the time can be sub-sampled using the settings parameter `LOCOMOTION_DC_SUBSAMPLE` (default 8); then only every 8th frame is considered for computing the angles. All angles are given in degrees.
 
 ## Run specifically
-Result tables and plots are stored in `RESULTS_ROOT_DIR/LOCOMOTION_OUTDIR` (default: ./locomotion)
-```
+Result tables and plots are stored in `RESULTS_ROOT_DIR/LOCOMOTION_OUTDIR` (default: `./locomotion`)
+
+```bash
 # Generate output tables
 python locomotion_analysis.py
 
