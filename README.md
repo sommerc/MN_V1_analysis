@@ -1,8 +1,11 @@
 # MN_V1_analysis
+
+
 This is custom analysis code associated with the publication:
+
 > **Spinal cord neural diversity scales with movement complexity during frog metamorphosis**
 >
-> Contact Lora Sweeney (lora.sweeney@ista.ac.at)
+> Contact: Lora Sweeney (lora.sweeney@ista.ac.at)
 
 
 ---
@@ -17,9 +20,10 @@ There are several kinds of locomotion and behavioral analyses implemented groupe
 * [Frequency](doc/frequency.md)
 * [PCA and Moving visualizations](doc/pca_moving.md)
 
-To each category there are two Python (ver. > 3.6) scripts:
-* \<category\>_analysis.py
-* \<category\>_plots.py
+To each category there are two Python (ver. $\geq$ 3.6) scripts:
+
+* `<category>_analysis.py`
+* `<category>_plots.py`
 
 All scripts reside in the "analysis" folder. For convenience the entire computation can be triggered in parallel from a single [entry script](#run)
 
@@ -52,9 +56,17 @@ The settings YAML file contains general parameters at its root level and specifi
 
 
 ## Run 
----
 
-To run the pipeline for all analysis categories.
+#### On SLURM cluster
+
+The full analysis can be executed on a SLURM cluster.
+
+1. [SLEAP predictions](scripts/README.md#run-sleap-prediction-of-movies-on-slurm-cluster)
+2. [Feature computations and plotting](scripts/README.md#run-analysis-on-slurm-cluster)
+
+#### Locally
+
+To run the pipeline for all analysis categories on your local computer.
 
 ```bash
 cd analysis
@@ -64,12 +76,12 @@ python analysis_run.py --settings <path-to-yaml>
 python analysis_run.py --help
 ```
 
-Results are stored in `RESULTS_ROOT_DIR` set globally in the YAML settings file. It can be given as argument to `analysis_run.py`.
+Each analysis catergory will run in parallel. Results are stored in `RESULTS_ROOT_DIR` set globally in the YAML settings file. It can be given as argument to `analysis_run.py`.
 
 ## Dependencies
 ---
 
-The analysis depends heavily on [tadpose](https://github.com/sommerc/tadpose) and the typical scientific Python stack. The Python SLEAP package is typically not required (only for [metrics](scripts/README.md))
+The analysis depends heavily on [tadpose](https://github.com/sommerc/tadpose) and the typical scientific Python stack. The Python SLEAP package is typically not required (only for [metrics](scripts/README.md#metrics-generate-sleap-validation-metrics-as-table))
 
 You can install all dependencies into a new environment **frog_analysis** by using the supplied `environment.yml`
 
@@ -81,9 +93,10 @@ conda env create -f environment.yaml
 ---
 Lora Sweeney
 Florina Toma
+Zoe Harrington
 Mara Julseth
 Alexia Wilson
-Zoe Harrington
+
 
 
 
