@@ -5,11 +5,12 @@ Locomotion features extract information about the basic movement of an SLEAP-tra
 
 ### Setup and settings
 For the locomotion analysis settings for each `STAGE_GRP` section must be provided. For instance:
-```
+
+```json
   LOCOMOTION_NODE: "Tail_1"
-  LOCOMOTION_MOVING_THRESH: 0.02 
-  LOCOMOTION_TEMPORAL_SIGMA: 30
-  LOCOMOTION_SPATIAL_SIGMA: 1
+  LOCOMOTION_MOVING_THRESH: 1.2 # (cm/sec)
+  LOCOMOTION_TEMPORAL_SIGMA: 30 # (frame)
+  LOCOMOTION_SPATIAL_SIGMA: 1   # (frame)
   LOCOMOTION_DC_SUBSAMPLE: 8
 ```
 
