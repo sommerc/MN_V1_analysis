@@ -33,7 +33,7 @@ PCA_FIT_ON_N: 8000
 PCA_PLOT_N: 256
 ```
 
-The PCA transformation, estimated from `PCA_FIT_ON_N` randomly selected frames. We use the class `sklearn.decomposition.PCA` for obtaining the PC transformation. For `PCA_PLOT_N` randomly selected body-parts skeletons, we color-code each body-part skeleton with the value of its transformed $PC_0 \in [-5, +5]$ standard deviations.
+The PCA transformation, estimated from `PCA_FIT_ON_N` randomly selected frames. We use the class `sklearn.decomposition.PCA` for obtaining the PC transformation. For `PCA_PLOT_N` randomly selected body-parts ske letons, we color-code each body-part skeleton with the value of its transformed $PC_0 \in [-5, +5]$ standard deviations.
 
 ### Moving episodes visualization
 In addition, moving episodes as defined in [basic locomotion](./locomotion.md#definition-of-moving-vs-not-moving-episodes) are visualized for a randomly selected time span of length given as `MOVING_PLOT_TIME_SPAN_MIN: 15`.
