@@ -6,7 +6,7 @@ Area explored features extract information about how the area of the dish has ex
 ### Setup and settings
 For the area explored analysis, two settings need to be set in the settings YAML file. These entries need be specified in each `STAGE_GRP` section.
 
-```
+```python
   AREA_EXPLORED_NODE: "Tail_1"
   AREA_EXPLORED_BINS: 128
 ```
@@ -18,7 +18,8 @@ Visualization of the histogram are stored in `RESULTS_ROOT_DIR/AREA_EXPLORED_OUT
 
 ## Run specifically
 Result tables and plots are stored in `RESULTS_ROOT_DIR/AREA_EXPLORED_OUTDIR` (default: ./area_explored)
-```
+
+```bash
 # Generate output tables
 python area_explored_analysis.py
 
@@ -28,8 +29,8 @@ python area_explored_plots.py
 
 ## Computed features
 
-### area_explored_ratio
-From the 2D histogram, the relative count of non-zeros bins is computed.
+| Feature              | Description                                                          | 
+| :----------------    | :------------------------------------------------         | 
+|area_explored_ratio   | From the 2D histogram, the relative count of non-zeros bins is computed. |
+|area_explored_per_h   | To make movies of different lengths comparable, `area_explored_ratio` is normalized by the length of the movie. |
 
-### area_explored_per_h
-To make movies of different lengths comparable, `area_explored_ratio` is normalized by the length of the movie.
