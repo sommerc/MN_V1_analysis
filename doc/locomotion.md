@@ -19,7 +19,7 @@ To partition the time-course of an tracked animal into *moving* and *not-moving*
 ### Definition directional change
 For directional change the angle between two succeeding time-points is computed. The angle at time $t_i$ is defined by the locations $P_i$ of the body part selected `LOCOMOTION_NODE` (typically *Tail_1*). The angle is computed from two segments $\overline{P_{i-1}P_i}$ and $\overline{P_{i}P_{i+1}}$. The angle is 0 if the segments are parallel and in range $(-\pi, +\pi)$.
 
-To get more robust to noise in the body part localizations, the raw yx-locations are smoothed with a Gaussian with sigma=`LOCOMOTION_SPATIAL_SIGMA` (default 1). In addition, the time can be sub-sampled using the settings parameter `LOCOMOTION_DC_SUBSAMPLE` (default 8); then only every 8th frame is considered for computing the angles. All angles are given in radians. In the plots angle degrees are shown.
+To get more robust to noise in the body part localizations, the raw yx-locations are smoothed with a Gaussian with sigma=`LOCOMOTION_SPATIAL_SIGMA` (default 1). In addition, the time can be sub-sampled using the settings parameter `LOCOMOTION_DC_SUBSAMPLE` (default 8); then only every 8th frame is considered for computing the angles. All angles are given in degrees.
 
 ## Run specifically
 Result tables and plots are stored in `RESULTS_ROOT_DIR/LOCOMOTION_OUTDIR` (default: ./locomotion)
@@ -33,23 +33,22 @@ python locomotion_plots.py
 
 ## Computed features
 
-### speed_mean
-The mean of the instantaneous speed in cm/frame (computed as explained above)
+| Feature           | Description                                                          | 
+| :---------------- | :------------------------------------------------         | 
+|speed_moving_mean  | mean of the instantaneous speed while moving (cm/sec)     |
+|speed_moving_std   | std of the instantaneous speed while moving               |
+|speed_moving_p95   | 95th percentile of the instantaneous speed while moving   |
+|time_spend_moving_ratio| ratio of frames thresholded as moving and the total number of frames (au)|
+|directional_change_mean| mean of the directional change (degree)               |
+|directional_change_std|  std of the directional change (degree)                |
+|directional_change_95|  95th percentile of the directional change (degree)     |
+|directional_change_pos_mean| mean directional change regarding positive angles only | 
+|directional_change_pos_std| std directional change regarding positive angles only |
+|directional_change_pos_95|  95th percentile directional change regarding positive angles only |
+|directional_change_neg_mean| mean directional change for regarding negative angles            |
+|directional_change_neg_std| std directional change for regarding negative angles              |
+|directional_change_neg_95| 95th percentile directional change for regarding negative angles   |
+|acceleration_mean| mean positive acceleration            |
+|acceleration_p95| 95th percentile positive acceleration  |
+|total_distance| total distance traveled while moving     |
 
-### speed_std
-The standard deviation of the instantaneous speed in cm/frame (computed as explained above)
-
-### speed_moving_mean
-The mean of the instantaneous speed in cm/frame computed only on moving frames 
-
-### time_spend_moving
-The ratio of frames thresholded as moving and the total number of frames
-
-### directional_change_mean
-The mean of the directional change angles
-
-### directional_change_std
-The standard deviation of the directional change angles
-
-### directional_change_95
-The 95th percentile of the directional change angles
