@@ -14,7 +14,7 @@ FREQUENCY_N: 24
 FREQUENCY_WAVELET: cmorl1.5-1.0
 ```
 
-We use the complex valued Morlet (aka Gabor) wavelet function for frequency estimation. The complex Morlet wavelet ("cmorB-C" with floating point values B, C) is given by:
+We use the complex valued Morlet (aka Gabor) wavelet function for frequency estimation. The complex Morlet (aka Gabor) wavelet ("cmorB-C" with floating point values B, C) is given by:
 
 $$\psi(t) = \frac{1}{\sqrt{\pi B}} \exp^{-\frac{t^2}{B}} \exp^{\mathrm{j} 2\pi C t}$$
 
@@ -22,7 +22,7 @@ where $B$ is the bandwidth and $C$ is the center frequency.
 
 In addition, settings for each `STAGE_GRP` need to be defined.
 
-```
+```python
   FREQ_ACTIVE_THRESH: 0.1
   FREQ_ACTIVE_SMOOTH: 15
   FREQ_TEMP_ANGLE_SMOOTH: 0.1
@@ -48,7 +48,7 @@ The preprocessed angle values defined in `FREQ_FOR` are first smoothed with a Ga
 The continuous wavelet transform requires *scaling* factors. Scaling factors are inversely proportional to frequency. We use the PyWavelet function `pywt.scale2frequency()` to define scales corresponding to the used frequency bins. 
 
 ### Computing the power spectral density
-First the coefficients of the continuous wavelet transform are computed by
+First the coefficients of the continuous wavelet transform are computed by:
 
 ```python
 pywt.cwt(
@@ -64,6 +64,13 @@ To obtain the power spectral density (PSD) we build the magnitude of the coeffic
 
 Now, the time-resolved PSD is averaged in *active* frames as described above.
 
+### Dominant frequency
+Peak finding on the mean power spectral density is applied using the function `scipy.signal.find_peaks` to obtain the dominant frequency bin. The dominant frequency hence corresponds to a local maxima in the mean power spectral density (PSD).
+
+The prominence of a peak at the dominant frequency bin measures how much a peak *stands out* from the surrounding baseline of the signal and is defined as the vertical distance between the peak and its lowest contour line.
+
+The analysis is repeated for frequency ranges below and a above a manual set frequency threshold $X% given by `FREQ_DOMINANT_SPLIT` (default 4.5)
+
 
 ### Background subtraction
 In order to remove spurious low frequency content, we additionally apply background subtraction to the smoothed angle z-scores. The background is estimated by smoothing the signal with a Gaussian of sigma=`FREQ_ACTIVE_SMOOTH`.
@@ -71,8 +78,9 @@ In order to remove spurious low frequency content, we additionally apply backgro
 Background subtracted results are indicated by the string *"_bs"* in the result tables.
 
 ## Run specifically
-Result tables and plots are stored in `RESULTS_ROOT_DIR/FREQUENCY_OUTDIR` (default: ./resutls/frequency)
-```
+Result tables and plots are stored in `RESULTS_ROOT_DIR/FREQUENCY_OUTDIR` (default: ./frequency)
+
+```bash
 # Generate output tables
 python frequency_analysis.py
 
@@ -81,14 +89,21 @@ python frequency_plots.py
 ```
 
 ## Computed features
-### dominant_freq
-Peak finding on the mean power spectral density is applied using the function `scipy.signal.find_peaks` to obtain the dominant frequency bin. The dominant frequency hence corresponds to a local maxima in the mean PSD.
-            
-### dominant_freq_prominence
-The prominence of a peak at the dominant frequency bin measures how much a peak stands out from the surrounding baseline of the signal and is defined as the vertical distance between the peak and its lowest contour line.
 
-### freq_active_ratio
-The ratio of frames which where thresholded to be *active*.
 
-### Power spectral density for frequency bins $\in (0,30]$ Hz
-The raw mean power spectral density in active episodes
+
+
+| Feature                   | Description                                                          | 
+| :----------------         | :------------------------------------------------         | 
+|dominant_freq              | dominant frequency:  local maximum frequency bin of the mean PSD. |
+|dominant_freq_prominence   | prominence of the dominant frequency peak |
+|dominant_freq_power        | mean power spectral density in active episodes at the *dominant_freq* |
+|dominant_freq_X-              | same as above but regarding frequency values $\leq$ `FREQ_DOMINANT_SPLIT` |
+|dominant_freq_prominence_X-   | same as above but regarding frequency values $\leq$ `FREQ_DOMINANT_SPLIT` |
+|dominant_freq_power_X-        | same as above but regarding frequency values $\leq$ `FREQ_DOMINANT_SPLIT` |
+|dominant_freq_X+              | same as above but regarding frequency values $>$ `FREQ_DOMINANT_SPLIT` |
+|dominant_freq_prominence_X+   | same as above but regarding frequency values $>$ `FREQ_DOMINANT_SPLIT` |
+|dominant_freq_power_X+        | same as above but regarding frequency values $>$ `FREQ_DOMINANT_SPLIT` |
+|freq_active_ratio| ratio of frames which where thresholded to be *active*.| 
+
+
