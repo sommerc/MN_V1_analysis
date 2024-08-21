@@ -7,7 +7,7 @@ Angle range features extract information about the variance of angle distributio
 ### Setup and settings
 For the angle range analysis, three settings need to be set in the settings YAML file. These entries need be specified in each `STAGE_GRP` section.
 
-```
+```python
   ANGLE_RANGE_MOVING_NODE: "Tail_1"
   ANGLE_RANGE_MOVING_NODE_THRESH: 1.2
   
@@ -22,7 +22,7 @@ For the angle range analysis, three settings need to be set in the settings YAML
 ## Run specifically:
 Result tables and plots are stored in `RESULTS_ROOT_DIR/ANGLE_RANGE_OUTDIR` (default: ./angle_range)
 
-```
+```bash
 # Generate output tables
 python angle_range_analysis.py
 
@@ -32,9 +32,20 @@ python angle_range_plots.py
 
 ## Computed features
 
-### angle_std
-                
-The standard deviation of angles
-
-### angle_moving_std
-The standard deviation of angles from only *moving* episodes (see [locomotion](./locomotion.md))
+| Feature              | Description                                               | 
+| :----------------    | :------------------------------------------------         | 
+| angle_moving_std  | std of angles during moving episodes (degree)                |
+| angle_moving_p05  | 56h of angles during moving episodes                         |
+| angle_moving_mean | mean of angles during moving episodes                        |
+| angle_moving_p95  | 95th of angles during moving episodes                        |
+| angle_non-moving_std  | std of angles during non-moving episodes (degree) |
+| angle_non-moving_p05  | 56h of angles during non-moving episodes  |
+| angle_non-moving_mean | mean of angles during non-moving episodes |
+| angle_non-moving_p95  | 95th of angles during non-moving episodes |
+| angular_speed_mov_pos_mean  | mean angular speed of regarding only positive values during moving episodes |
+| angular_speed_mov_pos_std,  | std angular speed of regarding only positive values during moving episodes  |
+| angular_speed_mov_pos_p95,  | 95th angular speed of regarding only positive values during moving episodes   |
+| angular_speed_mov_neg_mean  | same as above but using negative angular speed values only |
+| angular_speed_mov_neg_std,  |  same as above but using negative angular speed values only |
+| angular_speed_mov_neg_p95,  | same as above but using negative angular speed values only  |
+| angle_at  | body-part at which the angle was computed         |
