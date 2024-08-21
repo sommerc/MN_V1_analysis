@@ -9,7 +9,7 @@ The frequency is estimated using continuous Wavlet transfrom using the python mo
 
 In the settings YAML file the the number of bins in $(0, 30] Hz$ and the mother wavelet function can be defined.
 
-```
+```python
 FREQUENCY_N: 24
 FREQUENCY_WAVELET: cmorl1.5-1.0
 ```
@@ -40,7 +40,7 @@ where `FREQ_FOR` defines for which body-part locations the angle frequencies are
 
 
 ### Selection of *active* episodes
-All angles are preprocessed by slightly smoothing with a Gaussian with sigma=`FREQ_TEMP_ANGLE_SMOOTH`, followed by computing the z-score.
+All angles are preprocessed by slightly smoothing with a Gaussian with $\sigma$=`FREQ_TEMP_ANGLE_SMOOTH`, followed by computing the z-score.
 
 The preprocessed angle values defined in `FREQ_FOR` are first smoothed with a Gaussian of sigma=`FREQ_ACTIVE_SMOOTH` using `scipy.ndimage.gaussian_filter1d` function. Then, the gradient magnitude is computed using central differences with `numpy.gradient`. The resulting magnitude is thresholded with `FREQ_ACTIVE_THRESH`. Only frequency estimates (mean power spectral density) from time frames exceeding this threshold are used the compute the mean PSD distribution.
 
