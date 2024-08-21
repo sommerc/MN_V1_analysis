@@ -7,7 +7,7 @@ Angle Correlation features extract the correlation of angles measured at two def
 ### Setup and settings
 In the settings YAML file, one needs to define the angles for which the correlation is computed, e.g the correlation of the angles at the left and right ankle.
 
-```yaml
+```python
   ANGLE_CORR_FOR:
     LR_ankle:
       - - Left_Knee
@@ -21,7 +21,7 @@ Note, that the name `LR_ankle` will appear in results table columns and plots. O
 
 In addition, parameters for the detection of *active* episodes - in which the correlation is computed - and window size for the correlation need to be given for each `STAGE_GRP` section, e. g.
 
-```yaml
+```python
   ANGLE_CORR_ACTIVE_THRESH: 0.1
   ANGLE_CORR_ACTIVE_SMOOTH: 15
   ANGLE_CORR_TEMP_ANGLE_SMOOTH: 1
@@ -42,8 +42,9 @@ From this distribution characterizing correlation features are extracted (see be
 
 
 ## Run specifically
-Result tables and plots are stored in `RESULTS_ROOT_DIR/ANGLE_CORR_OUTDIR` (default: ./resutls/angle_correlation)
-```
+Result tables and plots are stored in `RESULTS_ROOT_DIR/ANGLE_CORR_OUTDIR` (default: `./angle_correlation`)
+
+```bash
 # Generate output tables
 python angle_correlation_analysis.py
 
@@ -53,20 +54,12 @@ python angle_correlation_plots.py
 
 ## Computed features
 
-### corr_median
-The median of the correlation distribution
-            
-### corr_p05
-The 5th percentile of the correlation distribution
+| Feature          | Description                                                          | 
+| :--------------- | :------------------------------------------------     | 
+|corr_median       | median of the correlation distribution  $\in [-1, 1]$ |
+|corr_p05          | 5th percentile of the correlation distribution        |
+|corr_p95          | The 95th percentile of the correlation distribution   |
+|corr_std          |  std of the correlation distribution                  |
+|corr_skewness     | The skewness of the correlation distribution. The skewness indicates how *skewed* a probability density distribution is. A standard normal Gaussian distribution has a skewness of zero. The more weight on the positive tail of the distribution the smaller the skewness value gets, and vice verse. Note, this is opposite than the *corr_median*|
+|computed_of_ratio | The ratio of frames which where thresholded to be *active*.  |
 
-### corr_p95
-The 95th percentile of the correlation distribution
-
-### corr_skewness
-The skewness of the correlation distribution. The skewness indicates how *skewed* a probability density distribution is. A standard normal Gaussian distribution has a skewness of zero. The more weight on the positive tail of the distrbution the smaller the skewness value gets, and vica verse. Note, this is opposite than the `corr_median`
-
-### corr_std
-The standard deviation of the correlation distribution
-
-### computed_of_ratio
-The ratio of frames which where thresholded to be *active*.
