@@ -6,7 +6,7 @@ Locomotion features extract information about the basic movement of an SLEAP-tra
 ### Setup and settings
 For the locomotion analysis settings for each `STAGE_GRP` section must be provided. For instance:
 
-```yaml
+```python
   LOCOMOTION_NODE: "Tail_1"
   LOCOMOTION_MOVING_THRESH: 1.2 # (cm/sec)
   LOCOMOTION_TEMPORAL_SIGMA: 30 # (frame)
