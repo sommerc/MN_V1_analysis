@@ -5,7 +5,7 @@
 Frequency features extract information about frequency of angle changes at specified body-part segments.
 
 ### Setup and settings
-The frequency is estimated using continuous Wavlet transfrom using the python modue [PyWavelets](https://pywavelets.readthedocs.io/en/latest/). Frequency bins are chosen in the range $(0, 30] Hz$. Where 30 Hz is the Nyquist limit for the recordings with a frame rate of 60 Hz.
+The frequency is estimated using continuous Wavlet transfrom using the python modue [PyWavelets](https://pywavelets.readthedocs.io/en/latest/). Frequency bins are chosen in the range [0.937, 30] Hz with each bin being a factor of 1.16263 higher than the previous bin, and 30 Hz is the Nyquist limit for the recordings with a camera frame rate of 60 Hz. 
 
 In the settings YAML file the the number of bins in $(0, 30] Hz$ and the mother wavelet function can be defined.
 
@@ -38,7 +38,6 @@ In addition, settings for each `STAGE_GRP` need to be defined.
 where `FREQ_FOR` defines for which body-part locations the angle frequencies are estimated. The other parameters are used for preprocessing the angles values on the selection of *active* episodes.
 
 
-
 ### Selection of *active* episodes
 All angles are preprocessed by slightly smoothing with a Gaussian with $\sigma$=`FREQ_TEMP_ANGLE_SMOOTH`, followed by computing the z-score.
 
@@ -60,9 +59,9 @@ pywt.cwt(
     )
 ```
 
-To obtain the power spectral density (PSD) we build the magnitude of the coefficients multiplied by their complex conjugate.
+To obtain the power spectral density (PSD) we computed the magnitude by multiplying the coefficients with their complex conjugate.
 
-Now, the time-resolved PSD is averaged in *active* frames as described above.
+Now, the time-resolved PSD is averaged in *active episodes* as described above.
 
 ### Dominant frequency
 Peak finding on the mean power spectral density is applied using the function `scipy.signal.find_peaks` to obtain the dominant frequency bin. The dominant frequency hence corresponds to a local maxima in the mean power spectral density (PSD).

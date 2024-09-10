@@ -2,7 +2,7 @@
 # Angle Range Analysis
 ---
 ## Basics
-Angle range features extract information about the variance of angle distributions at defined body-part segments.
+Angle range features extract statistics of angle distributions at selected body-part segments. We defined several body-part segments where angles are computed in range (-180, 180) degrees, where an angle of 0 degree indicates parallel segments. Statistics of the angle ranges are partitioned from moving and non-moving episodes.
 
 ### Setup and settings
 For the angle range analysis, three settings need to be set in the settings YAML file. These entries need be specified in each `STAGE_GRP` section.

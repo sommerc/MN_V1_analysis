@@ -1,7 +1,7 @@
 # Locomotion features
 ---
 ## Basics
-Locomotion features extract information about the basic movement of an SLEAP-tracked body-part. Due to noise in the images, SLEAP body-part locations may exhibit dislocations of up-to few pixels. To make the locomotion analysis robust custom pre-processing is applied. The parameters of the pre-processing steps can be set in the settings YAML file.
+Locomotion features extract information about the basic movement of a SLEAP-tracked body-part. Due to noise in the images, SLEAP body-part locations may exhibit dislocations of up-to few pixels. To make the locomotion analysis robust custom pre-processing is applied. The parameters of the pre-processing steps can be set in the settings YAML file.
 
 ### Setup and settings
 For the locomotion analysis settings for each `STAGE_GRP` section must be provided. For instance:
@@ -15,7 +15,7 @@ For the locomotion analysis settings for each `STAGE_GRP` section must be provid
 ```
 
 ### Definition of *moving* vs. *not-moving* episodes
-To partition the time-course of an tracked animal into *moving* and *not-moving*, we first extract the yx-locations of the chosen body part from the SLEAP analysis HDF5 file. If the body part was not detected in all frames, we interpolate the missing frames using `numpy.interp`. Next, we apply a Gaussian smoothing to the y and x body-part locations using `skimage.filters.gaussian`, with the sigma set to `LOCOMOTION_SPATIAL_SIGMA` (default 1). The resulting smoothed locations are used to compute the instantaneous speed by central differences with `numpy.gradient`. We then smooth the resulting speed with a Gaussian with sigma=`LOCOMOTION_TEMPORAL_SIGMA` (default 30). Each frame is associated with a speed in pixels per frame, which we calibrate to cm per frame using the known diameter of the dish (14 cm). Finally, we threshold the calibrated speed by `LOCOMOTION_MOVING_THRESH` (default 0.02 cm/frame) to obtain a binary, frame-wise moving classification.
+To partition the time-course of an tracked animal into *moving* and *non-moving*, we first extract the yx-locations of the chosen body part from the SLEAP analysis HDF5 file. If the body part was not detected in all frames, we interpolate the missing frames using `numpy.interp`. Next, we apply a Gaussian smoothing to the y and x body-part locations using `skimage.filters.gaussian`, with the sigma set to `LOCOMOTION_SPATIAL_SIGMA` (default 1). The resulting smoothed locations are used to compute the instantaneous speed by central differences with `numpy.gradient`. We then smooth the resulting speed with a Gaussian with sigma=`LOCOMOTION_TEMPORAL_SIGMA` (default 30). Each frame is associated with a speed in pixels per frame, which we calibrate to cm per frame using the known diameter of the dish (14 cm) and the camera speed with frames-per-second (FPS) of 60 hz. Each dish was manually annotated with a circle ROI in ImageJ/Fiji.Finally, we threshold the calibrated speed by `LOCOMOTION_MOVING_THRESH` (default 1.2 cm/sec) to obtain a binary partitioning into moving vs. non-moving animal episodes.
 
 ### Definition directional change
 For directional change the angle between two succeeding time-points is computed. The angle at time $t_i$ is defined by the locations $P_i$ of the body part selected `LOCOMOTION_NODE` (typically *Tail_1*). The angle is computed from two segments $\overline{P_{i-1}P_i}$ and $\overline{P_{i}P_{i+1}}$. The angle is 0 if the segments are parallel and in range $(-\pi, +\pi)$.
