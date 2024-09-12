@@ -89,9 +89,6 @@ python frequency_plots.py
 
 ## Computed features
 
-
-
-
 | Feature                   | Description                                                          | 
 | :----------------         | :------------------------------------------------         | 
 |dominant_freq              | dominant frequency:  local maximum frequency bin of the mean PSD. |
