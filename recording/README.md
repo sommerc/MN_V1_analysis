@@ -1,13 +1,13 @@
-# Behavioural recording setup 
+# Behavioral Recording  
 ---
 
 ## Behavioral Setup
 
-### The setup
+### Imaging Box
 
 ...
 
-### Recording
+### Recording scripts
 
 We recorded tadpole and frog swimming behavior in round plate dishes distributed in a custom-built infrared recording setup.
 
