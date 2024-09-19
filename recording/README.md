@@ -15,7 +15,7 @@ All recordings were aquired with custom [OBS Python scripts](https://git.ista.ac
 
 ## Lens Correction
 
-In order to remove geometric aberrations, we applied camera callibraton and [lens correcton](./lens_correction/).
+In order to remove geometric aberrations, we applied camera callibraton and [lens correcton](./lens_correction/README.md).
 
 ## Authors
 - Robert Hauschild (ISTA)
