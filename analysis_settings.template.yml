@@ -11,6 +11,7 @@ STAGES:
 RESULTS_ROOT_DIR: "./results_test_subf"
 
 LOCOMOTION_OUTDIR: "locomotion"
+LOCOMOTION_PLOT_INTERVAL_MIN: 3
 
 AREA_EXPLORED_OUTDIR: "area_explored"
 

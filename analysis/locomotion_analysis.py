@@ -4,7 +4,9 @@ import pathlib
 
 import numpy as np
 import pandas as pd
-
+import roifile
+from matplotlib import pyplot as plt
+from matplotlib.patches import Circle
 import tadpose
 
 from tqdm.auto import tqdm, trange
@@ -13,14 +15,47 @@ from shared import settings
 from tadpose.utils import directional_change
 
 
-def locomotion(tad, tids, stg, cfg):
+def locomotion(tad, tids, stg, gen, cfg, write_imgs=True):
     cfgs = cfg[stg]
     file_path = tad.video_fn
     base_file = os.path.basename(file_path)[:-4]
 
+    os.makedirs(f'{cfg["LOCOMOTION_OUTDIR"]}/imgs/{stg}/{gen}', exist_ok=True)
+    roi = roifile.roiread(file_path[:-4] + ".roi")
+
+    x_a, x_b = roi.left, roi.right
+    y_a, y_b = roi.top, roi.bottom
+
+    roi_center = (x_a + (x_b - x_a) / 2, y_a + (y_b - y_a) / 2)
+    roi_radius = (x_b - x_a) / 2
+
+    frame_step = cfg["LOCOMOTION_PLOT_INTERVAL_MIN"] * 60 * cfg["FPS"]
+
     tab_res = []
 
     for tid in tids:
+        if write_imgs:
+            locs = tad.locs(track_idx=tid, parts=(cfgs["LOCOMOTION_NODE"],)).squeeze()
+            for frame_start in range(0, tad.nframes, frame_step):
+                t_start_min = int(frame_start / 60 / cfg["FPS"])
+                f, ax = plt.subplots(figsize=(10, 10))
+                ax.plot(*locs[frame_start : frame_start + frame_step].T, "r-")
+
+                ax.add_patch(
+                    Circle(roi_center, radius=roi_radius, color="k", fill=False)
+                )
+
+                ax.set_axis_off()
+                ax.invert_yaxis()
+                ax.set_title(
+                    f"Trajectory of {cfgs['LOCOMOTION_NODE']}\n{os.path.basename(file_path)}, Tid: {tid} Time: {t_start_min} - {t_start_min + cfg['LOCOMOTION_PLOT_INTERVAL_MIN']} min"
+                )
+
+                plt.savefig(
+                    f"{cfg['LOCOMOTION_OUTDIR']}/imgs/{stg}/{gen}/{base_file}_{tid}_{t_start_min:03d}min.png"
+                )
+                plt.close(f)
+
         speed_px_per_frame = tad.speed(
             cfgs["LOCOMOTION_NODE"],
             track_idx=tid,
@@ -179,13 +214,18 @@ def run_stage(STAGE, cfg):
         assert stg == STAGE, "Stage mismatch!!"
 
         tad = tadpose.Tadpole.from_sleap(str(fn))
+
         track_okay_idx = np.nonzero(
-            tad.parts_detected(parts=(cfgs["LOCOMOTION_NODE"],), track_idx=None).sum(0)
-            / tad.nframes
-            > cfgs["TRACK_SELECT_THRES"]
+            np.atleast_1d(
+                tad.parts_detected(
+                    parts=(cfgs["LOCOMOTION_NODE"],), track_idx=None
+                ).sum(0)
+                / tad.nframes
+                > cfgs["TRACK_SELECT_THRES"]
+            )
         )[0]
 
-        tab_mov = locomotion(tad, track_okay_idx, stg, cfg)
+        tab_mov = locomotion(tad, track_okay_idx, stg, gen, cfg)
         tab_stg.append(tab_mov)
 
         tab_mov.insert(1, "Frames", tad.nframes)
