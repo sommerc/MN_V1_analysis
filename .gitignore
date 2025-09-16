@@ -20,3 +20,15 @@ pca_plots
 37-38
 44-48
 *.csv
+*.txt
+*.jpg
+*.h5
+*.slp
+used_settings.yaml
+*.m
+*.doc
+*.docx
+*.xlsx
+*.zip
+*.mp4
+.vscode
