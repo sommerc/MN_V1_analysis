@@ -25,7 +25,7 @@ from shared import settings
 def compute_angle_wavlet_psd_mean(
     tad, tid, scales, wavelet, a, b, c, fps, sub_bgrd, cfgs
 ):
-    ang = tadpose.analysis.angles(tad, (a, b), (b, c), win=None, track_idx=tid)
+    ang = tadpose.analysis.angles(tad, (a, b), (b, c), track_idx=tid)
     ang_smooth = gaussian_filter1d(ang, cfgs["FREQ_TEMP_ANGLE_SMOOTH"])
 
     if sub_bgrd:
@@ -100,8 +100,10 @@ def frequency_analysis(all_movs, stg, nodes, sub_bgrd, cfg):
 
         tad = tadpose.Tadpole.from_sleap(str(fn))
         track_okay_idx = np.nonzero(
-            tad.parts_detected(parts=(tail_b,), track_idx=None).sum(0) / tad.nframes
-            > cfgs["TRACK_SELECT_THRES"]
+            np.atleast_1d(
+                tad.parts_detected(parts=(tail_b,), track_idx=None).sum(0) / tad.nframes
+                > cfgs["TRACK_SELECT_THRES"]
+            )
         )[0]
 
         file_path = tad.video_fn

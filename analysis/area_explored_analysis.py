@@ -24,7 +24,7 @@ def area_explored(tad, tids, cfg, stg, gen, write_img=False):
 
     hist_total = np.zeros((area_bins, area_bins))
 
-    os.makedirs(f'{cfg["AREA_EXPLORED_OUTDIR"]}/imgs/{stg}/{gen}', exist_ok=True)
+    os.makedirs(f"{cfg['AREA_EXPLORED_OUTDIR']}/imgs/{stg}/{gen}", exist_ok=True)
 
     file_path = tad.video_fn
     base_file = os.path.basename(file_path)[:-4]
@@ -136,11 +136,13 @@ def run_stage(STAGE, cfg):
 
         tad = tadpose.Tadpole.from_sleap(str(fn))
         track_okay_idx = np.nonzero(
-            tad.parts_detected(parts=(cfgs["AREA_EXPLORED_NODE"],), track_idx=None).sum(
-                0
+            np.atleast_1d(
+                tad.parts_detected(
+                    parts=(cfgs["AREA_EXPLORED_NODE"],), track_idx=None
+                ).sum(0)
+                / tad.nframes
+                > cfgs["TRACK_SELECT_THRES"]
             )
-            / tad.nframes
-            > cfgs["TRACK_SELECT_THRES"]
         )[0]
 
         tab_mov = area_explored(tad, track_okay_idx, cfg, stg, gen, write_img=True)
@@ -174,7 +176,7 @@ def main(cfg=None):
     if cfg is None:
         cfg = settings()
     os.makedirs(cfg["AREA_EXPLORED_OUTDIR"], exist_ok=True)
-    os.makedirs(f'{cfg["AREA_EXPLORED_OUTDIR"]}/imgs', exist_ok=True)
+    os.makedirs(f"{cfg['AREA_EXPLORED_OUTDIR']}/imgs", exist_ok=True)
 
     STAGES = cfg["STAGES"]
     run(STAGES, cfg)

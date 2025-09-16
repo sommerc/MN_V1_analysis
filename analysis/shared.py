@@ -41,7 +41,7 @@ def settings(config_yml=None):
     os.makedirs(config_dict["RESULTS_ROOT_DIR"], exist_ok=True)
     print(f" - Results -> '{config_dict['RESULTS_ROOT_DIR']}'")
 
-    shutil.copy(config_yml, f'{config_dict["RESULTS_ROOT_DIR"]}/used_settings.yaml')
+    shutil.copy(config_yml, f"{config_dict['RESULTS_ROOT_DIR']}/used_settings.yaml")
 
     return config_dict
 
@@ -66,9 +66,11 @@ def set_frog(fn, cfgs):
     tad = tadpose.Tadpole.from_sleap(str(fn))
     print(f" - Checking tracks")
     track_okay_idx = np.nonzero(
-        tad.parts_detected(parts=(cfgs["LOCOMOTION_NODE"],), track_idx=None).sum(0)
-        / tad.nframes
-        > cfgs["TRACK_SELECT_THRES"]
+        np.atleast_1d(
+            tad.parts_detected(parts=(cfgs["LOCOMOTION_NODE"],), track_idx=None).sum(0)
+            / tad.nframes
+            > cfgs["TRACK_SELECT_THRES"]
+        )
     )[0]
 
     if len(track_okay_idx) == 0:
@@ -103,7 +105,6 @@ def show_pca(
     pca_for=("all", "moving", "non-moving"),
     save_pdf=True,
 ):
-
     np.random.seed(42)
 
     file_path = tad.video_fn
@@ -112,7 +113,6 @@ def show_pca(
     gen = pathlib.Path(file_path).parent.stem
 
     for part_name, parts in parts_dict.items():
-
         f, axs = plt.subplots(
             len(tad.aligner.tracks_to_align),
             len(pca_for),
@@ -220,7 +220,11 @@ def show_pca(
                         )
 
                     if cmap_dots is not None:
-                        only_use = [k for (k, col) in enumerate(cmap_dots.colors) if (col != "#00000000") and k < points[1::2].T.shape[0]]
+                        only_use = [
+                            k
+                            for (k, col) in enumerate(cmap_dots.colors)
+                            if (col != "#00000000") and k < points[1::2].T.shape[0]
+                        ]
 
                         p = axs[i, p_i].scatter(
                             -points[::2].T[only_use],
