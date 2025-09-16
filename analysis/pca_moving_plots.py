@@ -26,7 +26,7 @@ from shared import settings
 def moving_plots(tad, tids, stg, gen, cfg):
     cfgs = cfg[stg]
     os.makedirs(cfg["MOVING_OUTDIR"], exist_ok=True)
-    os.makedirs(f'{cfg["MOVING_OUTDIR"]}/{stg}/{gen}', exist_ok=True)
+    os.makedirs(f"{cfg['MOVING_OUTDIR']}/{stg}/{gen}", exist_ok=True)
 
     file_path = tad.video_fn
     base_file = os.path.basename(file_path)[:-4]
@@ -57,7 +57,7 @@ def moving_plots(tad, tids, stg, gen, cfg):
         )
         mov_pd = pd.DataFrame(
             mov_pd[:, start : start + 36000],
-            index=[f"Animal {i+1}" for i in range(len(tids))],
+            index=[f"Animal {i + 1}" for i in range(len(tids))],
         )
 
         f, ax = plt.subplots(figsize=(8, len(tids) / 2))
@@ -74,7 +74,7 @@ def moving_plots(tad, tids, stg, gen, cfg):
 
 def pca_plot(tad, tids, stg, gen, cfg, pca_on):
     os.makedirs(cfg["PCA_OUTDIR"], exist_ok=True)
-    os.makedirs(f'{cfg["PCA_OUTDIR"]}/{stg}/{gen}', exist_ok=True)
+    os.makedirs(f"{cfg['PCA_OUTDIR']}/{stg}/{gen}", exist_ok=True)
     cfgs = cfg[stg]
     np.random.seed(42)
 
@@ -211,9 +211,13 @@ def run_stage(STAGE, cfg):
 
         tad = tadpose.Tadpole.from_sleap(str(fn))
         track_okay_idx = np.nonzero(
-            tad.parts_detected(parts=(cfgs["LOCOMOTION_NODE"],), track_idx=None).sum(0)
-            / tad.nframes
-            > cfgs["TRACK_SELECT_THRES"]
+            np.atleast_1d(
+                tad.parts_detected(
+                    parts=(cfgs["LOCOMOTION_NODE"],), track_idx=None
+                ).sum(0)
+                / tad.nframes
+                > cfgs["TRACK_SELECT_THRES"]
+            )
         )[0]
 
         if len(track_okay_idx) > 0:

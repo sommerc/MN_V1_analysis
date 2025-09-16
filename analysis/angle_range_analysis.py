@@ -30,8 +30,10 @@ def angle_range(all_movs, stg, nodes, cfg):
 
         tad = tadpose.Tadpole.from_sleap(str(fn))
         track_okay_idx = np.nonzero(
-            tad.parts_detected(parts=(tail_b,), track_idx=None).sum(0) / tad.nframes
-            > cfgs["TRACK_SELECT_THRES"]
+            np.atleast_1d(
+                tad.parts_detected(parts=(tail_b,), track_idx=None).sum(0) / tad.nframes
+                > cfgs["TRACK_SELECT_THRES"]
+            )
         )[0]
 
         file_path = tad.video_fn
@@ -47,7 +49,7 @@ def angle_range(all_movs, stg, nodes, cfg):
 
         for tid in track_okay_idx:
             ang = tadpose.analysis.angles(
-                tad, (tail_a, tail_b), (tail_b, tail_c), win=None, track_idx=tid
+                tad, (tail_a, tail_b), (tail_b, tail_c), track_idx=tid
             )
             ang_smooth = gaussian_filter1d(ang, cfgs["FREQ_TEMP_ANGLE_SMOOTH"])
 
@@ -122,7 +124,6 @@ def angle_range(all_movs, stg, nodes, cfg):
                     ang_p05_mov,
                     ang_mean_mov,
                     ang_p95_mov,
-                    #
                     ang_std_not_mov,
                     ang_p05_not_mov,
                     ang_mean_not_mov,
@@ -152,11 +153,11 @@ def angle_range(all_movs, stg, nodes, cfg):
                 "angle_non-moving_mean",
                 "angle_non-moving_p95",
                 "angular_speed_mov_pos_mean",
-                "angular_speed_mov_pos_std,",
-                "angular_speed_mov_pos_p95,",
+                "angular_speed_mov_pos_std",
+                "angular_speed_mov_pos_p95",
                 "angular_speed_mov_neg_mean",
-                "angular_speed_mov_neg_std,",
-                "angular_speed_mov_neg_p95,",
+                "angular_speed_mov_neg_std",
+                "angular_speed_mov_neg_p95",
             ],
         )
     return tab_ar

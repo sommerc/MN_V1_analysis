@@ -26,9 +26,13 @@ def angle_correlation(all_movs, stg, name, nodes, cfg):
         tad = tadpose.Tadpole.from_sleap(str(fn))
 
         track_okay_idx = np.nonzero(
-            tad.parts_detected(parts=(cfgs["LOCOMOTION_NODE"],), track_idx=None).sum(0)
-            / tad.nframes
-            > cfgs["TRACK_SELECT_THRES"]
+            np.atleast_1d(
+                tad.parts_detected(
+                    parts=(cfgs["LOCOMOTION_NODE"],), track_idx=None
+                ).sum(0)
+                / tad.nframes
+                > cfgs["TRACK_SELECT_THRES"]
+            )
         )[0]
 
         file_path = tad.video_fn
@@ -39,14 +43,12 @@ def angle_correlation(all_movs, stg, name, nodes, cfg):
                 tad,
                 (a_nodes[0], a_nodes[1]),
                 (a_nodes[1], a_nodes[2]),
-                win=None,
                 track_idx=tid,
             )
             b_ang = tadpose.analysis.angles(
                 tad,
                 (b_nodes[0], b_nodes[1]),
                 (b_nodes[1], b_nodes[2]),
-                win=None,
                 track_idx=tid,
             )
 
