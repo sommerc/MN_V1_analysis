@@ -68,27 +68,30 @@ def angle_range_episode(tad, episode, name, nodes_tuple, cfg):
         ang_p05_mov, ang_p95_mov = np.percentile(ang_smooth[moving_bin], (5, 95))
         ang_mean_mov = ang_smooth[moving_bin].mean()
 
-        ang_speeds = np.gradient(ang_smooth)
-
-        ang_mov_speed_pos_mean = ang_speeds[ang_speeds > 0].mean()
-        ang_mov_speed_pos_std = ang_speeds[ang_speeds > 0].std()
-        ang_mov_speed_pos_p95 = np.percentile(ang_speeds[ang_speeds > 0], 95)
-
-        ang_mov_speed_neg_mean = -ang_speeds[ang_speeds < 0].mean()
-        ang_mov_speed_neg_std = -ang_speeds[ang_speeds < 0].std()
-        ang_mov_speed_neg_p95 = np.percentile(-ang_speeds[ang_speeds < 0], 95)
-
         episode["angle_moving_std"] = ang_std_mov
         episode["angle_moving_p05"] = ang_p05_mov
         episode["angle_moving_mean"] = ang_mean_mov
         episode["angle_moving_p95"] = ang_p95_mov
 
-        episode["angular_speed_mov_pos_mean"] = ang_mov_speed_pos_mean
-        episode["angular_speed_mov_pos_std"] = ang_mov_speed_pos_std
-        episode["angular_speed_mov_pos_p95"] = ang_mov_speed_pos_p95
-        episode["angular_speed_mov_neg_mean"] = ang_mov_speed_neg_mean
-        episode["angular_speed_mov_neg_std"] = ang_mov_speed_neg_std
-        episode["angular_speed_mov_neg_p95"] = ang_mov_speed_neg_p95
+        ang_speeds = np.gradient(ang_smooth)
+
+        if (ang_speeds > 0).sum() > 1:
+            ang_mov_speed_pos_mean = ang_speeds[ang_speeds > 0].mean()
+            ang_mov_speed_pos_std = ang_speeds[ang_speeds > 0].std()
+            ang_mov_speed_pos_p95 = np.percentile(ang_speeds[ang_speeds > 0], 95)
+
+            episode["angular_speed_mov_pos_mean"] = ang_mov_speed_pos_mean
+            episode["angular_speed_mov_pos_std"] = ang_mov_speed_pos_std
+            episode["angular_speed_mov_pos_p95"] = ang_mov_speed_pos_p95
+
+        if (ang_speeds < 0).sum() > 1:
+            ang_mov_speed_neg_mean = -ang_speeds[ang_speeds < 0].mean()
+            ang_mov_speed_neg_std = -ang_speeds[ang_speeds < 0].std()
+            ang_mov_speed_neg_p95 = np.percentile(-ang_speeds[ang_speeds < 0], 95)
+
+            episode["angular_speed_mov_neg_mean"] = ang_mov_speed_neg_mean
+            episode["angular_speed_mov_neg_std"] = ang_mov_speed_neg_std
+            episode["angular_speed_mov_neg_p95"] = ang_mov_speed_neg_p95
 
     not_moving_bin = ~moving_bin
     if not_moving_bin.sum() > 0:
