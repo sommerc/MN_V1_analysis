@@ -37,6 +37,7 @@ def main(tab_fn, cfg):
     AC_RESULTS = []
     AR_RESULTS = []
     F_RESULTS = []
+    F_BS_RESULTS = []
     L_RESULTS = []
 
     for i, row in (pbar := tqdm(episode_tab.iterrows(), total=len(episode_tab))):
@@ -73,19 +74,31 @@ def main(tab_fn, cfg):
         if "FREQ_FOR" in cfgs:
             for name, nodes in cfgs["FREQ_FOR"].items():
                 f_episode_result = frequency_episode(
-                    tad, row.copy(), name, nodes, cfg=cfg
+                    tad, row.copy(), name, nodes, False, cfg=cfg
                 )
                 F_RESULTS.append(f_episode_result)
+
+        ### Frequency Background Subtracted
+        ######################################################################################
+        if "FREQ_FOR" in cfgs:
+            for name, nodes in cfgs["FREQ_FOR"].items():
+                f_episode_result = frequency_episode(
+                    tad, row.copy(), name, nodes, True, cfg=cfg
+                )
+                F_BS_RESULTS.append(f_episode_result)
 
         ### Locomation
         ######################################################################################
         l_episode_result = locomotion_episode(tad, row.copy(), cfg=cfg)
         L_RESULTS.append(l_episode_result)
 
-    PREFIX = str(Path(tab_fn).parent) + "/straight_line_episodes_WT"
+    PREFIX = str(Path(tab_fn).parent) + "/"
     AC_RESULTS = pd.DataFrame(AC_RESULTS).to_csv(f"{PREFIX}_AC_res.tab", sep="\t")
     AR_RESULTS = pd.DataFrame(AR_RESULTS).to_csv(f"{PREFIX}_AR_res.tab", sep="\t")
     F_RESULTS = pd.DataFrame(F_RESULTS).to_csv(f"{PREFIX}_FREQ_res.tab", sep="\t")
+    F_BS_RESULTS = pd.DataFrame(F_BS_RESULTS).to_csv(
+        f"{PREFIX}_FREQ_BS_res.tab", sep="\t"
+    )
     L_RESULTS = pd.DataFrame(L_RESULTS).to_csv(f"{PREFIX}_LOC_res.tab", sep="\t")
 
 
