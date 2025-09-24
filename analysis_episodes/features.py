@@ -178,14 +178,12 @@ def angle_correlation_episode(tad, episode, name, nodes_tuple, cfg):
     return episode
 
 
-def frequency_episode(tad, episode, name, nodes_tuple, cfg):
+def frequency_episode(tad, episode, name, nodes_tuple, sub_bgrd, cfg):
     cfgs = cfg[episode.stage]
     frames = (episode.episode_start, episode.episode_stop)
     scales, freq, wavelet, fps = get_frequency_params(cfg)
 
     tail_a, tail_b, tail_c = nodes_tuple
-
-    sub_bgrd = False
 
     mean_psd_moving, freq, computed_on = compute_angle_wavlet_psd_mean(
         tad,
