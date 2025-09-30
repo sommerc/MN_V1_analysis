@@ -40,7 +40,10 @@ def main(tab_fn, cfg):
     F_BS_RESULTS = []
     L_RESULTS = []
 
-    for i, row in (pbar := tqdm(episode_tab.iterrows(), total=len(episode_tab))):
+    n = len(episode_tab)
+    i = 0
+    for row in (pbar := tqdm(episode_tab.itertuples(), total=n)):
+        print(f"{i:5d}/{n}", row.video_fn, row.episode_start, row.episode_stop)
         tad = get_tad(row.video_fn)
         cfgs = cfg[row.stage]
 
@@ -91,6 +94,7 @@ def main(tab_fn, cfg):
         ######################################################################################
         l_episode_result = locomotion_episode(tad, row.copy(), cfg=cfg)
         L_RESULTS.append(l_episode_result)
+        i += 1
 
     PREFIX = str(Path(tab_fn).parent) + "/"
     AC_RESULTS = pd.DataFrame(AC_RESULTS).to_csv(f"{PREFIX}_AC_res.tab", sep="\t")
