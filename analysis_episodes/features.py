@@ -368,7 +368,10 @@ def compute_angle_wavlet_psd_mean(
 
     computed_on = moving_bin.sum() / tad.nframes
 
-    mean_psd_moving = t_wvlt_psd[moving_bin].mean(0)
+    if moving_bin.sum() > 1:
+        mean_psd_moving = t_wvlt_psd[moving_bin].mean(0)
+    else:
+        mean_psd_moving = np.nan
 
     return mean_psd_moving, freq, computed_on
 
