@@ -31,11 +31,11 @@ def plot_by_stage(cfg):
                     "angle_non-moving_mean",
                     "angle_non-moving_p95",
                     "angular_speed_mov_pos_mean",
-                    "angular_speed_mov_pos_std,",
-                    "angular_speed_mov_pos_p95,",
+                    "angular_speed_mov_pos_std",
+                    "angular_speed_mov_pos_p95",
                     "angular_speed_mov_neg_mean",
-                    "angular_speed_mov_neg_std,",
-                    "angular_speed_mov_neg_p95,",
+                    "angular_speed_mov_neg_std",
+                    "angular_speed_mov_neg_p95",
                 ]:
                     f, ax = plt.subplots(figsize=(14, 4))
                     a = sns.boxenplot(
@@ -90,11 +90,11 @@ def plot_by_geno(cfg):
                     "angle_non-moving_mean",
                     "angle_non-moving_p95",
                     "angular_speed_mov_pos_mean",
-                    "angular_speed_mov_pos_std,",
-                    "angular_speed_mov_pos_p95,",
+                    "angular_speed_mov_pos_std",
+                    "angular_speed_mov_pos_p95",
                     "angular_speed_mov_neg_mean",
-                    "angular_speed_mov_neg_std,",
-                    "angular_speed_mov_neg_p95,",
+                    "angular_speed_mov_neg_std",
+                    "angular_speed_mov_neg_p95",
                 ]:
                     f, ax = plt.subplots(figsize=(14, 4))
                     a = sns.boxenplot(

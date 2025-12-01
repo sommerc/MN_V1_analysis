@@ -43,9 +43,9 @@ python angle_range_plots.py
 | angle_non-moving_mean | mean of angles during non-moving episodes |
 | angle_non-moving_p95  | 95th of angles during non-moving episodes |
 | angular_speed_mov_pos_mean  | mean angular speed of regarding only positive values during moving episodes |
-| angular_speed_mov_pos_std,  | std angular speed of regarding only positive values during moving episodes  |
-| angular_speed_mov_pos_p95,  | 95th angular speed of regarding only positive values during moving episodes   |
+| angular_speed_mov_pos_std  | std angular speed of regarding only positive values during moving episodes  |
+| angular_speed_mov_pos_p95  | 95th angular speed of regarding only positive values during moving episodes   |
 | angular_speed_mov_neg_mean  | same as above but using negative angular speed values only |
-| angular_speed_mov_neg_std,  |  same as above but using negative angular speed values only |
-| angular_speed_mov_neg_p95,  | same as above but using negative angular speed values only  |
+| angular_speed_mov_neg_std  |  same as above but using negative angular speed values only |
+| angular_speed_mov_neg_p95  | same as above but using negative angular speed values only  |
 | angle_at  | body-part at which the angle was computed         |
