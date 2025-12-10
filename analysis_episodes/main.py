@@ -42,7 +42,7 @@ def main(tab_fn, cfg):
 
     n = len(episode_tab)
     i = 0
-    for row in (pbar := tqdm(episode_tab.itertuples(), total=n)):
+    for _, row in (pbar := tqdm(episode_tab.iterrows(), total=n)):
         print(f"{i:5d}/{n}", row.video_fn, row.episode_start, row.episode_stop)
         tad = get_tad(row.video_fn)
         cfgs = cfg[row.stage]

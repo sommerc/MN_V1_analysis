@@ -15,12 +15,20 @@ from shared import settings
 from tadpose.utils import directional_change
 
 
+def get_body_size(tad, parts, track_idx=0):
+    px_size = tadpose.utils.calibrate_by_dish(tad, dish_diamter_in_cm=14)
+    body_locs = tad.locs(parts=parts, track_idx=track_idx, fill_missing=False)
+
+    body_size = np.linalg.norm(body_locs[:, 0] - body_locs[:, 1], axis=1) * px_size
+    return np.nanmean(body_size)
+
+
 def locomotion(tad, tids, stg, gen, cfg, write_imgs=True):
     cfgs = cfg[stg]
     file_path = tad.video_fn
     base_file = os.path.basename(file_path)[:-4]
 
-    os.makedirs(f'{cfg["LOCOMOTION_OUTDIR"]}/imgs/{stg}/{gen}', exist_ok=True)
+    os.makedirs(f"{cfg['LOCOMOTION_OUTDIR']}/imgs/{stg}/{gen}", exist_ok=True)
     roi = roifile.roiread(file_path[:-4] + ".roi")
 
     x_a, x_b = roi.left, roi.right
@@ -90,6 +98,9 @@ def locomotion(tad, tids, stg, gen, cfg, write_imgs=True):
         )
 
         moving_sub = moving_bin[:: cfgs["LOCOMOTION_DC_SUBSAMPLE"]][1:-1]
+
+        body_size_parts = (cfgs["ALIGN_CENTRAL"], cfgs["ALIGN_TOP"])
+        body_size_mean = get_body_size(tad, body_size_parts, tid)
 
         if np.any(moving_sub):
             dc_mov = dc_angles[moving_sub]
@@ -169,6 +180,12 @@ def locomotion(tad, tids, stg, gen, cfg, write_imgs=True):
                 np.percentile(acceleration[acceleration > 0], 95),
                 # acceleration[acceleration > 0].max(),
                 total_dist,
+                body_size_mean,
+                speed_moving_mean / body_size_mean,
+                speed_moving_std / body_size_mean,
+                speed_moving_p95 / body_size_mean,
+                acceleration[acceleration > 0].mean() / body_size_mean,
+                np.percentile(acceleration[acceleration > 0], 95) / body_size_mean,
             ]
         )
 
@@ -196,6 +213,13 @@ def locomotion(tad, tids, stg, gen, cfg, write_imgs=True):
             "acceleration_p95",
             # "acceleration_max",
             "total_distance",
+            # NEW
+            "body_size_mean",
+            "body_size_norm_speed_moving_mean",
+            "body_size_norm_speed_moving_std",
+            "body_size_norm_speed_moving_p95",
+            "body_size_norm_acceleration_mean",
+            "body_size_norm_acceleration_p95",
         ],
     )
 

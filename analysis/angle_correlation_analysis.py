@@ -128,22 +128,22 @@ def angle_correlation(all_movs, stg, name, nodes, cfg):
                     ]
                 )
 
-        tab_ar = pd.DataFrame(
-            tab_all,
-            columns=[
-                "Movie",
-                "Stage",
-                "Genotype",
-                "Track_idx",
-                "Name",
-                "corr_median",
-                "corr_p05",
-                "corr_p95",
-                "corr_skewness",
-                "corr_std",
-                "computed_of_ratio",
-            ],
-        )
+    tab_ar = pd.DataFrame(
+        tab_all,
+        columns=[
+            "Movie",
+            "Stage",
+            "Genotype",
+            "Track_idx",
+            "Name",
+            "corr_median",
+            "corr_p05",
+            "corr_p95",
+            "corr_skewness",
+            "corr_std",
+            "computed_of_ratio",
+        ],
+    )
     return tab_ar
 
 
