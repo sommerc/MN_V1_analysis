@@ -186,6 +186,7 @@ def locomotion(tad, tids, stg, gen, cfg, write_imgs=True):
                 speed_moving_p95 / body_size_mean,
                 acceleration[acceleration > 0].mean() / body_size_mean,
                 np.percentile(acceleration[acceleration > 0], 95) / body_size_mean,
+                total_dist / body_size_mean,
             ]
         )
 
@@ -220,6 +221,7 @@ def locomotion(tad, tids, stg, gen, cfg, write_imgs=True):
             "body_size_norm_speed_moving_p95",
             "body_size_norm_acceleration_mean",
             "body_size_norm_acceleration_p95",
+            "body_size_norm_total_distance",
         ],
     )
 
