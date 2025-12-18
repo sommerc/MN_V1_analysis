@@ -20,6 +20,9 @@ To partition the time-course of an tracked animal into *moving* and *non-moving*
 ### Speed and acceleration
 To compute the instantaneous speed and acceleration the central difference is used. For acceleration only the forward (positive) acceleration values are considered. In addition to the time spent moving per hour and the total distance, we computed various statistics of the instantaneous speed, acceleration and directional change.
 
+### Animal body-size normalization
+Some locomotion features exhibit a correlation with the animals body-size. For instance, the speed of an moving animal is usually increased with body-size. To make values comparable across genotypic groups, body-size normalization is implemented, by measuring the the average Euclidean distance between the `Heart_Center` and the `Tail_1` body-part. For Juvenile frogs distance of `Heart_Center` and `Tail_Stem` is used. We use this `body_size_mean` feature to normalize speed, acceleration and distance based features. To map the body-size normalized values back into physiological ranges, one can multiply the within group `body_size_mean` averages.
+
 ### Definition directional change
 For directional change the angle between two succeeding time-points is computed. The angle at time $t_i$ is defined by the locations $P_i$ of the body part selected `LOCOMOTION_NODE` (typically *Tail_1*). The angle is computed from two segments $\overline{P_{i-1}P_i}$ and $\overline{P_{i}P_{i+1}}$. The angle is 0 if the segments are parallel and in range $(-180, +180)$ degrees.
 
@@ -56,4 +59,12 @@ python locomotion_plots.py
 |acceleration_mean| mean positive acceleration            |
 |acceleration_p95| 95th percentile positive acceleration  |
 |total_distance| total distance traveled while moving     |
+|body_size_mean| distance from heart center to the tail stem |
+|body_size_norm_speed_moving_mean| speed_moving_mean per body size length |
+|body_size_norm_speed_moving_std| speed_moving_std per body size length      |
+|body_size_norm_speed_moving_p95| speed_moving_p95 per body size length      |
+|body_size_norm_acceleration_mean| acceleration_mean per body size length    |
+|body_size_norm_acceleration_p95| acceleration_p95 per body size length     |
+|body_size_norm_total_distance| total_distance per body size length     |
+
 
