@@ -31,7 +31,7 @@ def get_tad(fn):
     return tp.Tadpole.from_sleap(fn)
 
 
-def main(tab_fn, cfg):
+def analyze_episodes(tab_fn, cfg):
     episode_tab = pd.read_csv(tab_fn, sep="\t", index_col=0)
 
     AC_RESULTS = []
@@ -115,4 +115,4 @@ if __name__ == "__main__":
     with open(cfg_fn, "r") as ymlfile:
         cfg = yaml.safe_load(ymlfile)
 
-    main(epi_fn, cfg)
+    analyze_episodes(epi_fn, cfg)
