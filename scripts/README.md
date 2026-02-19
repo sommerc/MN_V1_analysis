@@ -1,8 +1,6 @@
 # Additional scripts 
 ---
 
-Collection of scripts.
-
 ## Run analysis on SLURM HPC cluster 
 
 First check the *settings.yaml* file to contain correct paths for inputs and results. Make sure you have conda installed and an environment called `frog_analysis`. Then

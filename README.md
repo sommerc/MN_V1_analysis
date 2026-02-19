@@ -28,11 +28,9 @@ All scripts reside in the [analysis](./analysis) folder. For convenience the ent
 
 ## Folder structure, settings and analysis parameters
 
-Settings and parameters are organized in YAML. The current pipeline is configured in [analysis_settings.yml](analysis_settings.yml). For an more minimal example template see [analysis_settings.template.yml](analysis_settings.template.yml)
+Settings and parameters are organized in YAML. The current pipeline is configured in [MNV1_SETTINGS.yaml](./MNV1_SETTINGS.yaml). 
 
-The overall input Folder structure has two levels.
-
-Stages and genotypes. 
+The overall input folder structure has two levels: **stages** and **genotypes**.
 
 ```bash
 ├── MOVIE_ROOT
