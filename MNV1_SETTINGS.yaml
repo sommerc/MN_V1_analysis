@@ -12,10 +12,10 @@ STAGES:
   - 63-64
   - Juv
 
-RESULTS_ROOT_DIR: "/nfs/scistore23/sweengrp/ftoma/Behavior_MNV1/MNV1_results/2024-11-31"
+RESULTS_ROOT_DIR: "/nfs/scistore23/sweengrp/ftoma/Behavior_MNV1/MNV1_results/2025-12-11_withALLcorrect"
 
 LOCOMOTION_OUTDIR: "locomotion"
-LOCOMOTION_PLOT_INTERVAL_MIN: 3 # <- NEW
+LOCOMOTION_PLOT_INTERVAL_MIN: 3
 
 AREA_EXPLORED_OUTDIR: "area_explored"
 
@@ -37,13 +37,12 @@ ANGLE_CORR_OUTDIR: angle_correlation
 ### 37-38 ###
 
 37-38:
-  ROOT_DIR: "/nfs/scistore23/sweengrp/ftoma/Behavior_MNV1/MNV1_dataset/37-38"
+  ROOT_DIR: "/nfs/scistore23/sweengrp/ftoma/Behavior_MNV1/MNV1_revision_dataset/37-38"
   TRACK_SELECT_THRES: 0.9
 
   AREA_EXPLORED_NODE: "Tail_1"
   AREA_EXPLORED_BINS: 128
   
-
   LOCOMOTION_NODE: "Tail_1"
   LOCOMOTION_MOVING_THRESH: 0.012
   LOCOMOTION_TEMPORAL_SIGMA: 30
@@ -66,7 +65,7 @@ ANGLE_CORR_OUTDIR: angle_correlation
 ### 44-48 ###
 
 44-48:
-  ROOT_DIR: "/nfs/scistore23/sweengrp/ftoma/Behavior_MNV1/MNV1_dataset/44-48"
+  ROOT_DIR: "/nfs/scistore23/sweengrp/ftoma/Behavior_MNV1/MNV1_revision_dataset/44-48"
                
   TRACK_SELECT_THRES: 0.9
 
@@ -74,7 +73,7 @@ ANGLE_CORR_OUTDIR: angle_correlation
   AREA_EXPLORED_BINS: 128
   
   LOCOMOTION_NODE: "Tail_1"
-  LOCOMOTION_MOVING_THRESH: 0.6 # THRESHOLD WAS UPDATED 31.11
+  LOCOMOTION_MOVING_THRESH: 0.3 # THRESHOLD WAS UPDATED 09.12.25
   LOCOMOTION_TEMPORAL_SIGMA: 30
   LOCOMOTION_SPATIAL_SIGMA: 1
   LOCOMOTION_DC_SUBSAMPLE: 8
@@ -111,7 +110,7 @@ ANGLE_CORR_OUTDIR: angle_correlation
       - Tail_Tip
 
   ANGLE_RANGE_MOVING_NODE: "Tail_1"
-  ANGLE_RANGE_MOVING_NODE_THRESH: 0.6 # THRESHOLD WAS UPDATED 31.11
+  ANGLE_RANGE_MOVING_NODE_THRESH: 1.2
   ANGLE_RANGE_FOR:
     tail_2:
       - Tail_1
@@ -126,38 +125,10 @@ ANGLE_CORR_OUTDIR: angle_correlation
       - Tail_6 # <- Angle here
       - Tail_Tip
 
-  ANGLE_CORR_ACTIVE_THRESH: 0.1
-  ANGLE_CORR_ACTIVE_SMOOTH: 15
-  ANGLE_CORR_TEMP_ANGLE_SMOOTH: 1
-  ANGLE_CORR_WIN_SIZE: 31
-  ANGLE_CORR_FOR:
-    #tail
-    top_mid:
-      - - Tail_1
-        - Tail_2
-        - Tail_3
-      - - Tail_3
-        - Tail_4
-        - Tail_5
-    top_tip:
-      - - Tail_1
-        - Tail_2
-        - Tail_3
-      - - Tail_5
-        - Tail_6
-        - Tail_Tip
-    mid_tip:
-      - - Tail_3
-        - Tail_4
-        - Tail_5
-      - - Tail_5
-        - Tail_6
-        - Tail_Tip
-
 ### 52-54 ####
     
 52-54:
-  ROOT_DIR: "/nfs/scistore23/sweengrp/ftoma/Behavior_MNV1/MNV1_dataset/52-54"
+  ROOT_DIR: "/nfs/scistore23/sweengrp/ftoma/Behavior_MNV1/MNV1_revision_dataset/52-54"
                
   TRACK_SELECT_THRES: 0.9
 
@@ -205,7 +176,7 @@ ANGLE_CORR_OUTDIR: angle_correlation
       - Tail_Tip
 
   ANGLE_RANGE_MOVING_NODE: "Tail_1"
-  ANGLE_RANGE_MOVING_NODE_THRESH: 1.2 # THRESHOLD WAS UPDATED 30.11
+  ANGLE_RANGE_MOVING_NODE_THRESH: 0.02
   ANGLE_RANGE_FOR:
     tail_2:
       - Tail_1
@@ -219,39 +190,12 @@ ANGLE_CORR_OUTDIR: angle_correlation
       - Tail_8
       - Tail_9 # <- Angle here
       - Tail_10
-  
-  ANGLE_CORR_ACTIVE_THRESH: 0.1
-  ANGLE_CORR_ACTIVE_SMOOTH: 15
-  ANGLE_CORR_TEMP_ANGLE_SMOOTH: 1
-  ANGLE_CORR_WIN_SIZE: 31
-  ANGLE_CORR_FOR:
-    #tail
-    top_mid:
-      - - Tail_1
-        - Tail_2
-        - Tail_3
-      - - Tail_4
-        - Tail_5
-        - Tail_6
-    top_tip:
-      - - Tail_1
-        - Tail_2
-        - Tail_3
-      - - Tail_8
-        - Tail_9
-        - Tail_10
-    mid_tip:
-      - - Tail_4
-        - Tail_5
-        - Tail_6
-      - - Tail_8
-        - Tail_9
-        - Tail_10
+
 
 ### 57-58 ####
 
 57-58:
-  ROOT_DIR: "/nfs/scistore23/sweengrp/ftoma/Behavior_MNV1/MNV1_dataset/57-58"
+  ROOT_DIR: "/nfs/scistore23/sweengrp/ftoma/Behavior_MNV1/MNV1_revision_dataset/57-58"
                
   TRACK_SELECT_THRES: 0.9
 
@@ -399,29 +343,6 @@ ANGLE_CORR_OUTDIR: angle_correlation
   ANGLE_CORR_TEMP_ANGLE_SMOOTH: 1
   ANGLE_CORR_WIN_SIZE: 31
   ANGLE_CORR_FOR:
-    #tail
-    top_mid:
-      - - Tail_1
-        - Tail_2
-        - Tail_3
-      - - Tail_4
-        - Tail_5
-        - Tail_6
-    top_tip:
-      - - Tail_1
-        - Tail_2
-        - Tail_3
-      - - Tail_8
-        - Tail_9
-        - Tail_10
-    mid_tip:
-      - - Tail_4
-        - Tail_5
-        - Tail_6
-      - - Tail_8
-        - Tail_9
-        - Tail_10
-
     #hindlimbs
     LR_foot:
       - - Left_Ankle
@@ -456,8 +377,9 @@ ANGLE_CORR_OUTDIR: angle_correlation
 ### 59-62 ####      
 
 
+
 59-62:
-  ROOT_DIR: "/nfs/scistore23/sweengrp/ftoma/Behavior_MNV1/MNV1_dataset/59-62"
+  ROOT_DIR: "/nfs/scistore23/sweengrp/ftoma/Behavior_MNV1/MNV1_revision_dataset/59-62"
                
   TRACK_SELECT_THRES: 0.9
 
@@ -675,30 +597,6 @@ ANGLE_CORR_OUTDIR: angle_correlation
   ANGLE_CORR_TEMP_ANGLE_SMOOTH: 1
   ANGLE_CORR_WIN_SIZE: 31
   ANGLE_CORR_FOR:
-    #tail
-    top_mid:
-      - - Tail_1
-        - Tail_2
-        - Tail_3
-      - - Tail_4
-        - Tail_5
-        - Tail_6
-    top_tip:
-      - - Tail_1
-        - Tail_2
-        - Tail_3
-      - - Tail_8
-        - Tail_9
-        - Tail_10
-    mid_tip:
-      - - Tail_4
-        - Tail_5
-        - Tail_6
-      - - Tail_8
-        - Tail_9
-        - Tail_10
-
-      #hindlimb
     LR_hip:    #UPDATED
       - - Tail_1
         - Left_Hip
@@ -845,7 +743,7 @@ ANGLE_CORR_OUTDIR: angle_correlation
 ### 63-64: ####
 
 63-64:
-  ROOT_DIR: "/nfs/scistore23/sweengrp/ftoma/Behavior_MNV1/MNV1_dataset/63-64"
+  ROOT_DIR: "/nfs/scistore23/sweengrp/ftoma/Behavior_MNV1/MNV1_revision_dataset/63-64"
                
   TRACK_SELECT_THRES: 0.9
 
@@ -1062,29 +960,6 @@ ANGLE_CORR_OUTDIR: angle_correlation
   ANGLE_CORR_TEMP_ANGLE_SMOOTH: 1
   ANGLE_CORR_WIN_SIZE: 31
   ANGLE_CORR_FOR:
-  #tail
-    top_mid:
-      - - Tail_1
-        - Tail_2
-        - Tail_3
-      - - Tail_4
-        - Tail_5
-        - Tail_6
-    top_tip:
-      - - Tail_1
-        - Tail_2
-        - Tail_3
-      - - Tail_8
-        - Tail_9
-        - Tail_10
-    mid_tip:
-      - - Tail_4
-        - Tail_5
-        - Tail_6
-      - - Tail_8
-        - Tail_9
-        - Tail_10
-     #hindlimb 
     LR_hip:    #UPDATED
       - - Tail_1
         - Left_Hip
@@ -1232,7 +1107,7 @@ ANGLE_CORR_OUTDIR: angle_correlation
 ### Juv: ####
 
 Juv:
-  ROOT_DIR: "/nfs/scistore23/sweengrp/ftoma/Behavior_MNV1/MNV1_dataset/Juv"
+  ROOT_DIR: "/nfs/scistore23/sweengrp/ftoma/Behavior_MNV1/MNV1_revision_dataset/Juv"
                
   TRACK_SELECT_THRES: 0.9
 
@@ -1315,7 +1190,7 @@ Juv:
       - Right_Hand
 
   ANGLE_RANGE_MOVING_NODE: "Tail_Stem"
-  ANGLE_RANGE_MOVING_NODE_THRESH: 1.2 # THRESHOLD WAS UPDATED 30.11
+  ANGLE_RANGE_MOVING_NODE_THRESH: 0.02
   ANGLE_RANGE_FOR:
     left_hip: #UPDATED
       - Tail_Stem
