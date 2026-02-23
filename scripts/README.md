@@ -17,14 +17,14 @@ To run only a subset of analyses, use:
 sbatch --array=<i> submit_analysis.sh <settings.yaml>
 ```
 
-where <i> can be chosen from:
+where `<i>` can be chosen from:
 
-0. Frequency
-1. Locomotion
-2. PCA + moving plots 
-3. Area explored
-4. Angle correlation 
-5. Angle range
+- **0. Frequency**
+- **1. Locomotion**
+- **2. PCA + moving plots**
+- **3. Area explored**
+- **4. Angle correlation**
+- **5. Angle range**
 
 or, mix using *comma*. For instance, `--array=2,4` would submit PCA and angle correlation analysis to the cluster.
 
