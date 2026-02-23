@@ -4,6 +4,7 @@
 *.tab
 .ipynb_checkpoints
 __pycache__
+drexel
 52-54
 57-58
 59-62
@@ -32,3 +33,4 @@ used_settings.yaml
 *.zip
 *.mp4
 .vscode
+scripts/.temp.gif
