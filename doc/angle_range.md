@@ -1,5 +1,5 @@
 
-# Angle Range Analysis
+# Angle range analysis
 ---
 
 ## Basics
