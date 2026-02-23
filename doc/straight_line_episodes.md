@@ -1,13 +1,14 @@
-## Analysis of Straight-Line Movement Episodes
+## Analysis of straight-line movement episodes
 ---
 
 Analysis of straight-line episodes is implemented in [notebook](../analysis_episodes/straight_line_episodes.ipynb)
 
-### 1. Find Straight-Line Movement Episodes
+### 1. Find straight-line movement episodes
 
 To identify episodes in which the frogs moved approximately in a straight line, we first filtered the video frames where the frog's body-axis vector was aligned with its movement vector, indicating active forward motion. This was achieved by projecting the frog's unit displacement vectors onto its body axis, defined by the unit vector from `Tail_Stem` to `Heart_Center`. The resulting forward correlation was denoised using a median filter with a window size of 3 frames (1/20 sec) and thresholded at a **minimum correlation of 0.8**. 
 
 Following thresholding, the candidate episodes were further refined by requiring a:
+
 * minimum **duration of 90 frames (1.5 sec)** 
 * minimum average **speed of 1.2 cm/sec**, and a 
 * minimum trajectory **confinement ratio of 0.95**. 
