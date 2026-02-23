@@ -1,13 +1,16 @@
 
-# Angle Correlation Analysis
+# Angle correlation analysis
 ---
+
 ## Basics
-Angle Correlation features extract the correlation of angles measured at two pairs of body-part segments in a time resolved manner. The correlation was computed as windowed Pearson correlation. From the correlation coefficient distribution (during active episodes) several statistics were extracted.
+
+Angle correlation features extract the correlation of angles measured at two pairs of body-part segments in a time resolved manner. The correlation was computed as windowed Pearson correlation. From the correlation coefficient distribution (during active episodes) several statistics were extracted.
 
 ### Setup and settings
-In the settings YAML file, one needs to define the angles for which the correlation is computed, e.g the correlation of the angles at the left and right ankle.
 
-```python
+In the settings YAML file, one needs to define the angles for which the correlation is computed, for instance, the correlation of the angles at the left and right ankle. 
+
+```yaml
   ANGLE_CORR_FOR:
     LR_ankle:
       - - Left_Knee
@@ -17,11 +20,12 @@ In the settings YAML file, one needs to define the angles for which the correlat
         - Right_Ankle # <- Angle B
         - Right_Foot
 ```
+
 Note, that the name `LR_ankle` will appear in results table columns and plots. One can define as many such entries as needed.
 
 In addition, parameters for the detection of *active* episodes - in which the correlation is computed - and window size for the correlation need to be given for each `STAGE_GRP` section, e. g.
 
-```python
+```yaml
   ANGLE_CORR_ACTIVE_THRESH: 0.1
   ANGLE_CORR_ACTIVE_SMOOTH: 15
   ANGLE_CORR_TEMP_ANGLE_SMOOTH: 1
