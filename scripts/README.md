@@ -56,7 +56,11 @@ ls MOVIE_ROOT/**/*.mp4 | wc -l
 
 ## Manual annotation of the dish ROI using ImageJ/Fiji
 
-For the calibration of pixel sizes, one needs to annotate the dish with a circular ROI. The script [create_dish_roi_semi_automatic.ijm](./create_dish_roi_semi_automatic.ijm) will create a `<movie_name>.roi` file located in the same folder as the movie `movie_name.mp4`. All movies need to be ROI-annotated.
+For the calibration of pixel sizes, one needs to annotate the dish with a circular ROI. The script ImageJ/Fiji [create_dish_roi_semi_automatic.ijm](./create_dish_roi_semi_automatic.ijm) will create a `<movie_name>.roi` file located in the same folder as the movie `movie_name.mp4`. All movies need to be ROI-annotated. In addition, the physical diameter of the annotated dishes needs to be set in the general setting YAML file as
+
+```yaml
+DISH_SIZE: 14 # cm
+```
 
 ## Metrics: generate SLEAP validation metrics as table
 
