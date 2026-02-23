@@ -22,6 +22,7 @@ For the angle range analysis, three settings need to be set in the settings YAML
 ```
 
 ## Run specifically:
+
 Result tables and plots are stored in `RESULTS_ROOT_DIR/ANGLE_RANGE_OUTDIR` (default: ./angle_range)
 
 ```bash
