@@ -1,7 +1,11 @@
-EPS: 0.000000000001
-FPS: 60
-DISH_SIZE: 14 # cm
+### Global settings ###
+#######################
 
+FPS: 60 # movie frame rate
+DISH_SIZE: 14 # dish diameter in cm
+EPS: 0.000000000001
+
+### Stage definition ###
 
 STAGES:
   - 37-38
@@ -12,7 +16,11 @@ STAGES:
   - 63-64
   - Juv
 
+### Output directory ###
+
 RESULTS_ROOT_DIR: "/nfs/scistore23/sweengrp/ftoma/Behavior_MNV1/MNV1_results/2025-12-11_withALLcorrect"
+
+### Global analysis parameters ###
 
 LOCOMOTION_OUTDIR: "locomotion"
 LOCOMOTION_PLOT_INTERVAL_MIN: 3
@@ -34,7 +42,10 @@ MOVING_PLOT_TIME_SPAN_MIN: 15
 ANGLE_RANGE_OUTDIR: angle_range
 ANGLE_CORR_OUTDIR: angle_correlation
 
-### 37-38 ###
+### Stage-specific parameters ###
+#################################
+
+### Stage 37-38 parameters ###
 
 37-38:
   ROOT_DIR: "/nfs/scistore23/sweengrp/ftoma/Behavior_MNV1/MNV1_revision_dataset/37-38"
@@ -62,7 +73,7 @@ ANGLE_CORR_OUTDIR: angle_correlation
   FREQ_ACTIVE_SMOOTH: 15
   FREQ_TEMP_ANGLE_SMOOTH: 0.1
 
-### 44-48 ###
+### Stage 44-48 parameters###
 
 44-48:
   ROOT_DIR: "/nfs/scistore23/sweengrp/ftoma/Behavior_MNV1/MNV1_revision_dataset/44-48"
@@ -73,7 +84,7 @@ ANGLE_CORR_OUTDIR: angle_correlation
   AREA_EXPLORED_BINS: 128
   
   LOCOMOTION_NODE: "Tail_1"
-  LOCOMOTION_MOVING_THRESH: 0.3 # THRESHOLD WAS UPDATED 09.12.25
+  LOCOMOTION_MOVING_THRESH: 0.3 
   LOCOMOTION_TEMPORAL_SIGMA: 30
   LOCOMOTION_SPATIAL_SIGMA: 1
   LOCOMOTION_DC_SUBSAMPLE: 8
@@ -88,15 +99,15 @@ ANGLE_CORR_OUTDIR: angle_correlation
   FREQ_FOR:
     tail_2:
       - Tail_1
-      - Tail_2 # <- Angle here
+      - Tail_2 
       - Tail_3
     tail_4:
       - Tail_3
-      - Tail_4 # <- Angle here
+      - Tail_4 
       - Tail_5
     tail_6:
       - Tail_5
-      - Tail_6 # <- Angle here
+      - Tail_6 
       - Tail_Tip
     
   PCA_PARTS:
@@ -114,18 +125,18 @@ ANGLE_CORR_OUTDIR: angle_correlation
   ANGLE_RANGE_FOR:
     tail_2:
       - Tail_1
-      - Tail_2 # <- Angle here
+      - Tail_2 
       - Tail_3
     tail_4:
       - Tail_3
-      - Tail_4 # <- Angle here
+      - Tail_4 
       - Tail_5
     tail_6:
       - Tail_5
-      - Tail_6 # <- Angle here
+      - Tail_6 
       - Tail_Tip
 
-### 52-54 ####
+### Stage 52-54 parameters ####
     
 52-54:
   ROOT_DIR: "/nfs/scistore23/sweengrp/ftoma/Behavior_MNV1/MNV1_revision_dataset/52-54"
@@ -150,15 +161,15 @@ ANGLE_CORR_OUTDIR: angle_correlation
   FREQ_FOR:
     tail_2:
       - Tail_1
-      - Tail_2 # <- Angle here
+      - Tail_2 
       - Tail_3
     tail_5:
       - Tail_4
-      - Tail_5 # <- Angle here
+      - Tail_5 
       - Tail_6
     tail_9:
       - Tail_8
-      - Tail_9 # <- Angle here
+      - Tail_9 
       - Tail_10
 
   PCA_PARTS:
@@ -180,19 +191,18 @@ ANGLE_CORR_OUTDIR: angle_correlation
   ANGLE_RANGE_FOR:
     tail_2:
       - Tail_1
-      - Tail_2 # <- Angle here
+      - Tail_2 
       - Tail_3
     tail_5:
       - Tail_4
-      - Tail_5 # <- Angle here
+      - Tail_5 
       - Tail_6
     tail_9:
       - Tail_8
-      - Tail_9 # <- Angle here
+      - Tail_9 
       - Tail_10
 
-
-### 57-58 ####
+### Stage 57-58 parameters ####
 
 57-58:
   ROOT_DIR: "/nfs/scistore23/sweengrp/ftoma/Behavior_MNV1/MNV1_revision_dataset/57-58"
@@ -217,15 +227,15 @@ ANGLE_CORR_OUTDIR: angle_correlation
   FREQ_FOR:
     tail_2:
       - Tail_1
-      - Tail_2 # <- Angle here
+      - Tail_2 
       - Tail_3
     tail_5:
       - Tail_4
-      - Tail_5 # <- Angle here
+      - Tail_5 
       - Tail_6
     tail_9:
       - Tail_8
-      - Tail_9 # <- Angle here
+      - Tail_9 
       - Tail_10
     left_knee:
       - Left_Hip
@@ -295,19 +305,19 @@ ANGLE_CORR_OUTDIR: angle_correlation
   ANGLE_RANGE_FOR:
     tail_2:
       - Tail_1
-      - Tail_2 # <- Angle here
+      - Tail_2 
       - Tail_3
     tail_5:
       - Tail_4
-      - Tail_5 # <- Angle here
+      - Tail_5 
       - Tail_6
     tail_9:
       - Tail_8
-      - Tail_9 # <- Angle here
+      - Tail_9 
       - Tail_10
     left_ankle:
       - Left_Knee
-      - Left_Ankle # <- Angle here
+      - Left_Ankle 
       - Left_Foot
     left_knee:
       - Left_Hip
@@ -343,7 +353,6 @@ ANGLE_CORR_OUTDIR: angle_correlation
   ANGLE_CORR_TEMP_ANGLE_SMOOTH: 1
   ANGLE_CORR_WIN_SIZE: 31
   ANGLE_CORR_FOR:
-    #hindlimbs
     LR_foot:
       - - Left_Ankle
         - Left_Foot
@@ -353,10 +362,10 @@ ANGLE_CORR_OUTDIR: angle_correlation
         - Right_toe
     LR_ankle:
       - - Left_Knee
-        - Left_Ankle  # <- Angle A
-        - Left_Foot   #      |
-      - - Right_Knee  #      |
-        - Right_Ankle # <- Angle B
+        - Left_Ankle  
+        - Left_Foot   
+      - - Right_Knee  
+        - Right_Ankle 
         - Right_Foot
     LR_knee:
       - - Left_Hip
@@ -373,10 +382,7 @@ ANGLE_CORR_OUTDIR: angle_correlation
         - Right_Hip
         - Right_Knee
 
-
-### 59-62 ####      
-
-
+### Stage 59-62 parameters ####      
 
 59-62:
   ROOT_DIR: "/nfs/scistore23/sweengrp/ftoma/Behavior_MNV1/MNV1_revision_dataset/59-62"
@@ -395,27 +401,25 @@ ANGLE_CORR_OUTDIR: angle_correlation
   LOCOMOTION_SPATIAL_SIGMA: 1
   LOCOMOTION_DC_SUBSAMPLE: 8
 
-  # FREQ_MOVING_NODE: "Tail_1"
-  # FREQ_MOVING_NODE_THRESH: 1.2
   FREQ_ACTIVE_THRESH: 0.1
   FREQ_ACTIVE_SMOOTH: 15
   FREQ_TEMP_ANGLE_SMOOTH: 0.1
   FREQ_FOR:
     tail_2:
       - Tail_1
-      - Tail_2 # <- Angle here
+      - Tail_2 
       - Tail_3
     tail_5:
       - Tail_4
-      - Tail_5 # <- Angle here
+      - Tail_5 
       - Tail_6
     tail_9:
       - Tail_8
-      - Tail_9 # <- Angle here
+      - Tail_9 
       - Tail_10
-    left_hip: #UPDATED
+    left_hip: 
       - Tail_1
-      - Left_Hip # <- Angle here
+      - Left_Hip 
       - Left_Knee
     left_knee:
       - Left_Hip
@@ -429,9 +433,9 @@ ANGLE_CORR_OUTDIR: angle_correlation
       - Left_Ankle
       - Left_Foot
       - Left_toe
-    right_hip: #UPDATED
+    right_hip: 
       - Tail_1
-      - Right_Hip # <- Angle here
+      - Right_Hip 
       - Right_Knee
     right_knee:
       - Right_Hip
@@ -446,29 +450,29 @@ ANGLE_CORR_OUTDIR: angle_correlation
       - Right_Foot
       - Right_toe
    
-    #forelimb
-    left_shoulder: #UPDATED
+    
+    left_shoulder: 
       - Tail_Stem
-      - Left_Shoulder # <- Angle here
+      - Left_Shoulder 
       - Left_Elbow
-    left_elbow: #UPDATED
+    left_elbow: 
       - Left_Shoulder
       - Left_Elbow
       - Left_Wrist
-    left_wrist: #UPDATED
+    left_wrist: 
       - Left_Elbow
       - Left_Wrist
       - Left_Hand
     
-    right_shoulder: #UPDATED
+    right_shoulder: 
       - Tail_Stem
-      - Right_Shoulder # <- Angle here
+      - Right_Shoulder 
       - Right_Elbow
-    right_elbow: #UPDATED
+    right_elbow: 
       - Right_Shoulder
       - Right_Elbow
       - Right_Wrist
-    right_wrist: #UPDATED
+    right_wrist: 
       - Right_Elbow
       - Right_Wrist
       - Right_Hand
@@ -504,14 +508,14 @@ ANGLE_CORR_OUTDIR: angle_correlation
       - Right_toe
       
     
-    Left_Arm: #UPDATED
+    Left_Arm: 
       - Heart_Center
       - Left_Shoulder
       - Left_Elbow
       - Left_Wrist
       - Left_Hand
       
-    Right_Arm: #UPDATED
+    Right_Arm: 
       - Heart_Center
       - Right_Shoulder
       - Right_Elbow
@@ -523,19 +527,19 @@ ANGLE_CORR_OUTDIR: angle_correlation
   ANGLE_RANGE_FOR:
     tail_2:
       - Tail_1
-      - Tail_2 # <- Angle here
+      - Tail_2 
       - Tail_3
     tail_5:
       - Tail_4
-      - Tail_5 # <- Angle here
+      - Tail_5 
       - Tail_6
     tail_9:
       - Tail_8
-      - Tail_9 # <- Angle here
+      - Tail_9 
       - Tail_10
-    left_hip: #UPDATED
+    left_hip: 
       - Tail_1
-      - Left_Hip # <- Angle here
+      - Left_Hip 
       - Left_Knee
     left_knee:
       - Left_Hip
@@ -543,15 +547,15 @@ ANGLE_CORR_OUTDIR: angle_correlation
       - Left_Ankle
     left_ankle:
       - Left_Knee
-      - Left_Ankle # <- Angle here
+      - Left_Ankle 
       - Left_Foot
     left_foot:
       - Left_Ankle
       - Left_Foot
       - Left_toe
-    right_hip: #UPDATED
+    right_hip: 
       - Tail_1
-      - Right_Hip # <- Angle here
+      - Right_Hip 
       - Right_Knee
     right_knee:
       - Right_Hip
@@ -566,28 +570,28 @@ ANGLE_CORR_OUTDIR: angle_correlation
       - Right_Foot
       - Right_toe
     
-    #forelimb
-    left_shoulder: #UPDATED
+    
+    left_shoulder: 
       - Tail_Stem
-      - Left_Shoulder # <- Angle here
+      - Left_Shoulder 
       - Left_Elbow
-    left_elbow: #UPDATED
+    left_elbow: 
       - Left_Shoulder
       - Left_Elbow
       - Left_Wrist
-    left_wrist: #UPDATED
+    left_wrist: 
       - Left_Elbow
       - Left_Wrist
       - Left_Hand
-    right_shoulder: #UPDATED
+    right_shoulder: 
       - Tail_Stem
-      - Right_Shoulder # <- Angle here
+      - Right_Shoulder 
       - Right_Elbow
-    right_elbow: #UPDATED
+    right_elbow: 
       - Right_Shoulder
       - Right_Elbow
       - Right_Wrist
-    right_wrist: #UPDATED
+    right_wrist: 
       - Right_Elbow
       - Right_Wrist
       - Right_Hand
@@ -597,7 +601,7 @@ ANGLE_CORR_OUTDIR: angle_correlation
   ANGLE_CORR_TEMP_ANGLE_SMOOTH: 1
   ANGLE_CORR_WIN_SIZE: 31
   ANGLE_CORR_FOR:
-    LR_hip:    #UPDATED
+    LR_hip:    
       - - Tail_1
         - Left_Hip
         - Left_Knee
@@ -613,10 +617,10 @@ ANGLE_CORR_OUTDIR: angle_correlation
         - Right_Ankle
     LR_ankle:
       - - Left_Knee
-        - Left_Ankle  # <- Angle A
-        - Left_Foot   #      |
-      - - Right_Knee  #      |
-        - Right_Ankle # <- Angle B
+        - Left_Ankle  
+        - Left_Foot   
+      - - Right_Knee  
+        - Right_Ankle 
         - Right_Foot
     LR_foot:
       - - Left_Ankle
@@ -625,122 +629,120 @@ ANGLE_CORR_OUTDIR: angle_correlation
       - - Right_Ankle
         - Right_Foot
         - Right_toe
-    #forelimb
+    
     LR_shoulder:
       - - Left_Elbow
-        - Left_Shoulder  # <- Angle A
-        - Tail_Stem   #      |
-      - - Right_Elbow  #      |
-        - Right_Shoulder # <- Angle B
+        - Left_Shoulder  
+        - Tail_Stem   
+      - - Right_Elbow  
+        - Right_Shoulder 
         - Tail_Stem
     LR_elbow:
       - - Left_Wrist
-        - Left_Elbow  # <- Angle A
-        - Left_Shoulder   #      |
-      - - Right_Wrist  #      |
-        - Right_Elbow # <- Angle B
+        - Left_Elbow  
+        - Left_Shoulder   
+      - - Right_Wrist  
+        - Right_Elbow 
         - Right_Shoulder
     LR_wrist:
       - - Left_Hand
-        - Left_Wrist  # <- Angle A
-        - Left_Elbow   #      |
-      - - Right_Hand  #      |
-        - Right_Wrist # <- Angle B
+        - Left_Wrist  
+        - Left_Elbow   
+      - - Right_Hand  
+        - Right_Wrist 
         - Right_Elbow
     
-    #L_fore-hind 
     L_shoulder_hip:
       - - Left_Elbow
-        - Left_Shoulder # <- Angle A
-        - Tail_Stem   #      |
-      - - Left_Knee  #      |
-        - Left_Hip # <- Angle B
+        - Left_Shoulder 
+        - Tail_Stem   
+      - - Left_Knee  
+        - Left_Hip 
         - Tail_1
     L_elbow_knee:
       - - Left_Wrist
-        - Left_Elbow # <- Angle A
-        - Left_Shoulder   #      |
-      - - Left_Ankle  #      |
-        - Left_Knee # <- Angle B
+        - Left_Elbow 
+        - Left_Shoulder   
+      - - Left_Ankle  
+        - Left_Knee 
         - Left_Hip
     L_wrist_ankle:
       - - Left_Hand
-        - Left_Wrist  # <- Angle A
-        - Left_Elbow   #      |
-      - - Left_Foot  #      |
-        - Left_Ankle # <- Angle B
+        - Left_Wrist  
+        - Left_Elbow   
+      - - Left_Foot  
+        - Left_Ankle 
         - Left_Knee
    
-    #R_fore_hind
     R_shoulder_hip:
       - - Right_Elbow
-        - Right_Shoulder # <- Angle A
-        - Tail_Stem   #      |
-      - - Right_Knee  #      |
-        - Right_Hip # <- Angle B
+        - Right_Shoulder 
+        - Tail_Stem   
+      - - Right_Knee  
+        - Right_Hip 
         - Tail_1
     R_elbow_knee:
       - - Right_Wrist
-        - Right_Elbow # <- Angle A
-        - Right_Shoulder   #      |
-      - - Right_Ankle  #      |
-        - Right_Knee # <- Angle B
+        - Right_Elbow 
+        - Right_Shoulder   
+      - - Right_Ankle  
+        - Right_Knee 
         - Right_Hip
     R_wrist_ankle:
       - - Right_Hand
-        - Right_Wrist  # <- Angle A
-        - Right_Elbow   #      |
-      - - Right_Foot  #      |
-        - Right_Ankle # <- Angle B
+        - Right_Wrist  
+        - Right_Elbow   
+      - - Right_Foot  
+        - Right_Ankle 
         - Right_Knee
     
     #L_fore_R_hind
     LR_shoulder_hip:
       - - Left_Elbow
-        - Left_Shoulder # <- Angle A
-        - Tail_Stem   #      |
-      - - Right_Knee  #      |
-        - Right_Hip # <- Angle B
+        - Left_Shoulder 
+        - Tail_Stem   
+      - - Right_Knee  
+        - Right_Hip 
         - Tail_1
     LR_elbow_knee:
       - - Left_Wrist
-        - Left_Elbow # <- Angle A
-        - Left_Shoulder   #      |
-      - - Right_Ankle  #      |
-        - Right_Knee # <- Angle B
+        - Left_Elbow 
+        - Left_Shoulder   
+      - - Right_Ankle  
+        - Right_Knee 
         - Right_Hip
     LR_wrist_ankle:
       - - Left_Hand
-        - Left_Wrist  # <- Angle A
-        - Left_Elbow   #      |
-      - - Right_Foot  #      |
-        - Right_Ankle # <- Angle B
+        - Left_Wrist  
+        - Left_Elbow   
+      - - Right_Foot  
+        - Right_Ankle 
         - Right_Knee
     
     #R_fore_L_hind
     RL_shoulder_hip:
       - - Right_Elbow
-        - Right_Shoulder # <- Angle A
-        - Tail_Stem   #      |
-      - - Left_Knee  #      |
-        - Left_Hip # <- Angle B
+        - Right_Shoulder 
+        - Tail_Stem   
+      - - Left_Knee  
+        - Left_Hip 
         - Tail_1
     RL_elbow_knee:
       - - Right_Wrist
-        - Right_Elbow # <- Angle A
-        - Right_Shoulder   #      |
-      - - Left_Ankle  #      |
-        - Left_Knee # <- Angle B
+        - Right_Elbow 
+        - Right_Shoulder   
+      - - Left_Ankle  
+        - Left_Knee 
         - Left_Hip
     RL_wrist_ankle:
       - - Right_Hand
-        - Right_Wrist  # <- Angle A
-        - Right_Elbow   #      |
-      - - Left_Foot  #      |
-        - Left_Ankle # <- Angle B
+        - Right_Wrist  
+        - Right_Elbow   
+      - - Left_Foot  
+        - Left_Ankle 
         - Left_Knee
 
-### 63-64: ####
+### Stage 63-64 parameters ####
 
 63-64:
   ROOT_DIR: "/nfs/scistore23/sweengrp/ftoma/Behavior_MNV1/MNV1_revision_dataset/63-64"
@@ -765,20 +767,20 @@ ANGLE_CORR_OUTDIR: angle_correlation
   FREQ_FOR:
     tail_2:
       - Tail_1
-      - Tail_2 # <- Angle here
+      - Tail_2 
       - Tail_3
     tail_5:
       - Tail_4
-      - Tail_5 # <- Angle here
+      - Tail_5 
       - Tail_6
     tail_9:
       - Tail_8
-      - Tail_9 # <- Angle here
+      - Tail_9 
       - Tail_10
 
-    left_hip: #UPDATED
+    left_hip: 
       - Tail_1
-      - Left_Hip # <- Angle here
+      - Left_Hip 
       - Left_Knee
     left_knee:
       - Left_Hip
@@ -793,9 +795,9 @@ ANGLE_CORR_OUTDIR: angle_correlation
       - Left_Foot
       - Left_toe
     
-    right_hip: #UPDATED
+    right_hip: 
       - Tail_1
-      - Right_Hip # <- Angle here
+      - Right_Hip 
       - Right_Knee
     right_knee:
       - Right_Hip
@@ -810,29 +812,29 @@ ANGLE_CORR_OUTDIR: angle_correlation
       - Right_Foot
       - Right_toe
    
-    #forelimb
-    left_shoulder: #UPDATED
+    
+    left_shoulder: 
       - Tail_Stem
-      - Left_Shoulder # <- Angle here
+      - Left_Shoulder 
       - Left_Elbow
-    left_elbow: #UPDATED
+    left_elbow: 
       - Left_Shoulder 
       - Left_Elbow
       - Left_Wrist 
-    left_wrist: #UPDATED
+    left_wrist: 
       - Left_Elbow
       - Left_Wrist
       - Left_Hand
     
-    right_shoulder: #UPDATED
+    right_shoulder: 
       - Tail_Stem
-      - Right_Shoulder # <- Angle here
+      - Right_Shoulder 
       - Right_Elbow
-    right_elbow: #UPDATED
+    right_elbow: 
       - Right_Shoulder 
       - Right_Elbow
       - Right_Wrist 
-    right_wrist: #UPDATED
+    right_wrist: 
       - Right_Elbow
       - Right_Wrist
       - Right_Hand
@@ -867,14 +869,14 @@ ANGLE_CORR_OUTDIR: angle_correlation
       - Right_Foot
       - Right_toe
       
-    Left_Arm: #UPDATED
+    Left_Arm: 
       - Heart_Center
       - Left_Shoulder
       - Left_Elbow
       - Left_Wrist
       - Left_Hand
       
-    Right_Arm: #UPDATED
+    Right_Arm: 
       - Heart_Center
       - Right_Shoulder
       - Right_Elbow
@@ -886,19 +888,19 @@ ANGLE_CORR_OUTDIR: angle_correlation
   ANGLE_RANGE_FOR:
     tail_2:
       - Tail_1
-      - Tail_2 # <- Angle here
+      - Tail_2 
       - Tail_3
     tail_5:
       - Tail_4
-      - Tail_5 # <- Angle here
+      - Tail_5 
       - Tail_6
     tail_9:
       - Tail_8
-      - Tail_9 # <- Angle here
+      - Tail_9 
       - Tail_10
-    left_hip: #UPDATED
+    left_hip: 
       - Tail_1
-      - Left_Hip # <- Angle here
+      - Left_Hip 
       - Left_Knee
     left_knee:
       - Left_Hip
@@ -906,15 +908,15 @@ ANGLE_CORR_OUTDIR: angle_correlation
       - Left_Ankle
     left_ankle:
       - Left_Knee
-      - Left_Ankle # <- Angle here
+      - Left_Ankle 
       - Left_Foot
     left_foot:
       - Left_Ankle
       - Left_Foot
       - Left_toe
-    right_hip: #UPDATED
+    right_hip: 
       - Tail_1
-      - Right_Hip # <- Angle here
+      - Right_Hip 
       - Right_Knee
     right_knee:
       - Right_Hip
@@ -929,28 +931,28 @@ ANGLE_CORR_OUTDIR: angle_correlation
       - Right_Foot
       - Right_toe
     
-    #forelimb
-    left_shoulder: #UPDATED
+    
+    left_shoulder: 
       - Tail_Stem
-      - Left_Shoulder # <- Angle here
+      - Left_Shoulder 
       - Left_Elbow
-    left_elbow: #UPDATED
+    left_elbow: 
       - Left_Shoulder
       - Left_Elbow
       - Left_Wrist
-    left_wrist: #UPDATED
+    left_wrist: 
       - Left_Elbow
       - Left_Wrist
       - Left_Hand
-    right_shoulder: #UPDATED
+    right_shoulder: 
       - Tail_Stem
-      - Right_Shoulder # <- Angle here
+      - Right_Shoulder 
       - Right_Elbow
-    right_elbow: #UPDATED
+    right_elbow: 
       - Right_Shoulder
       - Right_Elbow
       - Right_Wrist
-    right_wrist: #UPDATED
+    right_wrist: 
       - Right_Elbow
       - Right_Wrist
       - Right_Hand
@@ -960,7 +962,7 @@ ANGLE_CORR_OUTDIR: angle_correlation
   ANGLE_CORR_TEMP_ANGLE_SMOOTH: 1
   ANGLE_CORR_WIN_SIZE: 31
   ANGLE_CORR_FOR:
-    LR_hip:    #UPDATED
+    LR_hip:    
       - - Tail_1
         - Left_Hip
         - Left_Knee 
@@ -976,10 +978,10 @@ ANGLE_CORR_OUTDIR: angle_correlation
         - Right_Ankle
     LR_ankle:
       - - Left_Knee
-        - Left_Ankle  # <- Angle A
-        - Left_Foot   #      |
-      - - Right_Knee  #      |
-        - Right_Ankle # <- Angle B
+        - Left_Ankle  
+        - Left_Foot   
+      - - Right_Knee  
+        - Right_Ankle 
         - Right_Foot
     LR_foot:
       - - Left_Ankle
@@ -988,123 +990,122 @@ ANGLE_CORR_OUTDIR: angle_correlation
       - - Right_Ankle
         - Right_Foot
         - Right_toe
-    #forelimb
+    
     LR_shoulder:
       - - Left_Elbow
-        - Left_Shoulder  # <- Angle A
-        - Tail_Stem   #      |
-      - - Right_Elbow  #      |
-        - Right_Shoulder # <- Angle B
+        - Left_Shoulder  
+        - Tail_Stem   
+      - - Right_Elbow  
+        - Right_Shoulder 
         - Tail_Stem
     LR_elbow:
       - - Left_Wrist
-        - Left_Elbow  # <- Angle A
-        - Left_Shoulder   #      |
-      - - Right_Wrist  #      |
-        - Right_Elbow # <- Angle B
+        - Left_Elbow  
+        - Left_Shoulder   
+      - - Right_Wrist  
+        - Right_Elbow 
         - Right_Shoulder
     LR_wrist:
       - - Left_Hand
-        - Left_Wrist  # <- Angle A
-        - Left_Elbow   #      |
-      - - Right_Hand  #      |
-        - Right_Wrist # <- Angle B
+        - Left_Wrist  
+        - Left_Elbow   
+      - - Right_Hand  
+        - Right_Wrist 
         - Right_Elbow
     
-    #L_fore-hind 
+    
     L_shoulder_hip:
       - - Left_Elbow
-        - Left_Shoulder # <- Angle A
-        - Tail_Stem   #      |
-      - - Left_Knee  #      |
-        - Left_Hip # <- Angle B
+        - Left_Shoulder 
+        - Tail_Stem   
+      - - Left_Knee  
+        - Left_Hip 
         - Tail_1
     L_elbow_knee:
       - - Left_Wrist
-        - Left_Elbow # <- Angle A
-        - Left_Shoulder   #      |
-      - - Left_Ankle  #      |
-        - Left_Knee # <- Angle B
+        - Left_Elbow 
+        - Left_Shoulder   
+      - - Left_Ankle  
+        - Left_Knee 
         - Left_Hip
     L_wrist_ankle:
       - - Left_Hand
-        - Left_Wrist  # <- Angle A
-        - Left_Elbow   #      |
-      - - Left_Foot  #      |
-        - Left_Ankle # <- Angle B
+        - Left_Wrist  
+        - Left_Elbow   
+      - - Left_Foot  
+        - Left_Ankle 
         - Left_Knee
    
-    #R_fore_hind
+    
     R_shoulder_hip:
       - - Right_Elbow
-        - Right_Shoulder # <- Angle A
-        - Tail_Stem   #      |
-      - - Right_Knee  #      |
-        - Right_Hip # <- Angle B
+        - Right_Shoulder 
+        - Tail_Stem   
+      - - Right_Knee  
+        - Right_Hip 
         - Tail_1
     R_elbow_knee:
       - - Right_Wrist
-        - Right_Elbow # <- Angle A
-        - Right_Shoulder   #      |
-      - - Right_Ankle  #      |
-        - Right_Knee # <- Angle B
+        - Right_Elbow 
+        - Right_Shoulder   
+      - - Right_Ankle  
+        - Right_Knee 
         - Right_Hip
     R_wrist_ankle:
       - - Right_Hand
-        - Right_Wrist  # <- Angle A
-        - Right_Elbow   #      |
-      - - Right_Foot  #      |
-        - Right_Ankle # <- Angle B
+        - Right_Wrist  
+        - Right_Elbow   
+      - - Right_Foot  
+        - Right_Ankle 
         - Right_Knee
     
     #L_fore_R_hind
     LR_shoulder_hip:
       - - Left_Elbow
-        - Left_Shoulder # <- Angle A
-        - Tail_Stem   #      |
-      - - Right_Knee  #      |
-        - Right_Hip # <- Angle B
+        - Left_Shoulder 
+        - Tail_Stem   
+      - - Right_Knee  
+        - Right_Hip 
         - Tail_1
     LR_elbow_knee:
       - - Left_Wrist
-        - Left_Elbow # <- Angle A
-        - Left_Shoulder   #      |
-      - - Right_Ankle  #      |
-        - Right_Knee # <- Angle B
+        - Left_Elbow 
+        - Left_Shoulder   
+      - - Right_Ankle  
+        - Right_Knee 
         - Right_Hip
     LR_wrist_ankle:
       - - Left_Hand
-        - Left_Wrist  # <- Angle A
-        - Left_Elbow   #      |
-      - - Right_Foot  #      |
-        - Right_Ankle # <- Angle B
+        - Left_Wrist  
+        - Left_Elbow   
+      - - Right_Foot  
+        - Right_Ankle 
         - Right_Knee
     
     #R_fore_L_hind
     RL_shoulder_hip:
       - - Right_Elbow
-        - Right_Shoulder # <- Angle A
-        - Tail_Stem   #      |
-      - - Left_Knee  #      |
-        - Left_Hip # <- Angle B
+        - Right_Shoulder 
+        - Tail_Stem   
+      - - Left_Knee  
+        - Left_Hip 
         - Tail_1
     RL_elbow_knee:
       - - Right_Wrist
-        - Right_Elbow # <- Angle A
-        - Right_Shoulder   #      |
-      - - Left_Ankle  #      |
-        - Left_Knee # <- Angle B
+        - Right_Elbow 
+        - Right_Shoulder   
+      - - Left_Ankle  
+        - Left_Knee 
         - Left_Hip
     RL_wrist_ankle:
       - - Right_Hand
-        - Right_Wrist  # <- Angle A
-        - Right_Elbow   #      |
-      - - Left_Foot  #      |
-        - Left_Ankle # <- Angle B
+        - Right_Wrist  
+        - Right_Elbow   
+      - - Left_Foot  
+        - Left_Ankle 
         - Left_Knee
 
-
-### Juv: ####
+### Stage Juv parameters ####
 
 Juv:
   ROOT_DIR: "/nfs/scistore23/sweengrp/ftoma/Behavior_MNV1/MNV1_revision_dataset/Juv"
@@ -1113,7 +1114,6 @@ Juv:
 
   AREA_EXPLORED_NODE: "Tail_Stem"
   AREA_EXPLORED_BINS: 128
-
 
   ALIGN_CENTRAL: "Tail_Stem"
   ALIGN_TOP: "Heart_Center"
@@ -1124,15 +1124,13 @@ Juv:
   LOCOMOTION_SPATIAL_SIGMA: 1
   LOCOMOTION_DC_SUBSAMPLE: 8
 
-  # FREQ_MOVING_NODE: "Tail_Stem"
-  # FREQ_MOVING_NODE_THRESH: 1.2
   FREQ_ACTIVE_THRESH: 0.1
   FREQ_ACTIVE_SMOOTH: 15
   FREQ_TEMP_ANGLE_SMOOTH: 0.1
   FREQ_FOR:     
-    left_hip: #UPDATED
+    left_hip:
       - Tail_Stem
-      - Left_Hip # <- Angle here
+      - Left_Hip 
       - Left_Knee
     left_knee:
       - Left_Hip
@@ -1146,9 +1144,9 @@ Juv:
       - Left_Ankle
       - Left_Foot
       - Left_toe
-    right_hip: #UPDATED
+    right_hip: 
       - Tail_Stem
-      - Right_Hip # <- Angle here
+      - Right_Hip 
       - Right_Knee
     right_knee:
       - Right_Hip
@@ -1162,29 +1160,28 @@ Juv:
       - Right_Ankle
       - Right_Foot
       - Right_toe
-    #forelimb
-    left_shoulder: #UPDATED
+    left_shoulder: 
       - Heart_Center
-      - Left_Shoulder # <- Angle here
+      - Left_Shoulder 
       - Left_Elbow
-    left_elbow: #UPDATED
+    left_elbow: 
       - Left_Shoulder 
       - Left_Elbow
       - Left_Wrist 
-    left_wrist: #UPDATED
+    left_wrist: 
       - Left_Elbow
       - Left_Wrist
       - Left_Hand
     
-    right_shoulder: #UPDATED
+    right_shoulder: 
       - Heart_Center
-      - Right_Shoulder # <- Angle here
+      - Right_Shoulder 
       - Right_Elbow
-    right_elbow: #UPDATED
+    right_elbow: 
       - Right_Shoulder 
       - Right_Elbow
       - Right_Wrist 
-    right_wrist: #UPDATED
+    right_wrist: 
       - Right_Elbow
       - Right_Wrist
       - Right_Hand
@@ -1192,9 +1189,9 @@ Juv:
   ANGLE_RANGE_MOVING_NODE: "Tail_Stem"
   ANGLE_RANGE_MOVING_NODE_THRESH: 0.02
   ANGLE_RANGE_FOR:
-    left_hip: #UPDATED
+    left_hip: 
       - Tail_Stem
-      - Left_Hip # <- Angle here
+      - Left_Hip 
       - Left_Knee
     left_knee:
       - Left_Hip
@@ -1202,15 +1199,15 @@ Juv:
       - Left_Ankle 
     left_ankle:
       - Left_Knee
-      - Left_Ankle # <- Angle here
+      - Left_Ankle 
       - Left_Foot
     left_foot:
       - Left_Ankle 
       - Left_Foot
       - Left_toe
-    right_hip: #UPDATED
+    right_hip: 
       - Tail_Stem
-      - Right_Hip # <- Angle here
+      - Right_Hip 
       - Right_Knee
     right_knee:
       - Right_Hip
@@ -1225,28 +1222,28 @@ Juv:
       - Right_Foot
       - Right_toe
     
-    #forelimb
-    left_shoulder: #UPDATED
+    
+    left_shoulder: 
       - Heart_Center
-      - Left_Shoulder # <- Angle here
+      - Left_Shoulder 
       - Left_Elbow
-    left_elbow: #UPDATED
+    left_elbow: 
       - Left_Shoulder 
       - Left_Elbow
       - Left_Wrist 
-    left_wrist: #UPDATED
+    left_wrist: 
       - Left_Elbow
       - Left_Wrist
       - Left_Hand
-    right_shoulder: #UPDATED
+    right_shoulder: 
       - Heart_Center
-      - Right_Shoulder # <- Angle here
+      - Right_Shoulder 
       - Right_Elbow
-    right_elbow: #UPDATED
+    right_elbow: 
       - Right_Shoulder 
       - Right_Elbow
       - Right_Wrist 
-    right_wrist: #UPDATED
+    right_wrist: 
       - Right_Elbow
       - Right_Wrist
       - Right_Hand
@@ -1256,7 +1253,7 @@ Juv:
   ANGLE_CORR_TEMP_ANGLE_SMOOTH: 1
   ANGLE_CORR_WIN_SIZE: 31
   ANGLE_CORR_FOR:
-    LR_hip:    #UPDATED
+    LR_hip:    
       - - Tail_Stem
         - Left_Hip
         - Left_Knee 
@@ -1272,10 +1269,10 @@ Juv:
         - Right_Ankle
     LR_ankle:
       - - Left_Knee
-        - Left_Ankle  # <- Angle A
-        - Left_Foot   #      |
-      - - Right_Knee  #      |
-        - Right_Ankle # <- Angle B
+        - Left_Ankle  
+        - Left_Foot   
+      - - Right_Knee  
+        - Right_Ankle 
         - Right_Foot
     LR_foot:
       - - Left_Ankle 
@@ -1284,119 +1281,117 @@ Juv:
       - - Right_Ankle
         - Right_Foot
         - Right_toe
-    #forelimb
+    
     LR_shoulder:
       - - Left_Elbow
-        - Left_Shoulder  # <- Angle A
-        - Heart_Center   #      |
-      - - Right_Elbow  #      |
-        - Right_Shoulder # <- Angle B
+        - Left_Shoulder  
+        - Heart_Center   
+      - - Right_Elbow  
+        - Right_Shoulder 
         - Heart_Center
     LR_elbow:
       - - Left_Wrist
-        - Left_Elbow  # <- Angle A
-        - Left_Shoulder   #      |
-      - - Right_Wrist  #      |
-        - Right_Elbow # <- Angle B
+        - Left_Elbow  
+        - Left_Shoulder   
+      - - Right_Wrist  
+        - Right_Elbow 
         - Right_Shoulder
     LR_wrist:
       - - Left_Hand
-        - Left_Wrist  # <- Angle A
-        - Left_Elbow   #      |
-      - - Right_Hand  #      |
-        - Right_Wrist # <- Angle B
+        - Left_Wrist  
+        - Left_Elbow   
+      - - Right_Hand  
+        - Right_Wrist 
         - Right_Elbow
     
-    #L_fore-hind 
+    
     L_shoulder_hip:
       - - Left_Elbow
-        - Left_Shoulder # <- Angle A
-        - Heart_Center   #      |
-      - - Left_Knee  #      |
-        - Left_Hip # <- Angle B
+        - Left_Shoulder 
+        - Heart_Center   
+      - - Left_Knee  
+        - Left_Hip 
         - Tail_Stem
     L_elbow_knee:
       - - Left_Wrist
-        - Left_Elbow # <- Angle A
-        - Left_Shoulder   #      |
-      - - Left_Ankle  #      |
-        - Left_Knee # <- Angle B
+        - Left_Elbow 
+        - Left_Shoulder   
+      - - Left_Ankle  
+        - Left_Knee 
         - Left_Hip
     L_wrist_ankle:
       - - Left_Hand
-        - Left_Wrist  # <- Angle A
-        - Left_Elbow   #      |
-      - - Left_Foot  #      |
-        - Left_Ankle # <- Angle B
+        - Left_Wrist  
+        - Left_Elbow   
+      - - Left_Foot  
+        - Left_Ankle 
         - Left_Knee
    
-    #R_fore_hind
+    
     R_shoulder_hip:
       - - Right_Elbow
-        - Right_Shoulder # <- Angle A
-        - Heart_Center   #      |
-      - - Right_Knee  #      |
-        - Right_Hip # <- Angle B
+        - Right_Shoulder 
+        - Heart_Center   
+      - - Right_Knee  
+        - Right_Hip 
         - Tail_Stem
     R_elbow_knee:
       - - Right_Wrist
-        - Right_Elbow # <- Angle A
-        - Right_Shoulder   #      |
-      - - Right_Ankle  #      |
-        - Right_Knee # <- Angle B
+        - Right_Elbow 
+        - Right_Shoulder   
+      - - Right_Ankle  
+        - Right_Knee 
         - Right_Hip
     R_wrist_ankle:
       - - Right_Hand
-        - Right_Wrist  # <- Angle A
-        - Right_Elbow   #      |
-      - - Right_Foot  #      |
-        - Right_Ankle # <- Angle B
+        - Right_Wrist  
+        - Right_Elbow   
+      - - Right_Foot  
+        - Right_Ankle 
         - Right_Knee
     
-    #L_fore_R_hind
     LR_shoulder_hip:
       - - Left_Elbow
-        - Left_Shoulder # <- Angle A
-        - Heart_Center   #      |
-      - - Right_Knee  #      |
-        - Right_Hip # <- Angle B
+        - Left_Shoulder 
+        - Heart_Center   
+      - - Right_Knee  
+        - Right_Hip 
         - Tail_Stem
     LR_elbow_knee:
       - - Left_Wrist
-        - Left_Elbow # <- Angle A
-        - Left_Shoulder   #      |
-      - - Right_Ankle  #      |
-        - Right_Knee # <- Angle B
+        - Left_Elbow 
+        - Left_Shoulder   
+      - - Right_Ankle  
+        - Right_Knee 
         - Right_Hip    
     LR_wrist_ankle:
       - - Left_Hand
-        - Left_Wrist  # <- Angle A
-        - Left_Elbow   #      |
-      - - Right_Foot  #      |
-        - Right_Ankle # <- Angle B
+        - Left_Wrist  
+        - Left_Elbow   
+      - - Right_Foot  
+        - Right_Ankle 
         - Right_Knee
     
-    #R_fore_L_hind
     RL_shoulder_hip:
       - - Right_Elbow
-        - Right_Shoulder # <- Angle A
-        - Heart_Center   #      |
-      - - Left_Knee  #      |
-        - Left_Hip # <- Angle B
+        - Right_Shoulder 
+        - Heart_Center   
+      - - Left_Knee  
+        - Left_Hip 
         - Tail_Stem
     RL_elbow_knee:
       - - Right_Wrist
-        - Right_Elbow # <- Angle A
-        - Right_Shoulder   #      |
-      - - Left_Ankle  #      |
-        - Left_Knee # <- Angle B
+        - Right_Elbow 
+        - Right_Shoulder   
+      - - Left_Ankle  
+        - Left_Knee 
         - Left_Hip
     RL_wrist_ankle:
       - - Right_Hand
-        - Right_Wrist  # <- Angle A
-        - Right_Elbow   #      |
-      - - Left_Foot  #      |
-        - Left_Ankle # <- Angle B
+        - Right_Wrist  
+        - Right_Elbow   
+      - - Left_Foot  
+        - Left_Ankle 
         - Left_Knee
 
   PCA_PARTS:
@@ -1416,14 +1411,14 @@ Juv:
       - Right_Foot
       - Right_toe
       
-    Left_Arm: #UPDATED
+    Left_Arm: 
       - Heart_Center
       - Left_Shoulder
       - Left_Elbow
       - Left_Wrist
       - Left_Hand
       
-    Right_Arm: #UPDATED
+    Right_Arm: 
       - Heart_Center
       - Right_Shoulder
       - Right_Elbow
