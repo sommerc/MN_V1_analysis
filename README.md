@@ -7,6 +7,8 @@ This is custom analysis code associated with the publication:
 >
 > Corresponding author: Lora Sweeney (lora.sweeney@ista.ac.at)
 
+[![DOI](https://zenodo.org/badge/845561895.svg)](https://doi.org/10.5281/zenodo.18755393)
+
 ---
 
 ## Introduction
