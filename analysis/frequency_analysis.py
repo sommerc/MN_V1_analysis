@@ -132,6 +132,15 @@ def frequency_analysis(all_movs, stg, nodes, sub_bgrd, cfg):
                     dom_freq_prom_2 = (f, p, ph)
                     break
 
+            sum_names = []
+            sums = []
+            if "FREQ_PSF_SUMS" in cfg:
+                for a, b in cfg["FREQ_PSF_SUMS"]:
+                    mask = (a < freq) & (freq < b)
+                    s = mean_psd_moving[mask].sum()
+                    sums.append(s)
+                    sum_names.append(f"psf_sum_freq_{a:0.1f}-{b:0.1f}")
+
             tab_all.append(
                 [
                     base_file,
@@ -151,6 +160,7 @@ def frequency_analysis(all_movs, stg, nodes, sub_bgrd, cfg):
                     dom_freq_prom_2[2],
                     computed_on,
                 ]
+                + sums
                 + mean_psd_moving.tolist()
             )
 
@@ -172,6 +182,7 @@ def frequency_analysis(all_movs, stg, nodes, sub_bgrd, cfg):
             f"dominant_freq_power_{freq_dom_split}+",
             "freq_active_ratio",
         ]
+        + sum_names
         + freq.tolist(),
     )
 
@@ -228,7 +239,7 @@ def run(STAGES, cfg):
     tab_collect = []
     for tab_dict in tab_dict_all:
         for name, tab in tab_dict.items():
-            tab["frequency_for"] = name
+            tab["feature_for"] = name
             tab_collect.append(tab)
 
     if len(tab_collect) == 0:
