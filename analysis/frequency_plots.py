@@ -15,7 +15,7 @@ def plot_by_stage(cfg):
     OUT_DIR = cfg["FREQUENCY_OUTDIR"]
     TAB = pd.read_csv(f"{OUT_DIR}/frequency_res.tab", sep="\t", index_col=0)
     STAGES = TAB.Stage.unique()
-    FREQ_FOR = TAB.frequency_for.unique()
+    FREQ_FOR = TAB.feature_for.unique()
 
     OUT_DIR = cfg["FREQUENCY_OUTDIR"]
 
@@ -25,7 +25,7 @@ def plot_by_stage(cfg):
 
     for stg in STAGES:
         for freq_for in FREQ_FOR:
-            tab_sub = TAB[(TAB.Stage == stg) & (TAB.frequency_for == freq_for)]
+            tab_sub = TAB[(TAB.Stage == stg) & (TAB.feature_for == freq_for)]
             if len(tab_sub) > 0:
                 f, ax = plt.subplots(
                     1, tab_sub.Genotype.nunique(), sharey=True, figsize=(20, 4)
@@ -109,7 +109,7 @@ def plot_by_geno(cfg):
     TAB = pd.read_csv(f"{OUT_DIR}/frequency_res.tab", sep="\t", index_col=0)
 
     GENO = TAB.Genotype.unique()
-    FREQ_FOR = TAB.frequency_for.unique()
+    FREQ_FOR = TAB.feature_for.unique()
 
     OUT_DIR = cfg["FREQUENCY_OUTDIR"]
 
@@ -119,7 +119,7 @@ def plot_by_geno(cfg):
 
     for gen in GENO:
         for freq_for in FREQ_FOR:
-            tab_sub = TAB[(TAB.Genotype == gen) & (TAB.frequency_for == freq_for)]
+            tab_sub = TAB[(TAB.Genotype == gen) & (TAB.feature_for == freq_for)]
             if len(tab_sub) > 0:
                 f, ax = plt.subplots(
                     1, tab_sub.Stage.nunique(), sharey=True, figsize=(20, 4)

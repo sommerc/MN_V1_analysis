@@ -51,4 +51,4 @@ python angle_range_plots.py
 | angular_speed_mov_neg_mean  | same as above but using negative angular speed values only |
 | angular_speed_mov_neg_std  |  same as above but using negative angular speed values only |
 | angular_speed_mov_neg_p95  | same as above but using negative angular speed values only  |
-| angle_at  | body-part at which the angle was computed         |
+| feature_for  | body-part at which the angle was computed         |

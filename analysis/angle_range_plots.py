@@ -13,13 +13,13 @@ def plot_by_stage(cfg):
 
     STAGES = cfg["STAGES"]
 
-    AR_AT = TAB.angle_at.unique()
+    AR_AT = TAB.feature_for.unique()
 
     OUT_DIR = cfg["ANGLE_RANGE_OUTDIR"]
 
     for stg in STAGES:
-        for angle_at in AR_AT:
-            tab_sub = TAB[(TAB.Stage == stg) & (TAB.angle_at == angle_at)]
+        for feature_for in AR_AT:
+            tab_sub = TAB[(TAB.Stage == stg) & (TAB.feature_for == feature_for)]
             if len(tab_sub) > 0:
                 for feature in [
                     "angle_moving_std",
@@ -59,9 +59,9 @@ def plot_by_stage(cfg):
                         legend=False,
                     )
                     sns.despine(ax=ax)
-                    ax.set_title(f"{stg} {angle_at}")
+                    ax.set_title(f"{stg} {feature_for}")
                     plt.savefig(
-                        f"{OUT_DIR}/{stg}_{angle_at}_{feature}.pdf",
+                        f"{OUT_DIR}/{stg}_{feature_for}_{feature}.pdf",
                         bbox_inches="tight",
                     )
                     plt.close(f)
@@ -72,13 +72,13 @@ def plot_by_geno(cfg):
     TAB = pd.read_csv(f"{OUT_DIR}/angle_range_res.tab", sep="\t", index_col=0)
 
     GENO = TAB.Genotype.unique()
-    AR_AT = TAB.angle_at.unique()
+    AR_AT = TAB.feature_for.unique()
 
     OUT_DIR = cfg["ANGLE_RANGE_OUTDIR"]
 
     for gen in GENO:
-        for angle_at in AR_AT:
-            tab_sub = TAB[(TAB.Genotype == gen) & (TAB.angle_at == angle_at)]
+        for feature_for in AR_AT:
+            tab_sub = TAB[(TAB.Genotype == gen) & (TAB.feature_for == feature_for)]
             if len(tab_sub) > 0:
                 for feature in [
                     "angle_moving_std",
@@ -118,9 +118,9 @@ def plot_by_geno(cfg):
                         legend=False,
                     )
                     sns.despine(ax=ax)
-                    ax.set_title(f"{gen} {angle_at}")
+                    ax.set_title(f"{gen} {feature_for}")
                     plt.savefig(
-                        f"{OUT_DIR}/{gen}_{angle_at}_{feature}.pdf",
+                        f"{OUT_DIR}/{gen}_{feature_for}_{feature}.pdf",
                         bbox_inches="tight",
                     )
                     plt.close(f)

@@ -196,7 +196,7 @@ def run(STAGES, cfg):
     tab_collect = []
     for tab_dict in tab_all:
         for name, tab in tab_dict.items():
-            tab["angle_at"] = name
+            tab["feature_for"] = name
             tab_collect.append(tab)
 
     if len(tab_collect) == 0:
@@ -224,7 +224,7 @@ def merge_results():
     for fn in files:
         tab = pd.read_csv(cfg["ANGLE_RANGE_OUTDIR"] + "/" + fn, sep="\t", index_col=0)
         name = "_".join(fn.split("_")[3:5])
-        tab["angle_at"] = name
+        tab["feature_for"] = name
         TAB.append(tab)
 
     TAB = pd.concat(TAB, axis=0, ignore_index=True)

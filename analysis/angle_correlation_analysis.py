@@ -180,7 +180,7 @@ def run(STAGES, cfg):
     tab_collect = []
     for tab_dict in tab_all:
         for name, tab in tab_dict.items():
-            tab["angle_corr_of"] = name
+            tab["feature_for"] = name
             tab_collect.append(tab)
 
     if len(tab_collect) == 0:
