@@ -194,7 +194,7 @@ def locomotion(tad, tids, stg, gen, cfg, write_imgs=True):
         tab_res,
         columns=[
             "Movie",
-            "track_idx",
+            "Track_idx",
             # "speed_mean",
             # "speed_std",
             "speed_moving_mean",

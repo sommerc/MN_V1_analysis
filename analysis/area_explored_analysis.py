@@ -118,7 +118,7 @@ def area_explored(tad, tids, cfg, stg, gen, write_img=False):
 
     return pd.DataFrame(
         tab_res,
-        columns=["Movie", "track_idx", "area_explored_ratio", "area_explored_per_h"],
+        columns=["Movie", "Track_idx", "area_explored_ratio", "area_explored_per_h"],
     )
 
 

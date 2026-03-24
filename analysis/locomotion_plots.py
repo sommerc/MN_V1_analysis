@@ -67,11 +67,11 @@ def plot_by_stage(cfg):
             plt.savefig(f"{OUT_DIR}/{STAGE}_{feature}.pdf", bbox_inches="tight")
             plt.close(f)
 
-        count_tab = tab_stg.groupby("Genotype")[["track_idx"]].count().reset_index()
+        count_tab = tab_stg.groupby("Genotype")[["Track_idx"]].count().reset_index()
 
         f, ax = plt.subplots(figsize=(14, 4))
         sns.barplot(
-            y="track_idx",
+            y="Track_idx",
             x="Genotype",
             data=count_tab,
             hue="Genotype",
@@ -85,7 +85,7 @@ def plot_by_stage(cfg):
         plt.close(f)
 
         time_tab = (
-            tab_stg.groupby("Genotype")[["track_idx", "Frames"]]
+            tab_stg.groupby("Genotype")[["Track_idx", "Frames"]]
             .sum("Frames")
             .reset_index()
         )
@@ -163,11 +163,11 @@ def plot_by_geno(cfg):
             plt.savefig(f"{OUT_DIR}/{gen}_{feature}.pdf", bbox_inches="tight")
             plt.close(f)
 
-        count_tab = tab_sub.groupby("Stage")[["track_idx"]].count().reset_index()
+        count_tab = tab_sub.groupby("Stage")[["Track_idx"]].count().reset_index()
 
         f, ax = plt.subplots(figsize=(14, 4))
         sns.barplot(
-            y="track_idx",
+            y="Track_idx",
             x="Stage",
             data=count_tab,
             dodge=False,
@@ -181,7 +181,7 @@ def plot_by_geno(cfg):
         plt.close(f)
 
         time_tab = (
-            tab_sub.groupby("Stage")[["track_idx", "Frames"]]
+            tab_sub.groupby("Stage")[["Track_idx", "Frames"]]
             .sum("Frames")
             .reset_index()
         )
